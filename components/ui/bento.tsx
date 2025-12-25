@@ -12,7 +12,11 @@ type BentoItem = {
 };
 
 export const BentoGrid = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-  return <div className={cn('grid grid-cols-12 gap-4', className)}>{children}</div>;
+  return (
+    <div className={cn('grid grid-cols-12 gap-4 auto-rows-[minmax(220px,auto)]', className)}>
+      {children}
+    </div>
+  );
 };
 
 export const BentoCard = ({
@@ -29,7 +33,7 @@ export const BentoCard = ({
       layout
       onClick={onClick}
       className={cn(
-        'relative rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 shadow-2xl transition-all duration-300',
+        'relative h-full rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 shadow-2xl transition-all duration-300',
         'hover:border-emerald-500/50 hover:shadow-emerald-500/10 hover:bg-neutral-900',
         'group overflow-hidden',
         onClick ? 'cursor-pointer' : 'cursor-default',
