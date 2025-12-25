@@ -19,7 +19,7 @@ export default function Projects() {
           <p className="text-sm text-neutral-400 leading-relaxed">{project.description}</p>
           {project.formalProof && (
             <div className="mt-3 inline-block rounded border border-emerald-500/20 bg-emerald-500/5 px-2 py-1 text-[10px] text-emerald-400">
-              VERIFIED: {project.formalProof}
+              Status: Formally Verified · {project.formalProof}
             </div>
           )}
         </div>

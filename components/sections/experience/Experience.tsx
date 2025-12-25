@@ -1,23 +1,7 @@
 'use client';
 
 import { MotionDiv } from '@/components/ui/motion';
-
-const experience = [
-  {
-    date: '2022 - Present',
-    title: 'Full-Stack Developer',
-    company: 'Innovate Inc.',
-    description:
-      'Led the development of a new e-commerce platform, resulting in a 30% increase in sales. Collaborated with a team of 5 engineers to build and deploy a microservices-based architecture.',
-  },
-  {
-    date: '2020 - 2022',
-    title: 'Software Engineer Intern',
-    company: 'Tech Corp.',
-    description:
-      'Assisted in the development of a new mobile application. Wrote unit tests and end-to-end tests to ensure code quality.',
-  },
-];
+import { experienceData } from '@/content/experience';
 
 export default function Experience() {
   return (
@@ -28,10 +12,10 @@ export default function Experience() {
     >
       <section className="py-20">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-10">Experience</h2>
+          <h2 className="text-3xl font-bold text-center mb-10">Architectural Impact</h2>
           <div className="relative">
             <div className="border-l-2 border-neutral-700 absolute h-full left-1/2 -translate-x-1/2"></div>
-            {experience.map((item, index) => (
+            {experienceData.map((item, index) => (
               <MotionDiv
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -55,9 +39,11 @@ export default function Experience() {
                     <p className="text-neutral-400 text-sm">{item.date}</p>
                     <h3 className="font-bold">{item.title}</h3>
                     <p className="text-sm font-semibold">{item.company}</p>
-                    <p className="text-sm text-neutral-400">
-                      {item.description}
-                    </p>
+                    <div className="mt-3 space-y-2 text-sm text-neutral-400">
+                      {item.description.map(detail => (
+                        <p key={detail}>- {detail}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </MotionDiv>

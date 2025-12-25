@@ -15,8 +15,8 @@ export const projectsData = [
   Planner-->Scheduler[Global Scheduler]
   Scheduler-->NodePool[Heterogeneous Node Pool]`,
     tradeoffs: [
-      "In-kernel eBPF enforcement over user-space sidecars reduces latency, but increases kernel-level complexity and verification burden.",
-      "Cold-start caching improves tail latency but requires stricter cache invalidation to avoid policy drift.",
+      "Kernel-space eBPF guards guarantee syscall-level safety, while user-space WASM keeps policy iteration fast; I split policies so only safety-critical checks live in-kernel.",
+      "Reduced helper call overhead by batching map lookups and caching verifier-approved program state, trading memory for lower per-request latency.",
     ],
     invariants: [
       "No unverified syscall path reaches privileged namespaces.",
@@ -39,13 +39,13 @@ export const projectsData = [
   Relayer-->Verifier[On-chain Verifier]
   Verifier-->Target[Destination Vault]`,
     tradeoffs: [
-      "Proof-carrying transfers improve safety but increase latency and on-chain verification cost.",
-      "Zero-copy flows require strict handle ownership, limiting opportunistic batching.",
+      "Lean 4 proofs enforce resource conservation, but proof-carrying transfers add verification latency; I gated proofs to finalization paths only.",
+      "Zero-copy transfers avoid serialization overhead but require strict handle ownership, limiting batching across concurrent bridges.",
     ],
     invariants: [
+      "No asset can be double-spent across the bridge boundary.",
+      "No asset can be trapped in a bridge contract after settlement.",
       "Total asset supply remains conserved across all hops.",
-      "No orphaned resource handles persist after settlement.",
-      "Transfers finalize only with valid signatures and proofs.",
     ],
   },
   {
@@ -63,13 +63,39 @@ export const projectsData = [
   Optimizer-->Scheduler[K8s Scheduler Plugin]
   Scheduler-->Workloads[Workload Placement]`,
     tradeoffs: [
-      "Predictive scheduling reduces carbon but can miss sudden grid spikes without fallback heuristics.",
-      "Aggressive deferral lowers emissions but risks SLO burn without guardrails.",
+      "Carbon-aware placement improves emissions but can miss sudden grid spikes; I added a fallback heuristic that reverts to SLO-first scheduling.",
+      "The scheduler balances carbon score with job deadlines using a weighted priority queue, trading optimality for predictable completion windows.",
     ],
     invariants: [
       "SLO error budgets never exceed defined thresholds.",
-      "Carbon score is non-increasing when a feasible window exists.",
+      "Job deadlines are never violated when a feasible window exists.",
       "Scheduler fallbacks activate before overload conditions.",
+    ],
+  },
+  {
+    id: 'audittrace',
+    title: "AuditTrace: Compliance-as-Code",
+    description:
+      "Immutable audit logging for sensitive system calls using eBPF probes and append-only storage guarantees.",
+    metrics: "Tamper-Evident | 1.3M Events/Min",
+    tags: ["eBPF", "Rust", "Linux", "Compliance"],
+    formalProof: "Append-only log integrity proof",
+    hardProblem:
+      "Capture and persist every sensitive syscall without introducing user-visible latency or allowing log tampering.",
+    architecture: `graph TD
+  Syscall[Kernel Syscalls]-->Probe[eBPF Probe]
+  Probe-->Buffer[Ring Buffer]
+  Buffer-->Hasher[Hash Chain]
+  Hasher-->Store[Append-Only Log]
+  Store-->Auditor[Verifier + Report]`,
+    tradeoffs: [
+      "Kernel probes provide coverage guarantees, but raise performance risk; I used ring buffers and rate-limited metadata to cap overhead.",
+      "Hash chaining improves tamper evidence, but increases write amplification; I batch commits per epoch to keep ingestion steady.",
+    ],
+    invariants: [
+      "Sensitive syscalls are logged exactly once.",
+      "Log entries are append-only and hash-linked.",
+      "Audit exports are verifiable without trust in the collector.",
     ],
   }
 ];
