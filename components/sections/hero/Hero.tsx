@@ -1,3 +1,5 @@
+import { Bento } from '@/components/ui/bento';
+
 export default function Hero() {
   const heroItems = [
     {
@@ -20,7 +22,7 @@ export default function Hero() {
       className: 'col-span-12 lg:col-span-8',
       content: (
         <div className="font-mono text-[10px] text-neutral-500 overflow-hidden opacity-70">
-          <div className="text-emerald-500 mb-2">// LIVE_SYS_TELEMETRY: Sentinel_Node_01</div>
+          <div className="text-emerald-500 mb-2">{'// LIVE_SYS_TELEMETRY: Sentinel_Node_01'}</div>
           <div>[0.0001] eBPF_PROBE_LOADED: syscall_intercept_enabled</div>
           <div>[0.0004] MEM_ALLOC: verifying_segment_0xFF4E2</div>
           <div className="text-emerald-400">[0.0009] VERIFICATION_PASSED: invariant_check_success</div>
@@ -34,7 +36,7 @@ export default function Hero() {
     <section className="py-24 bg-black">
       <div className="container mx-auto px-6">
         <h1 className="text-6xl font-bold text-white mb-2 tracking-tighter">Mohammed Vepari</h1>
-        <p className="text-neutral-500 font-mono mb-12">// PRINCIPAL_SYSTEMS_ENGINEER</p>
+        <p className="text-neutral-500 font-mono mb-12">{'// PRINCIPAL_SYSTEMS_ENGINEER'}</p>
         <Bento items={heroItems} />
       </div>
     </section>

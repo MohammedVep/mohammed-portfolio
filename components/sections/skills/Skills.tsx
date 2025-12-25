@@ -1,6 +1,6 @@
 'use client';
 
-import { MotionDiv } from '../ui/motion';
+import { MotionDiv } from '@/components/ui/motion';
 
 const skills = [
   { name: 'JavaScript', level: 90 },

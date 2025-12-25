@@ -25,7 +25,7 @@ export default function Projects() {
       <div className="font-mono">
         <h2 className="text-2xl font-bold mb-4 text-emerald-400">{project.title}</h2>
         <div className="space-y-4">
-          <p className="text-neutral-300 italic">// Architectural RFC: System Specifications</p>
+          <p className="text-neutral-300 italic">{'// Architectural RFC: System Specifications'}</p>
           <div className="p-4 bg-black border border-neutral-800 rounded text-sm">
             <h4 className="text-neutral-500 uppercase text-[10px] mb-2">Technical Constraints</h4>
             <p className="text-neutral-400">Discuss trade-offs here (e.g., eBPF vs. Sidecar latency)...</p>

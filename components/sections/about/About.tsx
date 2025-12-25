@@ -1,6 +1,6 @@
 'use client';
 
-import { MotionDiv } from '../ui/motion';
+import { MotionDiv } from '@/components/ui/motion';
 
 export default function About() {
   return (
