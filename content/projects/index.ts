@@ -13,6 +13,7 @@ export type PortfolioProject = {
   highlights: string[];
   liveUrl?: string;
   repoUrl?: string;
+  systemDesignUrl?: string;
 };
 
 export const projectsData: PortfolioProject[] = [
@@ -48,6 +49,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     liveUrl: profileData.netPulseLiveUrl,
     repoUrl: profileData.netPulseRepoUrl,
+    systemDesignUrl: "/system-design/netpulse",
   },
   {
     id: "moveysplash",
@@ -78,6 +80,7 @@ export const projectsData: PortfolioProject[] = [
       "Used Supabase with SQL-backed storage for reliable content persistence.",
     ],
     liveUrl: "https://move-y-splash-new.vercel.app",
+    systemDesignUrl: "/system-design/moveysplash",
   },
   {
     id: "tutoring",

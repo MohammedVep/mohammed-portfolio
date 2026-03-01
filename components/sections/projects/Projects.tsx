@@ -34,7 +34,7 @@ export default function Projects() {
               </span>
             ))}
           </div>
-          {project.liveUrl || project.repoUrl ? (
+          {project.liveUrl || project.repoUrl || project.systemDesignUrl ? (
             <div className="mt-3 flex flex-wrap gap-2">
               {project.liveUrl ? (
                 <a
@@ -58,6 +58,15 @@ export default function Projects() {
                   Repo
                 </a>
               ) : null}
+              {project.systemDesignUrl ? (
+                <a
+                  href={project.systemDesignUrl}
+                  onClick={(event) => event.stopPropagation()}
+                  className="rounded border border-cyan-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                >
+                  System Design
+                </a>
+              ) : null}
             </div>
           ) : null}
         </div>
@@ -76,7 +85,7 @@ export default function Projects() {
             <p className="mt-2 text-neutral-300">{project.hardProblem}</p>
           </div>
 
-          {project.liveUrl || project.repoUrl ? (
+          {project.liveUrl || project.repoUrl || project.systemDesignUrl ? (
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Links</h4>
               <div className="mt-3 flex flex-wrap gap-3">
@@ -98,6 +107,14 @@ export default function Projects() {
                     className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-400/60 hover:text-emerald-200"
                   >
                     Source Code
+                  </a>
+                ) : null}
+                {project.systemDesignUrl ? (
+                  <a
+                    href={project.systemDesignUrl}
+                    className="rounded border border-cyan-400/50 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                  >
+                    System Design Doc
                   </a>
                 ) : null}
               </div>
@@ -161,8 +178,8 @@ ${project.architecture}
           Project_Vault
         </h2>
         <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-400">
-          Featured work with architecture decisions, tradeoffs, and measurable outcomes.
-          Select a project to open the technical deep dive.
+          Featured work with architecture decisions, tradeoffs, measurable outcomes, and
+          dedicated system design documents. Select a project to open the technical deep dive.
         </p>
         <Bento items={items} />
       </div>
