@@ -110,6 +110,46 @@ const projectSignals: ProjectSignal[] = [
       "web app",
     ],
   },
+  {
+    title: "Cloud Code Execution Environment",
+    summary:
+      "Cloud API project for isolated code execution workflows with queue/worker reliability and runtime controls.",
+    keywords: [
+      "code execution",
+      "compiler",
+      "sandbox",
+      "backend",
+      "api",
+      "queue",
+      "worker",
+      "cloud",
+      "aws",
+      "distributed",
+      "runtime",
+      "security",
+    ],
+    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+  },
+  {
+    title: "Real-Time Transit Telemetry Dashboard",
+    summary:
+      "Real-time telemetry dashboard for transit operations visibility, signal tracking, and fast data interpretation.",
+    keywords: [
+      "real-time",
+      "telemetry",
+      "dashboard",
+      "streaming",
+      "data visualization",
+      "frontend",
+      "monitoring",
+      "analytics",
+      "operations",
+      "transportation",
+      "transit",
+    ],
+    liveUrl:
+      "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+  },
 ];
 
 const sampleJobDescription = `New Grad Software Engineer - Full Time

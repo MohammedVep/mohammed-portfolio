@@ -83,6 +83,68 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/moveysplash",
   },
   {
+    id: "cloud-code-execution",
+    title: "Cloud Code Execution Environment",
+    description:
+      "Built a cloud-hosted code execution service with an API endpoint for running isolated jobs and returning execution results.",
+    metrics: "Live API Endpoint | Cloud Execution",
+    tags: ["Node.js", "API", "AWS", "Containers", "Backend"],
+    hardProblem:
+      "Execute untrusted user code safely while controlling runtime limits, output size, and request-level isolation.",
+    architecture: `graph LR
+  Client[Client Request]-->API[Execution API Gateway]
+  API-->Queue[Execution Queue]
+  Queue-->Worker[Sandboxed Workers]
+  Worker-->Result[Execution Result Store]
+  Result-->API`,
+    tradeoffs: [
+      "Strict sandbox limits improve safety but can reject edge-case workloads that need higher resource ceilings.",
+      "Queue-based execution improves throughput stability, but adds extra latency compared to direct synchronous execution.",
+    ],
+    invariants: [
+      "Every execution request runs with bounded CPU and memory limits.",
+      "Execution output is returned in a deterministic response format.",
+      "Failed runs do not block subsequent queue processing.",
+    ],
+    highlights: [
+      "Shipped a public cloud API endpoint for real execution requests.",
+      "Designed for isolation-first execution behavior under backend constraints.",
+      "Implemented execution flow with queue-worker reliability patterns.",
+    ],
+    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+  },
+  {
+    id: "realtime-transit-telemetry",
+    title: "Real-Time Transit Telemetry Dashboard",
+    description:
+      "Developed a live transit telemetry dashboard for visualizing operational signals and route-level movement patterns.",
+    metrics: "Live Dashboard | Real-Time Signal View",
+    tags: ["Dashboard", "Telemetry", "JavaScript", "AWS S3", "Data Visualization"],
+    hardProblem:
+      "Present real-time transit telemetry in a way that is both operationally useful and easy to interpret under fast-changing conditions.",
+    architecture: `graph TD
+  Feeds[Transit Data Feeds]-->Processor[Telemetry Processor]
+  Processor-->Store[(Telemetry Store)]
+  Store-->Dashboard[Web Dashboard]
+  Dashboard-->User[Operations Viewer]`,
+    tradeoffs: [
+      "High-frequency refresh improves recency but increases client render load on lower-end devices.",
+      "Aggregated telemetry views improve readability, but can hide short-lived outlier events.",
+    ],
+    invariants: [
+      "Dashboard updates reflect the most recent available telemetry window.",
+      "Displayed route/vehicle states remain tied to timestamped source events.",
+      "Core dashboard views remain accessible without backend control-plane access.",
+    ],
+    highlights: [
+      "Deployed a public telemetry dashboard for live viewing.",
+      "Structured operational data for fast visual interpretation.",
+      "Focused on usability for real-time monitoring scenarios.",
+    ],
+    liveUrl:
+      "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+  },
+  {
     id: "tutoring",
     title: "Online Tutoring Management System (Capstone)",
     description:
