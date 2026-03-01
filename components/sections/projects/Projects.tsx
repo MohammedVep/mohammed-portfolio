@@ -1,3 +1,5 @@
+'use client';
+
 import { projectsData } from "@/content/projects";
 import { Bento } from "@/components/ui/bento";
 
