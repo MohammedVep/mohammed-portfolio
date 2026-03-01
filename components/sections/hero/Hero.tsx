@@ -1,65 +1,89 @@
 'use client';
 
-import { useState } from 'react';
-import { Bento } from '@/components/ui/bento';
+import { useState } from "react";
+import { Bento } from "@/components/ui/bento";
+import { profileData } from "@/content/profile";
 
 export default function Hero() {
   const baseTelemetry = [
-    '[0.0001] eBPF_PROBE_LOADED: syscall_intercept_enabled',
-    '[0.0004] MEM_ALLOC: verifying_segment_0xFF4E2',
-    '[0.0009] VERIFICATION_PASSED: invariant_check_success',
-    '[0.0010] HEARTBEAT: sentinel_node_stable',
-    '_',
+    "[0.0002] CANDIDATE_PROFILE: new_grad_software_engineer_2026",
+    "[0.0005] ACTIVE_DEPLOYMENT: netpulse_live",
+    "[0.0008] CORE_STACK: java_python_react_sql_typescript",
+    "[0.0011] FOCUS: scalable_full_stack_web_applications",
+    "[0.0014] STATUS: open_to_interview",
+    "_",
   ];
+
   const hoverTelemetry = [
-    '[0.0001] eBPF_PROBE_LOADED: syscall_intercept_enabled',
-    '[0.0004] MEM_ALLOC: verifying_segment_0xFF4E2',
-    '[0.0007] SECURITY_SCAN: archetype_hover',
-    '[0.0009] VERIFICATION_PASSED: invariant_check_success',
-    '[0.0012] RFC_INDEX_READY: whitepaper_link_armed',
-    '_',
+    "[0.0002] CANDIDATE_PROFILE: new_grad_software_engineer_2026",
+    "[0.0005] ACTIVE_DEPLOYMENT: netpulse_live",
+    "[0.0008] PROJECT_LINK: moveysplash_live",
+    "[0.0010] RESUME_ASSET: downloadable_doc_ready",
+    "[0.0012] CONTACT_CHANNELS: email_phone_linkedin",
+    "_",
   ];
+
   const [telemetry, setTelemetry] = useState(baseTelemetry);
 
   const heroItems = [
     {
-      id: 'archetype',
-      className: 'col-span-12 lg:col-span-4',
+      id: "archetype",
+      className: "col-span-12 lg:col-span-5",
       content: (
         <div
-          className="flex flex-col h-full justify-between"
+          className="flex h-full flex-col justify-between"
           onMouseEnter={() => setTelemetry(hoverTelemetry)}
           onMouseLeave={() => setTelemetry(baseTelemetry)}
         >
-          <h3 className="text-lg font-mono font-bold text-emerald-500 underline decoration-2 underline-offset-4">
-            [Archetype: Systems Architect]
-          </h3>
-          <p className="text-neutral-300 mt-4 leading-relaxed">
-            I build formally verified infrastructure for the agentic era. 
-            Currently focusing on eBPF-based kernel safety and carbon-aware orchestration.
-          </p>
-          <a
-            href="#projects"
-            className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-400 transition hover:border-emerald-400 hover:text-emerald-300"
-          >
-            View Whitepaper
-          </a>
+          <div>
+            <h3 className="text-lg font-bold font-mono text-emerald-500 underline decoration-2 underline-offset-4">
+              [Candidate Profile]
+            </h3>
+            <p className="mt-4 leading-relaxed text-neutral-300">
+              {profileData.summary}
+            </p>
+            <p className="mt-4 text-sm text-neutral-400">
+              Built and shipped NetPulse and moveYSplash, with practical experience
+              in full-stack delivery, SQL-backed systems, and responsive frontend UX.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href={profileData.netPulseLiveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-400 transition hover:border-emerald-400 hover:text-emerald-300"
+            >
+              View NetPulse
+            </a>
+            <a
+              href={profileData.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/50 hover:text-emerald-200"
+            >
+              Download Resume
+            </a>
+          </div>
         </div>
       ),
     },
     {
-      id: 'telemetry',
-      className: 'col-span-12 lg:col-span-8',
+      id: "telemetry",
+      className: "col-span-12 lg:col-span-7",
       content: (
-        <div className="font-mono text-[10px] text-neutral-500 overflow-hidden opacity-70">
-          <div className="text-emerald-500 mb-2">{'// LIVE_SYS_TELEMETRY: Sentinel_Node_01'}</div>
+        <div className="overflow-hidden font-mono text-[10px] text-neutral-500 opacity-80">
+          <div className="mb-2 text-emerald-500">{'// LIVE_CANDIDATE_SIGNAL: PORTFOLIO_NODE_01'}</div>
           {telemetry.map((line, index) => {
-            const isVerification = line.includes('VERIFICATION_PASSED');
-            const isCursor = line === '_';
+            const isActiveSignal =
+              line.includes("ACTIVE_DEPLOYMENT") || line.includes("PROJECT_LINK");
+            const isCursor = line === "_";
             return (
               <div
                 key={`${line}-${index}`}
-                className={isCursor ? 'animate-pulse' : isVerification ? 'text-emerald-400' : undefined}
+                className={
+                  isCursor ? "animate-pulse" : isActiveSignal ? "text-emerald-400" : undefined
+                }
               >
                 {line}
               </div>
@@ -71,10 +95,15 @@ export default function Hero() {
   ];
 
   return (
-    <section className="py-24 bg-black">
+    <section className="bg-black py-24">
       <div className="container mx-auto px-6">
-        <h1 className="text-6xl font-bold text-white mb-2 tracking-tighter">Mohammed Vepari</h1>
-        <p className="text-neutral-500 font-mono mb-12">{'// PRINCIPAL_SYSTEMS_ENGINEER'}</p>
+        <h1 className="mb-2 text-5xl font-bold tracking-tighter text-white md:text-6xl">
+          {profileData.name}
+        </h1>
+        <p className="mb-2 font-mono text-neutral-300">{profileData.title}</p>
+        <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
+          {profileData.location}
+        </p>
         <Bento items={heroItems} />
       </div>
     </section>

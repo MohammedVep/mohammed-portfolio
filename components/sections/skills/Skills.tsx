@@ -1,30 +1,33 @@
 'use client';
 
-import { MotionDiv } from '@/components/ui/motion';
+import { MotionDiv } from "@/components/ui/motion";
 
 const arsenal = [
   {
-    group: 'Core Systems',
+    group: "Languages",
     items: [
-      { name: 'Rust', level: 'HIGH_INTEGRITY', note: 'Zero-cost safety for core runtimes.' },
-      { name: 'Go', level: 'PRODUCTION_GRADE', note: 'Distributed control planes and schedulers.' },
-      { name: 'Move', level: 'FORMALIZED', note: 'Resource safety in on-chain execution.' },
+      { name: "Java", level: "STRONG", note: "OOP fundamentals and backend problem solving." },
+      { name: "Python", level: "STRONG", note: "Scripting, logic implementation, and data workflows." },
+      { name: "TypeScript", level: "ACTIVE", note: "Type-safe full-stack web application development." },
+      { name: "SQL", level: "ACTIVE", note: "Schema design, joins, indexing, and query optimization." },
     ],
   },
   {
-    group: 'Observability',
+    group: "Web Development",
     items: [
-      { name: 'eBPF', level: 'KERNEL_NATIVE', note: 'Policy enforcement at syscall boundaries.' },
-      { name: 'Prometheus', level: 'SIGNAL_RICH', note: 'High-cardinality telemetry pipelines.' },
-      { name: 'Tracing', level: 'FULL_STACK', note: 'Cross-service causality graphs.' },
+      { name: "React", level: "ACTIVE", note: "Component-driven UI with reusable frontend architecture." },
+      { name: "Next.js", level: "ACTIVE", note: "Production-ready frontend and routing workflows." },
+      { name: "Node.js", level: "ACTIVE", note: "API and backend service development." },
+      { name: "Angular", level: "PROJECT", note: "Capstone implementation for complex user flows." },
     ],
   },
   {
-    group: 'Mathematical Rigor',
+    group: "Databases & Engineering Foundations",
     items: [
-      { name: 'TLA+', level: 'MODEL_CHECKED', note: 'Consensus and lease safety proofs.' },
-      { name: 'Lean 4', level: 'PROOF_ASSISTED', note: 'Machine-checked invariants.' },
-      { name: 'Formal Methods', level: 'INVARIANT_FIRST', note: 'Safety properties baked into design.' },
+      { name: "PostgreSQL / MySQL", level: "ACTIVE", note: "Relational data modeling and persistence." },
+      { name: "Supabase", level: "PROJECT", note: "Rapid full-stack data and auth integration." },
+      { name: "Data Structures", level: "CORE", note: "Applied through coursework and coding projects." },
+      { name: "Algorithms", level: "CORE", note: "Performance-focused implementation and optimization." },
     ],
   },
 ];
@@ -36,12 +39,12 @@ export default function Skills() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <section className="py-20 border-t border-neutral-900 bg-black">
+      <section id="skills" className="border-t border-neutral-900 bg-black py-20">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">Technical Arsenal</h2>
-            <p className="text-xs font-mono text-emerald-500 uppercase tracking-[0.4em]">
-              Capability_Allocation_Map
+          <div className="mb-12 text-center">
+            <h2 className="mb-3 text-3xl font-bold tracking-tight text-white">Technical Skills</h2>
+            <p className="text-xs font-mono uppercase tracking-[0.4em] text-emerald-500">
+              Recruiter_Ready_Skill_Map
             </p>
           </div>
           <div className="grid gap-8 lg:grid-cols-3">
@@ -53,7 +56,7 @@ export default function Skills() {
                 transition={{ duration: 0.5, delay: groupIndex * 0.15 }}
                 className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 shadow-xl"
               >
-                <h3 className="text-sm font-mono uppercase tracking-[0.3em] text-emerald-400 mb-6">
+                <h3 className="mb-6 text-sm font-mono uppercase tracking-[0.3em] text-emerald-400">
                   {group.group}
                 </h3>
                 <div className="space-y-4">
@@ -68,10 +71,10 @@ export default function Skills() {
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <p className="text-base font-semibold text-neutral-100">{item.name}</p>
-                          <p className="text-xs text-neutral-400 mt-1">{item.note}</p>
+                          <p className="mt-1 text-xs text-neutral-400">{item.note}</p>
                         </div>
                         <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                          CAP_LEVEL: {item.level}
+                          {item.level}
                         </span>
                       </div>
                     </MotionDiv>

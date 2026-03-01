@@ -10,9 +10,12 @@ export default function Experience() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <section className="py-20">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-10">Architectural Impact</h2>
+      <section id="experience" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="mb-2 text-center text-3xl font-bold">Experience</h2>
+          <p className="mb-10 text-center text-neutral-500">
+            Operational ownership and reliability experience in high-throughput environments.
+          </p>
           <div className="relative">
             <div className="border-l-2 border-neutral-700 absolute h-full left-1/2 -translate-x-1/2"></div>
             {experienceData.map((item, index) => (

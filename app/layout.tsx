@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { profileData } from "@/content/profile";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,8 +11,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Mohammed Vepari - Software Engineer",
-  description: "Portfolio of Mohammed Vepari, a software engineer specializing in building modern web applications.",
+  title: `${profileData.name} | New Grad Software Engineer`,
+  description:
+    "Portfolio of Mohammed Vepari featuring NetPulse, moveYSplash, and full-stack software engineering projects.",
 };
 
 export default function RootLayout({
