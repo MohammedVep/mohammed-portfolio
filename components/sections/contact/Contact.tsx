@@ -14,7 +14,8 @@ export default function Contact() {
         <div className="container mx-auto px-6">
           <h2 className="mb-3 text-center text-3xl font-bold text-white">Contact</h2>
           <p className="mx-auto mb-10 max-w-2xl text-center text-neutral-400">
-            I am open to software engineering internships and new grad opportunities.
+            I am actively seeking full-time New Grad Software Engineer roles (2026).
+            I have shipped public, production-style projects with live demos and source code.
             The fastest way to reach me is by email.
           </p>
 
