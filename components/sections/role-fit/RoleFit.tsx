@@ -5,6 +5,7 @@ import { profileData } from "@/content/profile";
 
 type SkillSignal = {
   label: string;
+  weight: number;
   keywords: string[];
   evidence: string;
 };
@@ -21,33 +22,83 @@ type ProjectSignal = {
 const skillSignals: SkillSignal[] = [
   {
     label: "Frontend Delivery (React / Next.js)",
+    weight: 10,
     keywords: ["react", "next.js", "nextjs", "typescript", "javascript", "frontend", "ui"],
     evidence:
       "Built portfolio, moveYSplash, and tutoring interfaces with reusable components and responsive UX.",
   },
   {
     label: "Backend API Development",
+    weight: 8,
     keywords: ["node", "backend", "api", "rest", "server", "services"],
     evidence:
       "Implemented backend workflows for NetPulse and tutoring management system with production-oriented API design.",
   },
   {
+    label: "Core Languages (Java / Python / Rust)",
+    weight: 14,
+    keywords: ["java", "python", "rust", "typescript", "javascript"],
+    evidence:
+      "Strong language alignment with New Grad roles requiring Java or Python and modern TypeScript/JavaScript delivery.",
+  },
+  {
     label: "Database Engineering",
+    weight: 7,
     keywords: ["sql", "postgres", "postgresql", "mysql", "supabase", "database", "schema"],
     evidence:
       "Shipped SQL-backed systems and optimized query patterns for performance and data reliability.",
   },
   {
+    label: "CS Fundamentals (Compilers / OS / Algorithms)",
+    weight: 10,
+    keywords: [
+      "compilers",
+      "compiler",
+      "operating systems",
+      "operating system",
+      "algorithms",
+      "data structures",
+      "fundamentals",
+      "systems",
+    ],
+    evidence:
+      "Foundational CS focus from coursework and algorithmic problem solving used in portfolio projects.",
+  },
+  {
     label: "Reliability & Monitoring",
+    weight: 8,
     keywords: ["monitoring", "uptime", "incident", "reliability", "observability", "production"],
     evidence:
       "Built NetPulse as a distributed uptime monitoring SaaS with incident lifecycle and alerting logic.",
   },
   {
     label: "Performance & Problem Solving",
+    weight: 7,
     keywords: ["performance", "optimiz", "latency", "algorithms", "scalable", "scale"],
     evidence:
       "Improved moveYSplash search performance by 90% and applied algorithm-focused optimization in coursework and projects.",
+  },
+  {
+    label: "Communication & Professional Standards",
+    weight: 6,
+    keywords: ["communication", "written", "verbal", "english", "integrity", "honesty", "work ethic"],
+    evidence:
+      "Portfolio and resume emphasize delivery clarity, reliability, and professional communication standards.",
+  },
+  {
+    label: "New Grad Program Alignment",
+    weight: 10,
+    keywords: [
+      "new grad",
+      "recent university graduates",
+      "recent graduate",
+      "entry level",
+      "junior",
+      "0-2 years",
+      "engineering development program",
+    ],
+    evidence:
+      "Profile is explicitly positioned for full-time New Grad Software Engineer roles (2026).",
   },
 ];
 
@@ -173,37 +224,80 @@ export default function RoleFit() {
     const matchedSkills = skillSignals
       .map((signal) => {
         const hits = computeKeywordHits(text, signal.keywords);
-        return { ...signal, hits };
+        const signalScore =
+          hits > 0 ? Math.min(signal.weight, Math.round((hits / 2) * signal.weight)) : 0;
+        return { ...signal, hits, signalScore };
       })
       .filter((signal) => signal.hits > 0)
-      .sort((a, b) => b.hits - a.hits);
+      .sort((a, b) => b.signalScore - a.signalScore || b.hits - a.hits);
 
     const matchedProjects = projectSignals
       .map((project) => {
         const hits = computeKeywordHits(text, project.keywords);
-        return { ...project, hits };
+        const projectScore = Math.min(10, hits * 3);
+        return { ...project, hits, projectScore };
       })
       .filter((project) => project.hits > 0)
-      .sort((a, b) => b.hits - a.hits);
+      .sort((a, b) => b.projectScore - a.projectScore || b.hits - a.hits);
 
-    const skillCoverage = Math.min(60, Math.round((matchedSkills.length / skillSignals.length) * 60));
-    const projectCoverage = Math.min(30, Math.round((matchedProjects.length / projectSignals.length) * 30));
-    const newGradBoost =
-      text.includes("new grad") || text.includes("entry level") || text.includes("junior") ? 10 : 5;
-    const fitScore = Math.min(100, skillCoverage + projectCoverage + newGradBoost);
+    const skillCoverage = Math.min(
+      65,
+      matchedSkills.reduce((sum, signal) => sum + signal.signalScore, 0)
+    );
+    const projectCoverage = Math.min(
+      25,
+      matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.projectScore, 0)
+    );
 
-    const strongestSignals = matchedSkills.slice(0, 3).map((signal) => signal.label);
+    const stageKeywords = [
+      "new grad",
+      "recent university graduates",
+      "entry level",
+      "0-2 years",
+      "junior",
+      "engineering development program",
+    ];
+    const stageHits = computeKeywordHits(text, stageKeywords);
+    const stageAlignment = Math.min(10, stageHits * 2);
+
+    const logisticsKeywords = [
+      "canada",
+      "toronto",
+      "in office",
+      "4 days/week",
+      "work anywhere",
+      "work authorization",
+    ];
+    const logisticsHits = computeKeywordHits(text, logisticsKeywords);
+    const logisticsAlignment = Math.min(8, logisticsHits * 2);
+
+    const fitScore = Math.min(
+      100,
+      Math.round(skillCoverage + projectCoverage + stageAlignment + logisticsAlignment)
+    );
+
+    const strongestSignals = matchedSkills.slice(0, 4).map((signal) => signal.label);
 
     const recruiterPitch = [
-      `${profileData.name} is a strong match for this role based on proven full-stack delivery across React/Next.js, Node.js APIs, and SQL-backed systems.`,
+      `${profileData.name} shows strong alignment for this role through stack fit (Java/Python/TypeScript/React), practical full-stack delivery, and production-style project evidence.`,
       matchedProjects[0]
         ? `Most relevant project: ${matchedProjects[0].title} (${matchedProjects[0].summary})`
         : "Relevant project evidence is available across NetPulse, moveYSplash, and capstone work.",
       "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, and system design documentation.",
     ].join(" ");
 
+    const scoreBreakdown = [
+      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 65 },
+      { label: "Project Evidence Match", score: Math.round(projectCoverage), max: 25 },
+      { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 10 },
+      { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 8 },
+    ];
+
     const briefText = [
       `Role Fit Score: ${fitScore}/100`,
+      "",
+      "Score Breakdown:",
+      ...scoreBreakdown.map((part) => `- ${part.label}: ${part.score}/${part.max}`),
       "",
       "Top Signals:",
       ...strongestSignals.map((item) => `- ${item}`),
@@ -217,6 +311,7 @@ export default function RoleFit() {
       matchedSkills,
       matchedProjects,
       recruiterPitch,
+      scoreBreakdown,
       briefText,
     };
   }, [jobDescription]);
@@ -278,9 +373,13 @@ export default function RoleFit() {
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
                 <p className="text-xs uppercase tracking-widest text-neutral-500">Fit Score</p>
                 <p className="mt-3 text-4xl font-bold text-emerald-300">{analysis.fitScore}/100</p>
-                <p className="mt-2 text-sm text-neutral-400">
-                  Calculated from role keyword coverage + project relevance signals.
-                </p>
+                <div className="mt-3 space-y-1 text-xs text-neutral-400">
+                  {analysis.scoreBreakdown.map((part) => (
+                    <p key={part.label}>
+                      {part.label}: {part.score}/{part.max}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5 lg:col-span-2">
