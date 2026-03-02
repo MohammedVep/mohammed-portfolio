@@ -14,6 +14,10 @@ export type PortfolioProject = {
   liveUrl?: string;
   repoUrl?: string;
   systemDesignUrl?: string;
+  additionalLinks?: {
+    label: string;
+    url: string;
+  }[];
 };
 
 export const projectsData: PortfolioProject[] = [
@@ -86,20 +90,23 @@ export const projectsData: PortfolioProject[] = [
     id: "cloud-code-execution",
     title: "Cloud Code Execution Environment",
     description:
-      "Built a cloud-hosted code execution service with an API endpoint for running isolated jobs and returning execution results.",
-    metrics: "Live API Endpoint | Cloud Execution",
+      "Built and upgraded a cloud-hosted code execution platform with separate web application and execution API deployments.",
+    metrics: "App Runner Web + ALB API | Cloud Execution",
     tags: ["Node.js", "API", "AWS", "Containers", "Backend"],
     hardProblem:
       "Execute untrusted user code safely while controlling runtime limits, output size, and request-level isolation.",
     architecture: `graph LR
-  Client[Client Request]-->API[Execution API Gateway]
+  Client[Web Client]-->App[App Runner Service]
+  App-->API[Execution API Endpoint]
   API-->Queue[Execution Queue]
   Queue-->Worker[Sandboxed Workers]
   Worker-->Result[Execution Result Store]
-  Result-->API`,
+  Result-->API
+  API-->App`,
     tradeoffs: [
       "Strict sandbox limits improve safety but can reject edge-case workloads that need higher resource ceilings.",
       "Queue-based execution improves throughput stability, but adds extra latency compared to direct synchronous execution.",
+      "Splitting web and API deployments improves scalability isolation, but increases operational surface area.",
     ],
     invariants: [
       "Every execution request runs with bounded CPU and memory limits.",
@@ -107,11 +114,18 @@ export const projectsData: PortfolioProject[] = [
       "Failed runs do not block subsequent queue processing.",
     ],
     highlights: [
+      "Upgraded deployment to separate web app and API endpoints for clearer platform architecture.",
       "Shipped a public cloud API endpoint for real execution requests.",
       "Designed for isolation-first execution behavior under backend constraints.",
       "Implemented execution flow with queue-worker reliability patterns.",
     ],
-    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
+    additionalLinks: [
+      {
+        label: "Execution API",
+        url: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+      },
+    ],
   },
   {
     id: "realtime-transit-telemetry",

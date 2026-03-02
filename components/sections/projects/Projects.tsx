@@ -34,7 +34,10 @@ export default function Projects() {
               </span>
             ))}
           </div>
-          {project.liveUrl || project.repoUrl || project.systemDesignUrl ? (
+          {project.liveUrl ||
+          project.repoUrl ||
+          project.systemDesignUrl ||
+          (project.additionalLinks?.length ?? 0) > 0 ? (
             <div className="mt-3 flex flex-wrap gap-2">
               {project.liveUrl ? (
                 <a
@@ -67,6 +70,18 @@ export default function Projects() {
                   System Design
                 </a>
               ) : null}
+              {project.additionalLinks?.map((link) => (
+                <a
+                  key={`${project.id}-${link.label}`}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(event) => event.stopPropagation()}
+                  className="rounded border border-amber-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           ) : null}
         </div>
@@ -85,7 +100,10 @@ export default function Projects() {
             <p className="mt-2 text-neutral-300">{project.hardProblem}</p>
           </div>
 
-          {project.liveUrl || project.repoUrl || project.systemDesignUrl ? (
+          {project.liveUrl ||
+          project.repoUrl ||
+          project.systemDesignUrl ||
+          (project.additionalLinks?.length ?? 0) > 0 ? (
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Links</h4>
               <div className="mt-3 flex flex-wrap gap-3">
@@ -117,6 +135,17 @@ export default function Projects() {
                     System Design Doc
                   </a>
                 ) : null}
+                {project.additionalLinks?.map((link) => (
+                  <a
+                    key={`${project.id}-detail-${link.label}`}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded border border-amber-400/50 px-3 py-2 text-xs uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </div>
           ) : null}

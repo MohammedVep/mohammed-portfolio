@@ -164,7 +164,7 @@ const projectSignals: ProjectSignal[] = [
   {
     title: "Cloud Code Execution Environment",
     summary:
-      "Cloud API project for isolated code execution workflows with queue/worker reliability and runtime controls.",
+      "Cloud code execution platform upgraded with App Runner web delivery and ALB-backed execution API.",
     keywords: [
       "code execution",
       "compiler",
@@ -179,7 +179,7 @@ const projectSignals: ProjectSignal[] = [
       "runtime",
       "security",
     ],
-    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
   },
   {
     title: "Real-Time Transit Telemetry Dashboard",
