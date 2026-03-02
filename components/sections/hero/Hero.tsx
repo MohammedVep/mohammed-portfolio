@@ -24,6 +24,7 @@ export default function Hero() {
   ];
 
   const [telemetry, setTelemetry] = useState(baseTelemetry);
+  const systemDesignBriefMailto = `mailto:${profileData.email}?subject=System%20Design%20Brief%20Request&body=Hi%20Mohammed%2C%0A%0AI%20reviewed%20your%20portfolio%20and%20would%20like%20a%20system%20design%20brief%20for%20a%20specific%20project.%0A%0AProject%3A%20%0ARole%3A%20%0ACompany%3A%20`;
 
   const heroItems = [
     {
@@ -104,6 +105,30 @@ export default function Hero() {
         <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
           {profileData.location}
         </p>
+        <div className="mb-8 flex flex-wrap gap-3">
+          <a
+            href={profileData.resumeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-300 transition hover:border-emerald-400 hover:text-emerald-200"
+          >
+            Download Resume
+          </a>
+          <a
+            href={profileData.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/50 hover:text-emerald-200"
+          >
+            View GitHub
+          </a>
+          <a
+            href={systemDesignBriefMailto}
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+          >
+            Request System Design Brief
+          </a>
+        </div>
         <Bento items={heroItems} />
       </div>
     </section>

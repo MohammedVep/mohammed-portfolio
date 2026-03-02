@@ -26,6 +26,12 @@ type ProjectSignal = {
   recentUpdates?: string[];
 };
 
+type RoleTemplate = {
+  title: string;
+  alignment: string[];
+  evidence: string[];
+};
+
 const skillSignals: SkillSignal[] = [
   {
     label: "Frontend Delivery (React / Next.js)",
@@ -251,6 +257,48 @@ const projectSignals: ProjectSignal[] = projectsData.map((project) => {
 const sampleJobDescription = `New Grad Software Engineer - Full Time
 We are looking for an engineer who can build full-stack web applications, work across React/TypeScript and Node.js APIs, and write efficient SQL queries. You should care about reliability, testing, and performance optimization.`;
 
+const roleTemplates: RoleTemplate[] = [
+  {
+    title: "Amazon SDE Fit",
+    alignment: [
+      "Distributed systems ownership with failure handling and operational controls.",
+      "Scalable backend APIs with queue-worker and streaming patterns.",
+      "Production-readiness focus: observability, retries, and reliability tradeoffs.",
+    ],
+    evidence: [
+      "NetPulse + Mini Load Balancer for distributed reliability and routing.",
+      "Cloud Code Execution + Transit Telemetry for async and real-time pipelines.",
+      "System design docs + live demos for fast technical validation.",
+    ],
+  },
+  {
+    title: "Veeva EDP Fit",
+    alignment: [
+      "Strong CS fundamentals through algorithmic and systems-focused projects.",
+      "Backend architecture depth with clear tradeoff communication.",
+      "New grad profile positioning with documented engineering rigor.",
+    ],
+    evidence: [
+      "Telecom Network Visualizer + Mini Load Balancer for fundamentals and systems thinking.",
+      "NetPulse + Cloud Code Execution for backend architecture and reliability.",
+      "Role Fit brief + system design documentation for communication quality.",
+    ],
+  },
+  {
+    title: "Backend / Platform New Grad Fit",
+    alignment: [
+      "API and data workflow implementation across full-stack products.",
+      "Operational safety controls for retries, limits, and idempotency.",
+      "Evidence of measurable improvements and deployment ownership.",
+    ],
+    evidence: [
+      "Cloud Code Execution + NetPulse for platform and backend service design.",
+      "Transit Telemetry for streaming semantics and observability.",
+      "moveYSplash + Tutoring for full-stack delivery and SQL-backed workflows.",
+    ],
+  },
+];
+
 const computeKeywordHits = (text: string, keywords: string[]) =>
   keywords.reduce((count, keyword) => (text.includes(keyword) ? count + 1 : count), 0);
 
@@ -389,6 +437,27 @@ export default function RoleFit() {
             Evidence-first AI-style analysis for hiring teams. Paste a job description and get a
             concise fit brief mapped to real project outcomes, not generic buzzwords.
           </p>
+
+          <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
+            <p className="text-xs uppercase tracking-widest text-neutral-500">Target Role Templates</p>
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              {roleTemplates.map((template) => (
+                <div key={template.title} className="rounded-xl border border-neutral-800 bg-black p-4">
+                  <p className="text-sm font-semibold text-neutral-100">{template.title}</p>
+                  <div className="mt-2 space-y-1 text-xs text-neutral-300">
+                    {template.alignment.map((item) => (
+                      <p key={`${template.title}-${item}`}>- {item}</p>
+                    ))}
+                  </div>
+                  <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
+                    {template.evidence.map((item) => (
+                      <p key={`${template.title}-evidence-${item}`}>- {item}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>

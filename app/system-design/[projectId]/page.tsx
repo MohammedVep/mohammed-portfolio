@@ -30,6 +30,7 @@ export default async function ProjectSystemDesignPage({ params }: SystemDesignPa
         </div>
 
         <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
+          <p className="text-xs uppercase tracking-widest text-cyan-300/90">{project.projectType}</p>
           <p className="text-sm text-neutral-300">{project.description}</p>
           <p className="mt-2 text-xs uppercase tracking-widest text-emerald-500/80">{project.metrics}</p>
           {project.liveUrl ||
@@ -73,6 +74,37 @@ export default async function ProjectSystemDesignPage({ params }: SystemDesignPa
         </section>
 
         <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
+          <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">
+            Why This Project Matters
+          </h2>
+          <p className="text-sm text-neutral-200">{project.whyItMatters}</p>
+        </section>
+
+        <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
+          <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">
+            Tech + Architecture Summary
+          </h2>
+          <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-300">
+            <li>
+              <span className="font-semibold text-neutral-100">Tech:</span> {project.tags.join(", ")}
+            </li>
+            <li>
+              <span className="font-semibold text-neutral-100">Architecture:</span>{" "}
+              {project.architectureSummary}
+            </li>
+          </ul>
+        </section>
+
+        <section className="mb-8 rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-5">
+          <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-300">Impact Metrics</h2>
+          <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-200">
+            {project.impactMetrics.map((metric, index) => (
+              <li key={`${project.id}-metric-${index}`}>{metric}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
           <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">Core Problem</h2>
           <p className="text-sm text-neutral-300">{project.hardProblem}</p>
         </section>
@@ -111,6 +143,19 @@ ${project.architecture}
             ))}
           </ul>
         </section>
+
+        {project.behavioralSignals?.length ? (
+          <section className="mb-8 rounded-xl border border-amber-500/30 bg-amber-500/5 p-5">
+            <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-300">
+              Behavioral + Impact Signals
+            </h2>
+            <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-200">
+              {project.behavioralSignals.map((signal, index) => (
+                <li key={`${project.id}-behavior-${index}`}>{signal}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
           <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">

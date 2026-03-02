@@ -1,13 +1,35 @@
 'use client';
 
-import { projectsData } from "@/content/projects";
 import { Bento } from "@/components/ui/bento";
+import { projectsData, type PortfolioProject } from "@/content/projects";
 
-export default function Projects() {
-  const items = projectsData.map((project, index) => ({
+const categoryOrder: PortfolioProject["projectType"][] = [
+  "Distributed Systems & Cloud APIs",
+  "Scaling & Messaging Systems",
+  "Algorithms & Visualization",
+  "Full-Stack Product Engineering",
+];
+
+const categoryDescriptions: Record<PortfolioProject["projectType"], string> = {
+  "Distributed Systems & Cloud APIs":
+    "Reliability-focused backend systems with routing, failover, and API-driven operations.",
+  "Scaling & Messaging Systems":
+    "Queue-based and real-time data pipelines designed for throughput, isolation, and safe execution.",
+  "Algorithms & Visualization":
+    "Algorithmic systems that surface routing, optimization, and tradeoff decisions clearly.",
+  "Full-Stack Product Engineering":
+    "End-to-end applications with product UX, backend workflows, and documented design decisions.",
+};
+
+function buildBentoItems(categoryProjects: PortfolioProject[]) {
+  return categoryProjects.map((project, index) => ({
     id: project.id,
     className:
-      index === 0 ? "col-span-12 lg:col-span-8" : "col-span-12 lg:col-span-4",
+      categoryProjects.length === 1
+        ? "col-span-12"
+        : index === 0
+          ? "col-span-12 lg:col-span-8"
+          : "col-span-12 lg:col-span-4",
     content: (
       <div className="flex h-full flex-col justify-between font-mono">
         <div>
@@ -17,16 +39,27 @@ export default function Projects() {
               {project.metrics}
             </span>
           </div>
-          <h3 className="mb-2 text-xl font-bold text-neutral-200">{project.title}</h3>
-          <p className="text-sm leading-relaxed text-neutral-400">{project.description}</p>
-          <p className="mt-3 text-xs text-emerald-300/90">
-            {project.highlights[0]}
+          <p className="mb-2 text-[10px] uppercase tracking-widest text-cyan-300/90">
+            {project.projectType}
           </p>
-          {project.productionCapabilities?.length ? (
-            <p className="mt-2 text-[11px] text-cyan-300/90">
-              Production: {project.productionCapabilities[0]}
+          <h3 className="mb-2 text-xl font-bold text-neutral-200">{project.title}</h3>
+          <p className="text-sm leading-relaxed text-neutral-300">{project.whyItMatters}</p>
+
+          <div className="mt-3 space-y-1 text-[11px] text-neutral-400">
+            <p>
+              <span className="text-neutral-200">Tech:</span> {project.tags.join(", ")}
             </p>
-          ) : null}
+            <p>
+              <span className="text-neutral-200">Architecture:</span> {project.architectureSummary}
+            </p>
+          </div>
+
+          <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
+            {project.impactMetrics.slice(0, 2).map((metric, metricIndex) => (
+              <p key={`${project.id}-metric-preview-${metricIndex}`}>- {metric}</p>
+            ))}
+          </div>
+
           {project.recentUpdates?.length ? (
             <p className="mt-2 text-[11px] text-amber-300/90">
               Update: {project.recentUpdates[0]}
@@ -99,12 +132,41 @@ export default function Projects() {
     ),
     deepDiveContent: (
       <div className="font-mono">
+        <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-cyan-300">{project.projectType}</p>
         <h2 className="mb-2 text-2xl font-bold text-emerald-400">{project.title}</h2>
-        <p className="mb-4 text-xs uppercase tracking-widest text-emerald-500/80">
-          {project.metrics}
-        </p>
+        <p className="mb-4 text-xs uppercase tracking-widest text-emerald-500/80">{project.metrics}</p>
 
         <div className="space-y-6 text-sm">
+          <div>
+            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
+              Why This Project Matters
+            </h4>
+            <p className="mt-2 text-neutral-200">{project.whyItMatters}</p>
+          </div>
+
+          <div>
+            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
+              Tech + Architecture Summary
+            </h4>
+            <div className="mt-2 space-y-2 rounded border border-neutral-800 bg-neutral-950 p-4 text-neutral-300">
+              <p>
+                <span className="text-neutral-100">Tech:</span> {project.tags.join(", ")}
+              </p>
+              <p>
+                <span className="text-neutral-100">Architecture:</span> {project.architectureSummary}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Impact Metrics</h4>
+            <div className="mt-2 space-y-2 rounded border border-emerald-500/30 bg-emerald-500/5 p-4 text-neutral-200">
+              {project.impactMetrics.map((metric, metricIndex) => (
+                <p key={`${project.id}-metric-${metricIndex}`}>- {metric}</p>
+              ))}
+            </div>
+          </div>
+
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Problem</h4>
             <p className="mt-2 text-neutral-300">{project.hardProblem}</p>
@@ -184,6 +246,19 @@ ${project.architecture}
             </div>
           </div>
 
+          {project.behavioralSignals?.length ? (
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-amber-300">
+                Behavioral + Impact Signals
+              </h4>
+              <div className="mt-2 space-y-2 rounded border border-amber-500/30 bg-amber-500/5 p-4 text-neutral-200">
+                {project.behavioralSignals.map((signal, signalIndex) => (
+                  <p key={`${project.id}-signal-${signalIndex}`}>- {signal}</p>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {project.productionCapabilities?.length ? (
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-400">
@@ -235,6 +310,16 @@ ${project.architecture}
       </div>
     ),
   }));
+}
+
+export default function Projects() {
+  const groupedProjects = categoryOrder
+    .map((category) => ({
+      category,
+      description: categoryDescriptions[category],
+      projects: projectsData.filter((project) => project.projectType === category),
+    }))
+    .filter((group) => group.projects.length > 0);
 
   return (
     <section id="projects" className="border-t border-neutral-900 bg-black py-20">
@@ -242,12 +327,28 @@ ${project.architecture}
         <h2 className="mb-4 text-center text-xs font-mono uppercase tracking-[0.5em] text-emerald-500">
           Project_Vault
         </h2>
-        <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-400">
-          Featured work with architecture decisions, production-grade capabilities, measurable
-          outcomes, and dedicated system design documentation. Select a project to open the
-          technical deep dive.
+        <p className="mx-auto mb-6 max-w-3xl text-center text-sm text-neutral-300">
+          Each project now includes an immediate value statement, measurable impact metrics, tech and
+          architecture summary, and production-grade capabilities with full system design references.
         </p>
-        <Bento items={items} />
+        <div className="mx-auto mb-10 max-w-4xl rounded-xl border border-neutral-800 bg-neutral-950 p-5 font-mono text-sm text-neutral-300">
+          <p className="mb-2 text-xs uppercase tracking-[0.3em] text-amber-300">
+            Engineering Behavioral Signals
+          </p>
+          <p>- Built systems with explicit failure handling, retries, and reliability controls.</p>
+          <p>- Documented architecture tradeoffs and scaling decisions in each project deep dive.</p>
+          <p>- Demonstrated deployment + observability readiness with public demos and live metrics.</p>
+        </div>
+
+        <div className="space-y-12">
+          {groupedProjects.map((group) => (
+            <div key={group.category}>
+              <h3 className="text-lg font-bold text-white">{group.category}</h3>
+              <p className="mb-4 mt-1 text-sm text-neutral-400">{group.description}</p>
+              <Bento items={buildBentoItems(group.projects)} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
