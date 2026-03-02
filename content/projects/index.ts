@@ -11,6 +11,7 @@ export type PortfolioProject = {
   tradeoffs: string[];
   invariants: string[];
   highlights: string[];
+  recentUpdates?: string[];
   liveUrl?: string;
   repoUrl?: string;
   systemDesignUrl?: string;
@@ -51,6 +52,11 @@ export const projectsData: PortfolioProject[] = [
       "Implemented status dashboards that let users track service health over time instead of isolated check events.",
       "Designed alert flow with retry/debounce behavior to reduce noisy false alarms.",
     ],
+    recentUpdates: [
+      "Expanded from baseline monitoring into a multi-region reliability flow with stronger incident lifecycle handling.",
+      "Added clearer production proof points: public demo environment, source repository, and system design documentation.",
+      "Improved recruiter readability with explicit architecture/tradeoff/invariant sections in portfolio presentation.",
+    ],
     liveUrl: profileData.netPulseLiveUrl,
     repoUrl: profileData.netPulseRepoUrl,
     systemDesignUrl: "/system-design/netpulse",
@@ -82,6 +88,10 @@ export const projectsData: PortfolioProject[] = [
       "Improved search performance by 90% through query and indexing optimization.",
       "Built a responsive UI across desktop and mobile experiences.",
       "Used Supabase with SQL-backed storage for reliable content persistence.",
+    ],
+    recentUpdates: [
+      "Published a live deployment link to make academic project outcomes directly reviewable.",
+      "Added a dedicated system design doc page to explain architecture and performance decisions.",
     ],
     liveUrl: "https://move-y-splash-new.vercel.app",
     systemDesignUrl: "/system-design/moveysplash",
@@ -119,6 +129,10 @@ export const projectsData: PortfolioProject[] = [
       "Designed for isolation-first execution behavior under backend constraints.",
       "Implemented execution flow with queue-worker reliability patterns.",
     ],
+    recentUpdates: [
+      "Introduced dual-endpoint deployment model: App Runner for web delivery plus ALB endpoint for execution API.",
+      "Refined architecture documentation and portfolio link strategy so reviewers can inspect web and API surfaces separately.",
+    ],
     liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
     additionalLinks: [
       {
@@ -154,6 +168,10 @@ export const projectsData: PortfolioProject[] = [
       "Deployed a public telemetry dashboard for live viewing.",
       "Structured operational data for fast visual interpretation.",
       "Focused on usability for real-time monitoring scenarios.",
+    ],
+    recentUpdates: [
+      "Linked public dashboard deployment to portfolio for direct reviewer validation.",
+      "Aligned project narrative to emphasize real-time operations visibility and telemetry interpretation value.",
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",

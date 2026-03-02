@@ -22,6 +22,11 @@ export default function Projects() {
           <p className="mt-3 text-xs text-emerald-300/90">
             {project.highlights[0]}
           </p>
+          {project.recentUpdates?.length ? (
+            <p className="mt-2 text-[11px] text-amber-300/90">
+              Update: {project.recentUpdates[0]}
+            </p>
+          ) : null}
         </div>
         <div className="mt-4">
           <div className="flex flex-wrap gap-2">
@@ -195,6 +200,19 @@ ${project.architecture}
               ))}
             </div>
           </div>
+
+          {project.recentUpdates?.length ? (
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-amber-400">
+                Recent Upgrades
+              </h4>
+              <div className="mt-2 space-y-2 rounded border border-amber-500/30 bg-amber-500/5 p-4 text-neutral-200">
+                {project.recentUpdates.map((item, updateIndex) => (
+                  <p key={`${project.id}-update-${updateIndex}`}>- {item}</p>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     ),
