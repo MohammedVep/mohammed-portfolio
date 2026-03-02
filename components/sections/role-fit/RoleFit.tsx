@@ -180,6 +180,7 @@ const projectSignals: ProjectSignal[] = [
       "security",
     ],
     liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
+    repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
   },
   {
     title: "Real-Time Transit Telemetry Dashboard",
@@ -200,6 +201,45 @@ const projectSignals: ProjectSignal[] = [
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+  },
+  {
+    title: "Mini Load Balancer (Go)",
+    summary:
+      "Go-based load balancer with multi-strategy routing, health-aware failover, and control-plane observability.",
+    keywords: [
+      "load balancer",
+      "go",
+      "routing",
+      "least connections",
+      "round robin",
+      "consistent hashing",
+      "failover",
+      "health checks",
+      "circuit breaker",
+      "distributed systems",
+      "observability",
+      "metrics",
+    ],
+  },
+  {
+    title: "Telecom Network Routing Visualizer",
+    summary:
+      "Interactive telecom routing simulator with Dijkstra/A* pathfinding, congestion simulation, and route metrics.",
+    keywords: [
+      "telecom",
+      "network",
+      "visualizer",
+      "routing",
+      "dijkstra",
+      "a*",
+      "graph",
+      "algorithms",
+      "react",
+      "typescript",
+      "latency",
+      "pathfinding",
+    ],
+    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
   },
 ];
 

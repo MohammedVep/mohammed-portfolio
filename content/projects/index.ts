@@ -26,7 +26,7 @@ export const projectsData: PortfolioProject[] = [
     id: "netpulse",
     title: "NetPulse: Distributed Uptime Monitoring SaaS",
     description:
-      "Built and deployed an uptime monitoring platform with scheduled checks, status tracking, and incident visibility for service reliability.",
+      "Built and continuously upgraded a distributed uptime monitoring platform with secure auth, public demo access, and multi-region reliability workflows.",
     metrics: "Live Demo + GitHub | Multi-Region Monitoring",
     tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Redis", "Docker"],
     hardProblem:
@@ -53,9 +53,9 @@ export const projectsData: PortfolioProject[] = [
       "Designed alert flow with retry/debounce behavior to reduce noisy false alarms.",
     ],
     recentUpdates: [
-      "Expanded from baseline monitoring into a multi-region reliability flow with stronger incident lifecycle handling.",
-      "Added clearer production proof points: public demo environment, source repository, and system design documentation.",
-      "Improved recruiter readability with explicit architecture/tradeoff/invariant sections in portfolio presentation.",
+      "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
+      "Introduced public read-only demo API mode so recruiters can evaluate functionality without tenant credentials.",
+      "Expanded integration test + deployment workflows for stronger end-to-end operational confidence.",
     ],
     liveUrl: profileData.netPulseLiveUrl,
     repoUrl: profileData.netPulseRepoUrl,
@@ -131,9 +131,11 @@ export const projectsData: PortfolioProject[] = [
     ],
     recentUpdates: [
       "Introduced dual-endpoint deployment model: App Runner for web delivery plus ALB endpoint for execution API.",
-      "Refined architecture documentation and portfolio link strategy so reviewers can inspect web and API surfaces separately.",
+      "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
+      "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
     ],
     liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
+    repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
     additionalLinks: [
       {
         label: "Execution API",
@@ -170,11 +172,89 @@ export const projectsData: PortfolioProject[] = [
       "Focused on usability for real-time monitoring scenarios.",
     ],
     recentUpdates: [
-      "Linked public dashboard deployment to portfolio for direct reviewer validation.",
-      "Aligned project narrative to emphasize real-time operations visibility and telemetry interpretation value.",
+      "Added event-time ordering, idempotency dedupe, and late-arrival correction for robust stream semantics.",
+      "Introduced adaptive backpressure controls and streaming analytics signal generation for high-throughput conditions.",
+      "Expanded operations readiness with CloudWatch alarms/dashboard integration and real-time WebSocket push.",
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+  },
+  {
+    id: "mini-load-balancer",
+    title: "Mini Load Balancer (Go)",
+    description:
+      "Production-style load balancer built in Go with multi-strategy routing, health-aware failover, and recruiter-facing observability controls.",
+    metrics: "Round Robin + Least Conn + Consistent Hash",
+    tags: ["Go", "Load Balancing", "Distributed Systems", "App Runner", "Observability"],
+    hardProblem:
+      "Route traffic predictably under backend failure while minimizing flapping, maintaining idempotent retry behavior, and preserving operational insight.",
+    architecture: `graph LR
+  Client[User Traffic]-->LB[Go Load Balancer]
+  LB-->CP[Control Plane /admin/*]
+  LB-->Proxy[Proxy Plane /proxy/*]
+  Proxy-->B1[Backend A]
+  Proxy-->B2[Backend B]
+  Proxy-->B3[Backend C]
+  LB-.Health Checks.->B1
+  LB-.Health Checks.->B2
+  LB-.Health Checks.->B3`,
+    tradeoffs: [
+      "Consistent hashing improves stickiness and cache locality, but can create uneven load if key distribution is skewed.",
+      "Aggressive health probing catches failures quickly, but risks false flaps without hysteresis thresholds.",
+      "Retry with failover improves success rates, but must stay bounded to avoid amplifying tail latency.",
+    ],
+    invariants: [
+      "Only healthy backends receive routed traffic unless explicitly in drain-aware transition.",
+      "Idempotent request retries remain bounded and never recurse indefinitely.",
+      "Routing strategy switches are observable through control-plane and metrics endpoints.",
+    ],
+    highlights: [
+      "Implemented three routing strategies with runtime switch support.",
+      "Added circuit breaker, active health checks, graceful draining, and failover mechanics.",
+      "Exposed control plane + Prometheus-style metrics for recruiter-visible operations evidence.",
+    ],
+    recentUpdates: [
+      "Built core engine with round robin, least connections, and consistent hashing selection modes.",
+      "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
+      "Added App Runner deployment scripts and recruiter-facing dashboard/control surface.",
+    ],
+  },
+  {
+    id: "telecom-network-visualizer",
+    title: "Telecom Network Routing Visualizer",
+    description:
+      "Interactive telecom routing simulator for visualizing shortest-path behavior, congestion effects, and network quality metrics.",
+    metrics: "Dijkstra + A* | Interactive Graph Simulation",
+    tags: ["React", "TypeScript", "Vite", "Algorithms", "Visualization"],
+    hardProblem:
+      "Represent dynamic network congestion and route optimization decisions in a way that is both mathematically correct and visually understandable.",
+    architecture: `graph TD
+  UI[React UI]-->Graph[Network Graph Model]
+  Graph-->Algo[Dijkstra / A* Engine]
+  Algo-->Sim[Congestion Weight Simulation]
+  Sim-->Metrics[Latency / Cost / Hops / Drop Rate]
+  Metrics-->UI`,
+    tradeoffs: [
+      "Frequent congestion recomputation improves realism but increases render and computation overhead.",
+      "A* pathfinding can reduce computation for target-focused routing, but requires heuristic tuning.",
+      "Dense topologies improve fidelity, but can reduce visual clarity without progressive filtering.",
+    ],
+    invariants: [
+      "Route results are always derived from current weighted graph state.",
+      "Visualization reflects algorithm output and congestion state consistently.",
+      "Metrics panel stays synchronized with selected path and simulation step.",
+    ],
+    highlights: [
+      "Implemented graph-based routing visualization with Dijkstra and A*.",
+      "Added dynamic edge-weight simulation to model congestion-driven route changes.",
+      "Exposed route quality metrics for latency, hops, cost, and drop-rate interpretation.",
+    ],
+    recentUpdates: [
+      "Initial release of telecom network routing visualizer with core graph/routing primitives.",
+      "Added dynamic congestion weighting and real-time route heat-style feedback.",
+      "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
+    ],
+    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
   },
   {
     id: "tutoring",
