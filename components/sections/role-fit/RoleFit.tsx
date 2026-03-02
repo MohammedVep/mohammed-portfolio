@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { profileData } from "@/content/profile";
+import { projectsData } from "@/content/projects";
 
 type SkillSignal = {
   label: string;
@@ -11,12 +12,18 @@ type SkillSignal = {
 };
 
 type ProjectSignal = {
+  id: string;
   title: string;
   summary: string;
   keywords: string[];
   liveUrl?: string;
   repoUrl?: string;
   designUrl?: string;
+  additionalLinks?: {
+    label: string;
+    url: string;
+  }[];
+  recentUpdates?: string[];
 };
 
 const skillSignals: SkillSignal[] = [
@@ -32,14 +39,14 @@ const skillSignals: SkillSignal[] = [
     weight: 8,
     keywords: ["node", "backend", "api", "rest", "server", "services"],
     evidence:
-      "Implemented backend workflows for NetPulse and tutoring management system with production-oriented API design.",
+      "Implemented backend workflows for NetPulse, cloud code execution, and tutoring management system.",
   },
   {
-    label: "Core Languages (Java / Python / Rust)",
+    label: "Core Languages (Java / Python / Rust / Go)",
     weight: 14,
-    keywords: ["java", "python", "rust", "typescript", "javascript"],
+    keywords: ["java", "python", "rust", "go", "typescript", "javascript"],
     evidence:
-      "Strong language alignment with New Grad roles requiring Java or Python and modern TypeScript/JavaScript delivery.",
+      "Strong language alignment with New Grad roles requiring Java or Python plus systems-oriented implementation work.",
   },
   {
     label: "Database Engineering",
@@ -62,28 +69,28 @@ const skillSignals: SkillSignal[] = [
       "systems",
     ],
     evidence:
-      "Foundational CS focus from coursework and algorithmic problem solving used in portfolio projects.",
+      "Foundational CS focus from coursework and algorithmic problem solving applied across projects.",
   },
   {
     label: "Reliability & Monitoring",
     weight: 8,
     keywords: ["monitoring", "uptime", "incident", "reliability", "observability", "production"],
     evidence:
-      "Built NetPulse as a distributed uptime monitoring SaaS with incident lifecycle and alerting logic.",
+      "Built reliability-focused systems including NetPulse and real-time telemetry operations workflows.",
   },
   {
     label: "Performance & Problem Solving",
     weight: 7,
     keywords: ["performance", "optimiz", "latency", "algorithms", "scalable", "scale"],
     evidence:
-      "Improved moveYSplash search performance by 90% and applied algorithm-focused optimization in coursework and projects.",
+      "Improved moveYSplash search performance by 90% and implemented distributed system tradeoff decisions.",
   },
   {
     label: "Communication & Professional Standards",
     weight: 6,
     keywords: ["communication", "written", "verbal", "english", "integrity", "honesty", "work ethic"],
     evidence:
-      "Portfolio and resume emphasize delivery clarity, reliability, and professional communication standards.",
+      "Portfolio emphasizes clear technical communication, design tradeoffs, and operational responsibility.",
   },
   {
     label: "New Grad Program Alignment",
@@ -102,153 +109,147 @@ const skillSignals: SkillSignal[] = [
   },
 ];
 
-const projectSignals: ProjectSignal[] = [
-  {
-    title: "NetPulse",
-    summary:
-      "Distributed uptime monitoring SaaS with scheduled checks, incident workflows, and operational visibility.",
-    keywords: [
-      "monitoring",
-      "uptime",
-      "incident",
-      "alert",
-      "reliability",
-      "backend",
-      "node",
-      "api",
-      "distributed",
-      "aws",
-      "saas",
-    ],
-    liveUrl: profileData.netPulseLiveUrl,
-    repoUrl: profileData.netPulseRepoUrl,
-    designUrl: "/system-design/netpulse",
-  },
-  {
-    title: "moveYSplash",
-    summary:
-      "Social platform project focused on search speed, responsive UX, and SQL-backed content workflows.",
-    keywords: [
-      "social",
-      "frontend",
-      "react",
-      "next.js",
-      "search",
-      "performance",
-      "sql",
-      "supabase",
-      "full stack",
-      "web",
-    ],
-    liveUrl: "https://move-y-splash-new.vercel.app",
-    repoUrl: "https://github.com/MohammedVep/MoveYSplashNew",
-    designUrl: "/system-design/moveysplash",
-  },
-  {
-    title: "Online Tutoring Management System",
-    summary:
-      "Capstone full-stack application with scheduling, authentication, and student/tutor workflow support.",
-    keywords: [
-      "full stack",
-      "scheduling",
-      "auth",
-      "authentication",
-      "angular",
-      "react",
-      "node",
-      "sql",
-      "capstone",
-      "web app",
-    ],
-  },
-  {
-    title: "Cloud Code Execution Environment",
-    summary:
-      "Cloud code execution platform upgraded with App Runner web delivery and ALB-backed execution API.",
-    keywords: [
-      "code execution",
-      "compiler",
-      "sandbox",
-      "backend",
-      "api",
-      "queue",
-      "worker",
-      "cloud",
-      "aws",
-      "distributed",
-      "runtime",
-      "security",
-    ],
-    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
-    repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
-  },
-  {
-    title: "Real-Time Transit Telemetry Dashboard",
-    summary:
-      "Real-time telemetry dashboard for transit operations visibility, signal tracking, and fast data interpretation.",
-    keywords: [
-      "real-time",
-      "telemetry",
-      "dashboard",
-      "streaming",
-      "data visualization",
-      "frontend",
-      "monitoring",
-      "analytics",
-      "operations",
-      "transportation",
-      "transit",
-    ],
-    liveUrl:
-      "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
-  },
-  {
-    title: "Mini Load Balancer (Go)",
-    summary:
-      "Go-based load balancer with multi-strategy routing, health-aware failover, and control-plane observability.",
-    keywords: [
-      "load balancer",
-      "go",
-      "routing",
-      "least connections",
-      "round robin",
-      "consistent hashing",
-      "failover",
-      "health checks",
-      "circuit breaker",
-      "distributed systems",
-      "observability",
-      "metrics",
-    ],
-    liveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
-    repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
-  },
-  {
-    title: "Telecom Network Routing Visualizer",
-    summary:
-      "Interactive telecom routing simulator with Dijkstra/A* pathfinding, congestion simulation, and route metrics.",
-    keywords: [
-      "telecom",
-      "network",
-      "visualizer",
-      "routing",
-      "dijkstra",
-      "a*",
-      "graph",
-      "algorithms",
-      "react",
-      "typescript",
-      "latency",
-      "pathfinding",
-    ],
-    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
-  },
-];
+const stopWords = new Set([
+  "the",
+  "and",
+  "for",
+  "with",
+  "from",
+  "into",
+  "that",
+  "this",
+  "your",
+  "their",
+  "while",
+  "about",
+  "under",
+  "over",
+  "across",
+  "without",
+  "where",
+  "when",
+  "which",
+  "project",
+  "projects",
+  "built",
+  "using",
+  "style",
+  "based",
+  "core",
+  "work",
+  "works",
+]);
+
+const normalize = (value: string) => value.toLowerCase();
+
+const tokenize = (value: string) =>
+  normalize(value)
+    .split(/[^a-z0-9+*#.-]+/)
+    .filter((token) => token.length > 2 && !stopWords.has(token));
+
+const keywordOverrides: Record<string, string[]> = {
+  netpulse: [
+    "monitoring",
+    "uptime",
+    "incident",
+    "alert",
+    "multi-region",
+    "websocket",
+    "api",
+    "aws",
+    "saas",
+    "reliability",
+  ],
+  moveysplash: [
+    "social",
+    "frontend",
+    "react",
+    "next.js",
+    "search",
+    "sql",
+    "supabase",
+    "performance",
+    "full stack",
+  ],
+  "cloud-code-execution": [
+    "code execution",
+    "sandbox",
+    "runtime",
+    "worker",
+    "queue",
+    "api",
+    "app runner",
+    "alb",
+    "security",
+    "cloud",
+  ],
+  "realtime-transit-telemetry": [
+    "real-time",
+    "telemetry",
+    "streaming",
+    "analytics",
+    "backpressure",
+    "idempotency",
+    "event-time",
+    "dashboard",
+    "websocket",
+    "transit",
+  ],
+  "mini-load-balancer": [
+    "load balancer",
+    "go",
+    "routing",
+    "least connections",
+    "round robin",
+    "consistent hashing",
+    "circuit breaker",
+    "health checks",
+    "failover",
+    "metrics",
+    "cloudfront",
+    "app runner",
+  ],
+  "telecom-network-visualizer": [
+    "telecom",
+    "network",
+    "routing",
+    "visualizer",
+    "dijkstra",
+    "a*",
+    "graph",
+    "latency",
+    "pathfinding",
+    "congestion",
+  ],
+};
+
+const projectSignals: ProjectSignal[] = projectsData.map((project) => {
+  const seedKeywords = [
+    ...(keywordOverrides[project.id] ?? []),
+    ...project.tags.map((tag) => normalize(tag)),
+    ...tokenize(project.title),
+    ...tokenize(project.description),
+    ...tokenize(project.hardProblem),
+    ...(project.recentUpdates?.flatMap((item) => tokenize(item)) ?? []),
+  ];
+
+  const keywords = Array.from(new Set(seedKeywords)).slice(0, 80);
+
+  return {
+    id: project.id,
+    title: project.title,
+    summary: project.description,
+    keywords,
+    liveUrl: project.liveUrl,
+    repoUrl: project.repoUrl,
+    designUrl: project.systemDesignUrl,
+    additionalLinks: project.additionalLinks,
+    recentUpdates: project.recentUpdates,
+  };
+});
 
 const sampleJobDescription = `New Grad Software Engineer - Full Time
 We are looking for an engineer who can build full-stack web applications, work across React/TypeScript and Node.js APIs, and write efficient SQL queries. You should care about reliability, testing, and performance optimization.`;
-
-const normalize = (value: string) => value.toLowerCase();
 
 const computeKeywordHits = (text: string, keywords: string[]) =>
   keywords.reduce((count, keyword) => (text.includes(keyword) ? count + 1 : count), 0);
@@ -275,19 +276,21 @@ export default function RoleFit() {
 
     const matchedProjects = projectSignals
       .map((project) => {
-        const hits = computeKeywordHits(text, project.keywords);
-        const projectScore = Math.min(10, hits * 3);
-        return { ...project, hits, projectScore };
+        const keywordHits = computeKeywordHits(text, project.keywords);
+        const upgradeTokens = tokenize(project.recentUpdates?.join(" ") ?? "");
+        const upgradeHits = computeKeywordHits(text, upgradeTokens);
+        const projectScore = Math.min(12, keywordHits * 2 + Math.min(4, upgradeHits));
+        return { ...project, keywordHits, upgradeHits, projectScore };
       })
-      .filter((project) => project.hits > 0)
-      .sort((a, b) => b.projectScore - a.projectScore || b.hits - a.hits);
+      .filter((project) => project.keywordHits > 0)
+      .sort((a, b) => b.projectScore - a.projectScore || b.keywordHits - a.keywordHits);
 
     const skillCoverage = Math.min(
-      65,
+      62,
       matchedSkills.reduce((sum, signal) => sum + signal.signalScore, 0)
     );
     const projectCoverage = Math.min(
-      25,
+      30,
       matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.projectScore, 0)
     );
 
@@ -319,18 +322,22 @@ export default function RoleFit() {
     );
 
     const strongestSignals = matchedSkills.slice(0, 4).map((signal) => signal.label);
+    const referencedUpdates = matchedProjects
+      .slice(0, 2)
+      .flatMap((project) => project.recentUpdates ?? [])
+      .slice(0, 3);
 
     const recruiterPitch = [
-      `${profileData.name} shows strong alignment for this role through stack fit (Java/Python/TypeScript/React), practical full-stack delivery, and production-style project evidence.`,
+      `${profileData.name} shows strong role alignment through stack fit, practical full-stack delivery, and recent production-style project upgrades.`,
       matchedProjects[0]
         ? `Most relevant project: ${matchedProjects[0].title} (${matchedProjects[0].summary})`
-        : "Relevant project evidence is available across NetPulse, moveYSplash, and capstone work.",
-      "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, and system design documentation.",
+        : "Relevant project evidence is available across multiple live and documented portfolio projects.",
+      "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, system design docs, and recent change history.",
     ].join(" ");
 
     const scoreBreakdown = [
-      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 65 },
-      { label: "Project Evidence Match", score: Math.round(projectCoverage), max: 25 },
+      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 62 },
+      { label: "Project Evidence Match", score: Math.round(projectCoverage), max: 30 },
       { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 10 },
       { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 8 },
     ];
@@ -343,6 +350,9 @@ export default function RoleFit() {
       "",
       "Top Signals:",
       ...strongestSignals.map((item) => `- ${item}`),
+      ...(referencedUpdates.length
+        ? ["", "Recent Upgrades Referenced:", ...referencedUpdates.map((item) => `- ${item}`)]
+        : []),
       "",
       "Recruiter-Ready Summary:",
       recruiterPitch,
@@ -354,6 +364,7 @@ export default function RoleFit() {
       matchedProjects,
       recruiterPitch,
       scoreBreakdown,
+      referencedUpdates,
       briefText,
     };
   }, [jobDescription]);
@@ -382,10 +393,10 @@ export default function RoleFit() {
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>
             <div className="mt-3 space-y-2 text-sm text-neutral-300">
-              <p>- Uses deterministic role-keyword matching against your skills and shipped projects.</p>
-              <p>- Produces a transparent weighted score breakdown (no black-box scoring).</p>
-              <p>- Generates recruiter summary text only from real evidence links in your portfolio.</p>
-              <p>- Designed to reduce AI bloat by prioritizing verifiable project signal over hype.</p>
+              <p>- Pulls evidence directly from your current `Project_Vault` data (projects, links, and recent upgrades).</p>
+              <p>- Uses deterministic keyword + weighted scoring (no black-box generation).</p>
+              <p>- Produces transparent score breakdown and recruiter summary grounded in verifiable links.</p>
+              <p>- Automatically updates as portfolio projects evolve, so scoring reflects your latest work.</p>
             </div>
           </div>
 
@@ -460,6 +471,13 @@ export default function RoleFit() {
                     <div key={project.title} className="rounded border border-neutral-800 bg-black p-3">
                       <p className="text-sm font-semibold text-neutral-100">{project.title}</p>
                       <p className="mt-1 text-xs text-neutral-400">{project.summary}</p>
+                      {project.recentUpdates?.length ? (
+                        <div className="mt-2 space-y-1 text-[11px] text-amber-300/90">
+                          {project.recentUpdates.slice(0, 2).map((item, index) => (
+                            <p key={`${project.id}-update-${index}`}>- {item}</p>
+                          ))}
+                        </div>
+                      ) : null}
                       <div className="mt-2 flex flex-wrap gap-2">
                         {project.liveUrl ? (
                           <a
@@ -489,11 +507,33 @@ export default function RoleFit() {
                             Design
                           </a>
                         ) : null}
+                        {project.additionalLinks?.map((link) => (
+                          <a
+                            key={`${project.id}-extra-${link.label}`}
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded border border-amber-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-amber-300"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+
+              {analysis.referencedUpdates.length ? (
+                <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-5 lg:col-span-3">
+                  <p className="text-xs uppercase tracking-widest text-amber-300">Recent Upgrades Considered</p>
+                  <div className="mt-2 space-y-1 text-sm text-neutral-200">
+                    {analysis.referencedUpdates.map((item) => (
+                      <p key={item}>- {item}</p>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : (
             <p className="mt-6 text-center text-sm text-neutral-500">
