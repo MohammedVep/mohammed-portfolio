@@ -220,6 +220,8 @@ const projectSignals: ProjectSignal[] = [
       "observability",
       "metrics",
     ],
+    liveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
+    repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
   },
   {
     title: "Telecom Network Routing Visualizer",
@@ -376,6 +378,16 @@ export default function RoleFit() {
             Evidence-first AI-style analysis for hiring teams. Paste a job description and get a
             concise fit brief mapped to real project outcomes, not generic buzzwords.
           </p>
+
+          <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
+            <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>
+            <div className="mt-3 space-y-2 text-sm text-neutral-300">
+              <p>- Uses deterministic role-keyword matching against your skills and shipped projects.</p>
+              <p>- Produces a transparent weighted score breakdown (no black-box scoring).</p>
+              <p>- Generates recruiter summary text only from real evidence links in your portfolio.</p>
+              <p>- Designed to reduce AI bloat by prioritizing verifiable project signal over hype.</p>
+            </div>
+          </div>
 
           <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <label htmlFor="jd" className="mb-2 block text-xs uppercase tracking-widest text-neutral-500">

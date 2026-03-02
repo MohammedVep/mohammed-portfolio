@@ -218,6 +218,14 @@ export const projectsData: PortfolioProject[] = [
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
       "Added App Runner deployment scripts and recruiter-facing dashboard/control surface.",
     ],
+    liveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
+    repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
+    additionalLinks: [
+      {
+        label: "CloudFront Edge",
+        url: "https://d1zwy02em6289x.cloudfront.net",
+      },
+    ],
   },
   {
     id: "telecom-network-visualizer",
