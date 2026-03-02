@@ -11,6 +11,7 @@ export type PortfolioProject = {
   tradeoffs: string[];
   invariants: string[];
   highlights: string[];
+  productionCapabilities?: string[];
   recentUpdates?: string[];
   liveUrl?: string;
   repoUrl?: string;
@@ -52,6 +53,11 @@ export const projectsData: PortfolioProject[] = [
       "Implemented status dashboards that let users track service health over time instead of isolated check events.",
       "Designed alert flow with retry/debounce behavior to reduce noisy false alarms.",
     ],
+    productionCapabilities: [
+      "Tenant-aware authentication and onboarding via Cognito registration + login.",
+      "Public demo-safe read-only API mode for recruiter review without privileged credentials.",
+      "Multi-region probe workflow with incident lifecycle and alert deduplication controls.",
+    ],
     recentUpdates: [
       "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
       "Introduced public read-only demo API mode so recruiters can evaluate functionality without tenant credentials.",
@@ -88,6 +94,11 @@ export const projectsData: PortfolioProject[] = [
       "Improved search performance by 90% through query and indexing optimization.",
       "Built a responsive UI across desktop and mobile experiences.",
       "Used Supabase with SQL-backed storage for reliable content persistence.",
+    ],
+    productionCapabilities: [
+      "Responsive multi-device UX with authenticated user workflows.",
+      "SQL-backed persistence with query optimization and indexing strategy.",
+      "Live deployment availability for external recruiter/interviewer validation.",
     ],
     recentUpdates: [
       "Published a live deployment link to make academic project outcomes directly reviewable.",
@@ -129,6 +140,11 @@ export const projectsData: PortfolioProject[] = [
       "Designed for isolation-first execution behavior under backend constraints.",
       "Implemented execution flow with queue-worker reliability patterns.",
     ],
+    productionCapabilities: [
+      "Asynchronous queue-worker execution model with bounded retries and durable result flow.",
+      "Tenant-aware API boundary with safer sandbox and runtime guardrails.",
+      "Split deployment topology (App Runner UI + ALB API) for clearer scaling responsibility.",
+    ],
     recentUpdates: [
       "Introduced dual-endpoint deployment model: App Runner for web delivery plus ALB endpoint for execution API.",
       "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
@@ -136,6 +152,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
     repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
+    systemDesignUrl: "/system-design/cloud-code-execution",
     additionalLinks: [
       {
         label: "Execution API",
@@ -171,6 +188,11 @@ export const projectsData: PortfolioProject[] = [
       "Structured operational data for fast visual interpretation.",
       "Focused on usability for real-time monitoring scenarios.",
     ],
+    productionCapabilities: [
+      "Event-time ordering + idempotency dedupe for resilient streaming semantics.",
+      "Adaptive backpressure and queue buffering for burst handling stability.",
+      "WebSocket-based low-latency telemetry push with operational observability hooks.",
+    ],
     recentUpdates: [
       "Added event-time ordering, idempotency dedupe, and late-arrival correction for robust stream semantics.",
       "Introduced adaptive backpressure controls and streaming analytics signal generation for high-throughput conditions.",
@@ -178,6 +200,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+    systemDesignUrl: "/system-design/realtime-transit-telemetry",
   },
   {
     id: "mini-load-balancer",
@@ -213,6 +236,11 @@ export const projectsData: PortfolioProject[] = [
       "Added circuit breaker, active health checks, graceful draining, and failover mechanics.",
       "Exposed control plane + Prometheus-style metrics for recruiter-visible operations evidence.",
     ],
+    productionCapabilities: [
+      "Multiple runtime-selectable balancing strategies with control-plane visibility.",
+      "Health-aware failover with hysteresis and graceful draining for safer lifecycle transitions.",
+      "Operational telemetry endpoints and deployment-ready container/App Runner scripts.",
+    ],
     recentUpdates: [
       "Built core engine with round robin, least connections, and consistent hashing selection modes.",
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
@@ -226,6 +254,7 @@ export const projectsData: PortfolioProject[] = [
         url: "https://d1zwy02em6289x.cloudfront.net",
       },
     ],
+    systemDesignUrl: "/system-design/mini-load-balancer",
   },
   {
     id: "telecom-network-visualizer",
@@ -257,12 +286,18 @@ export const projectsData: PortfolioProject[] = [
       "Added dynamic edge-weight simulation to model congestion-driven route changes.",
       "Exposed route quality metrics for latency, hops, cost, and drop-rate interpretation.",
     ],
+    productionCapabilities: [
+      "Deterministic route computation using Dijkstra and A* engines.",
+      "Real-time congestion-influenced simulation for network stress behavior modeling.",
+      "Interactive metrics surface for route quality diagnostics and decision support.",
+    ],
     recentUpdates: [
       "Initial release of telecom network routing visualizer with core graph/routing primitives.",
       "Added dynamic congestion weighting and real-time route heat-style feedback.",
       "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
     ],
     repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
+    systemDesignUrl: "/system-design/telecom-network-visualizer",
   },
   {
     id: "tutoring",
@@ -292,5 +327,11 @@ export const projectsData: PortfolioProject[] = [
       "Built secure backend flows for authentication and scheduling operations.",
       "Implemented responsive frontend workflows for students and tutors.",
     ],
+    productionCapabilities: [
+      "Authentication-gated scheduling workflows with consistent state management.",
+      "Separation of frontend and backend responsibilities via API-driven design.",
+      "Capstone delivery with maintainable full-stack structure and SQL persistence.",
+    ],
+    systemDesignUrl: "/system-design/tutoring",
   },
 ];

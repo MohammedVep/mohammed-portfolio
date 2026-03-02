@@ -398,6 +398,14 @@ export default function RoleFit() {
               <p>- Produces transparent score breakdown and recruiter summary grounded in verifiable links.</p>
               <p>- Automatically updates as portfolio projects evolve, so scoring reflects your latest work.</p>
             </div>
+            <div className="mt-4">
+              <a
+                href="/system-design/ai-role-fit"
+                className="inline-flex rounded border border-cyan-400/40 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+              >
+                AI System Design Doc
+              </a>
+            </div>
           </div>
 
           <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-5">

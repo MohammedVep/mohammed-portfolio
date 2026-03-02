@@ -22,6 +22,11 @@ export default function Projects() {
           <p className="mt-3 text-xs text-emerald-300/90">
             {project.highlights[0]}
           </p>
+          {project.productionCapabilities?.length ? (
+            <p className="mt-2 text-[11px] text-cyan-300/90">
+              Production: {project.productionCapabilities[0]}
+            </p>
+          ) : null}
           {project.recentUpdates?.length ? (
             <p className="mt-2 text-[11px] text-amber-300/90">
               Update: {project.recentUpdates[0]}
@@ -179,6 +184,19 @@ ${project.architecture}
             </div>
           </div>
 
+          {project.productionCapabilities?.length ? (
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-400">
+                Production-Grade Capabilities
+              </h4>
+              <div className="mt-2 space-y-2 rounded border border-cyan-500/30 bg-cyan-500/5 p-4 text-neutral-200">
+                {project.productionCapabilities.map((capability, capabilityIndex) => (
+                  <p key={`${project.id}-production-${capabilityIndex}`}>- {capability}</p>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
               Quality Guarantees
@@ -225,8 +243,9 @@ ${project.architecture}
           Project_Vault
         </h2>
         <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-400">
-          Featured work with architecture decisions, tradeoffs, measurable outcomes, and
-          dedicated system design documents. Select a project to open the technical deep dive.
+          Featured work with architecture decisions, production-grade capabilities, measurable
+          outcomes, and dedicated system design documentation. Select a project to open the
+          technical deep dive.
         </p>
         <Bento items={items} />
       </div>
