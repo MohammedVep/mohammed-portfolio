@@ -8,8 +8,8 @@ export default function Hero() {
   const baseTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: new_grad_software_engineer_2026",
     "[0.0005] ACTIVE_DEPLOYMENT: netpulse_live",
-    "[0.0008] CORE_STACK: java_python_react_sql_typescript",
-    "[0.0011] FOCUS: scalable_full_stack_web_applications",
+    "[0.0008] CORE_STACK: go_typescript_python_sql_aws",
+    "[0.0011] FOCUS: distributed_systems_and_infrastructure",
     "[0.0014] STATUS: open_to_interview",
     "_",
   ];
@@ -38,14 +38,14 @@ export default function Hero() {
         >
           <div>
             <h3 className="text-lg font-bold font-mono text-emerald-500 underline decoration-2 underline-offset-4">
-              [Candidate Profile]
+              [Engineering Identity]
             </h3>
             <p className="mt-4 leading-relaxed text-neutral-300">
               {profileData.summary}
             </p>
             <p className="mt-4 text-sm text-neutral-400">
-              Built and shipped NetPulse and moveYSplash, with practical experience
-              in full-stack delivery, SQL-backed systems, and responsive frontend UX.
+              Built and shipped distributed systems and cloud-backed platforms including
+              NetPulse, Cloud Code Execution, and a real-time telemetry pipeline.
             </p>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -101,7 +101,11 @@ export default function Hero() {
         <h1 className="mb-2 text-5xl font-bold tracking-tighter text-white md:text-6xl">
           {profileData.name}
         </h1>
-        <p className="mb-2 font-mono text-neutral-300">{profileData.title}</p>
+        <p className="mb-2 font-mono text-emerald-300">{profileData.title}</p>
+        <p className="mb-2 max-w-3xl text-sm leading-relaxed text-neutral-300">{profileData.summary}</p>
+        <p className="mb-1 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
+          Reliability | Observability | Performance
+        </p>
         <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
           {profileData.location}
         </p>

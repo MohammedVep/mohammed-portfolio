@@ -21,6 +21,13 @@ const categoryDescriptions: Record<PortfolioProject["projectType"], string> = {
     "End-to-end applications with product UX, backend workflows, and documented design decisions.",
 };
 
+const toArchitecturePreview = (summary: string) =>
+  summary
+    .split("->")
+    .map((node) => node.trim())
+    .filter(Boolean)
+    .join("\n  -> ");
+
 function buildBentoItems(categoryProjects: PortfolioProject[]) {
   return categoryProjects.map((project, index) => ({
     id: project.id,
@@ -52,6 +59,15 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
             <p>
               <span className="text-neutral-200">Architecture:</span> {project.architectureSummary}
             </p>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-emerald-500">
+              Architecture Snapshot
+            </p>
+            <pre className="overflow-x-auto rounded border border-neutral-800 bg-black p-3 text-[10px] text-neutral-400">
+              {toArchitecturePreview(project.architectureSummary)}
+            </pre>
           </div>
 
           <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
