@@ -16,13 +16,13 @@ export default function Home() {
       <Hero />
       <RecruiterIndex />
       <FeaturedSystems />
-      <BlogPreview />
-      <About />
-      <Education />
-      <Experience />
       <Projects />
-      <Skills />
+      <BlogPreview />
       <RoleFit />
+      <Skills />
+      <Experience />
+      <Education />
+      <About />
       <Contact />
     </>
   );

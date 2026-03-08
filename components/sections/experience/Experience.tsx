@@ -1,7 +1,7 @@
 'use client';
 
-import { MotionDiv } from '@/components/ui/motion';
-import { experienceData } from '@/content/experience';
+import { MotionDiv } from "@/components/ui/motion";
+import { experienceData } from "@/content/experience";
 
 export default function Experience() {
   return (
@@ -10,44 +10,39 @@ export default function Experience() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <section id="experience" className="py-20">
+      <section id="experience" className="border-t border-neutral-900 bg-black py-20">
         <div className="container mx-auto px-6">
-          <h2 className="mb-2 text-center text-3xl font-bold">Experience</h2>
-          <p className="mb-10 text-center text-neutral-500">
-            Operational ownership and reliability experience in high-throughput environments.
-          </p>
-          <div className="relative">
-            <div className="border-l-2 border-neutral-700 absolute h-full left-1/2 -translate-x-1/2"></div>
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-white">Experience</h2>
+            <p className="mt-2 text-sm text-neutral-400">
+              Operational ownership, reliability awareness, and delivery discipline carried into
+              production-style project work.
+            </p>
+          </div>
+
+          <div className="grid gap-5">
             {experienceData.map((item, index) => (
               <MotionDiv
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+                key={`${item.company}-${item.title}`}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.4, delay: index * 0.12 }}
+                className="rounded-2xl border border-neutral-800 bg-neutral-950 p-5 font-mono"
               >
-                <div
-                  className={`mb-8 flex justify-between items-center w-full ${
-                    index % 2 === 0 ? 'flex-row-reverse' : ''
-                  }`}
-                >
-                  <div className="w-5/12"></div>
-                  <div className="z-20 flex items-center bg-neutral-800 shadow-xl w-8 h-8 rounded-full">
-                    <div className="bg-neutral-700 w-4 h-4 mx-auto rounded-full"></div>
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-neutral-500">{item.company}</p>
+                    <h3 className="mt-1 text-xl font-bold text-neutral-100">{item.title}</h3>
                   </div>
-                  <div
-                    className={`w-5/12 px-4 py-2 rounded-lg shadow-xl ${
-                      index % 2 === 0 ? 'text-right' : 'text-left'
-                    }`}
-                  >
-                    <p className="text-neutral-400 text-sm">{item.date}</p>
-                    <h3 className="font-bold">{item.title}</h3>
-                    <p className="text-sm font-semibold">{item.company}</p>
-                    <div className="mt-3 space-y-2 text-sm text-neutral-400">
-                      {item.description.map(detail => (
-                        <p key={detail}>- {detail}</p>
-                      ))}
-                    </div>
-                  </div>
+                  <span className="rounded border border-neutral-700 bg-black px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-400">
+                    {item.date}
+                  </span>
+                </div>
+
+                <div className="mt-4 space-y-2 text-sm text-neutral-300">
+                  {item.description.map((detail) => (
+                    <p key={`${item.company}-${detail}`}>- {detail}</p>
+                  ))}
                 </div>
               </MotionDiv>
             ))}

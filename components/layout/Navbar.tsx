@@ -4,152 +4,93 @@ import Link from "next/link";
 import { useState } from "react";
 import { profileData } from "@/content/profile";
 
+const navLinks = [
+  { href: "/#featured-systems", label: "Flagship" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#recruiter-index", label: "Recruiter Index" },
+  { href: "/blog", label: "Blog" },
+  { href: "/#role-fit", label: "Role Fit" },
+  { href: "/#contact", label: "Contact" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-neutral-900/80 bg-black/70 backdrop-blur-md">
       <nav className="container mx-auto flex items-center justify-between px-6 py-4">
-        <Link href="/" className="text-2xl font-bold text-gray-800">
+        <Link href="/" className="font-mono text-lg font-semibold uppercase tracking-[0.2em] text-neutral-100">
           {profileData.name}
         </Link>
-        <div className="hidden items-center space-x-6 md:flex">
-          <Link href="/#about" className="text-gray-600 hover:text-gray-800">
-            About
-          </Link>
-          <Link href="/#experience" className="text-gray-600 hover:text-gray-800">
-            Experience
-          </Link>
-          <Link href="/#projects" className="text-gray-600 hover:text-gray-800">
-            Projects
-          </Link>
-          <Link href="/#skills" className="text-gray-600 hover:text-gray-800">
-            Skills
-          </Link>
-          <Link href="/#recruiter-index" className="text-gray-600 hover:text-gray-800">
-            Recruiter Index
-          </Link>
-          <Link href="/blog" className="text-gray-600 hover:text-gray-800">
-            Blog
-          </Link>
-          <Link href="/#role-fit" className="text-gray-600 hover:text-gray-800">
-            Role Fit
-          </Link>
-          <Link href="/#contact" className="text-gray-600 hover:text-gray-800">
-            Contact
-          </Link>
+
+        <div className="hidden items-center gap-4 md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs uppercase tracking-widest text-neutral-400 transition hover:text-emerald-300"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
+
         <div className="hidden items-center gap-2 md:flex">
           <a
             href={profileData.resumeUrl}
             target="_blank"
             rel="noreferrer"
-            className="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
+            className="rounded border border-neutral-700 px-3 py-2 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
           >
             Resume
           </a>
           <a
             href={`mailto:${profileData.email}`}
-            className="rounded-md bg-gray-800 px-4 py-2 text-sm text-white transition hover:bg-gray-700"
+            className="rounded border border-emerald-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
           >
-            Get in Touch
+            Email
           </a>
         </div>
-        <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-              />
-            </svg>
-          </button>
-        </div>
+
+        <button
+          type="button"
+          className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-300 md:hidden"
+          onClick={() => setIsOpen((value) => !value)}
+        >
+          {isOpen ? "Close" : "Menu"}
+        </button>
       </nav>
-      {isOpen && (
-        <div className="bg-white md:hidden">
-          <div className="flex flex-col items-center space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            <Link
-              href="/#about"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              About
-            </Link>
-            <Link
-              href="/#experience"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Experience
-            </Link>
-            <Link
-              href="/#projects"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/#skills"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Skills
-            </Link>
-            <Link
-              href="/#recruiter-index"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Recruiter Index
-            </Link>
-            <Link
-              href="/blog"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/#role-fit"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Role Fit
-            </Link>
-            <Link
-              href="/#contact"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
-            >
-              Contact
-            </Link>
+
+      {isOpen ? (
+        <div className="border-t border-neutral-900 bg-black md:hidden">
+          <div className="container mx-auto flex flex-col gap-1 px-6 py-3">
+            {navLinks.map((link) => (
+              <Link
+                key={`mobile-${link.href}`}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="rounded px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:bg-neutral-900 hover:text-emerald-300"
+              >
+                {link.label}
+              </Link>
+            ))}
             <a
               href={profileData.resumeUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700"
+              className="mt-2 rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300"
             >
               Resume
             </a>
             <a
               href={`mailto:${profileData.email}`}
-              className="mt-2 rounded-md bg-gray-800 px-4 py-2 text-white hover:bg-gray-700"
+              className="mt-1 rounded border border-emerald-500/40 px-3 py-2 text-xs uppercase tracking-widest text-emerald-300"
             >
-              Get in Touch
+              Email
             </a>
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   );
 };

@@ -1,45 +1,73 @@
 import { profileData } from "@/content/profile";
 
+const quickLinks = [
+  { href: "/#featured-systems", label: "Flagship Systems" },
+  { href: "/#projects", label: "Project Vault" },
+  { href: "/#recruiter-index", label: "Recruiter Index" },
+  { href: "/blog", label: "Engineering Blog" },
+  { href: "/#role-fit", label: "Role Fit Brief" },
+];
+
 const Footer = () => {
   return (
-    <footer className="bg-gray-100">
-      <div className="container mx-auto px-6 py-8">
-        <div className="flex flex-col items-center text-center">
-          <p className="text-gray-600">
-            &copy; {new Date().getFullYear()} {profileData.name}. All rights reserved.
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-4">
-            <a
-              href={profileData.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-600 hover:text-gray-800"
-            >
-              GitHub
-            </a>
-            <a
-              href={profileData.linkedInUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-600 hover:text-gray-800"
-            >
-              LinkedIn
-            </a>
-            <a href={`mailto:${profileData.email}`} className="text-gray-600 hover:text-gray-800">
-              Email
-            </a>
-            <a
-              href={profileData.netPulseLiveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-600 hover:text-gray-800"
-            >
-              NetPulse Live
-            </a>
-            <a href="/blog" className="text-gray-600 hover:text-gray-800">
-              Engineering Blog
-            </a>
+    <footer className="border-t border-neutral-900 bg-black">
+      <div className="container mx-auto px-6 py-10">
+        <div className="grid gap-8 md:grid-cols-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">Portfolio_Node</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-400">
+              Systems and infrastructure portfolio with production-style projects, architecture docs,
+              and incident-style engineering writing.
+            </p>
           </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">Quick Access</p>
+            <div className="mt-3 flex flex-col gap-2">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-neutral-300 transition hover:text-emerald-300"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">External</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <a
+                href={profileData.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-neutral-700 px-3 py-2 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
+              >
+                GitHub
+              </a>
+              <a
+                href={profileData.linkedInUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-neutral-700 px-3 py-2 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={`mailto:${profileData.email}`}
+                className="rounded border border-emerald-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
+              >
+                Email
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-neutral-900 pt-5 text-xs text-neutral-500">
+          &copy; {new Date().getFullYear()} {profileData.name}. Built for recruiter-first technical
+          validation.
         </div>
       </div>
     </footer>

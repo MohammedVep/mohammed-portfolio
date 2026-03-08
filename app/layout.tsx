@@ -11,9 +11,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: `${profileData.name} | New Grad Software Engineer`,
+  title: `${profileData.name} | Systems and Infrastructure Engineer`,
   description:
-    "Portfolio of Mohammed Vepari featuring NetPulse, moveYSplash, and full-stack software engineering projects.",
+    "Systems and infrastructure portfolio featuring flagship distributed systems, incident-style engineering blog posts, and recruiter-ready role fit analysis.",
 };
 
 export default function RootLayout({
@@ -23,10 +23,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} font-sans antialiased`}
-      >
-        <div className="flex flex-col min-h-screen bg-white text-gray-800">
+      <body className={`${geistSans.variable} font-sans antialiased`}>
+        <div className="flex min-h-screen flex-col bg-transparent text-neutral-100">
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
