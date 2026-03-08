@@ -5,6 +5,7 @@ import Education from "@/components/sections/education/Education";
 import Experience from "@/components/sections/experience/Experience";
 import FeaturedSystems from "@/components/sections/featured-systems/FeaturedSystems";
 import Hero from "@/components/sections/hero/Hero";
+import LatestImprovements from "@/components/sections/latest-improvements/LatestImprovements";
 import Projects from "@/components/sections/projects/Projects";
 import RecruiterIndex from "@/components/sections/recruiter-index/RecruiterIndex";
 import RoleFit from "@/components/sections/role-fit/RoleFit";
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <Hero />
       <RecruiterIndex />
+      <LatestImprovements />
       <FeaturedSystems />
       <Projects />
       <Runbooks />
