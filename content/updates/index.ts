@@ -20,13 +20,13 @@ export const latestImprovements: Improvement[] = [
     proofLabel: "View Core Infrastructure",
   },
   {
-    id: "sre-preview",
-    title: "SRE Dashboard Preview Added",
-    scope: "Reliability Proof",
+    id: "skills-map-refresh",
+    title: "Infrastructure Skills Map Refreshed",
+    scope: "Technical Positioning",
     detail:
-      "Added a dedicated SRE preview page with scaling timeline context and CloudWatch-style metrics snapshot.",
-    proofHref: "/sre-dashboard",
-    proofLabel: "Open SRE Preview",
+      "Technical skills now foreground Go, AWS, Terraform, Docker, Prometheus, Grafana, and Redis/BullMQ reliability workflows.",
+    proofHref: "/#skills",
+    proofLabel: "View Technical Skills",
   },
   {
     id: "live-app-cta",
@@ -56,4 +56,3 @@ export const latestImprovements: Improvement[] = [
     proofLabel: "Open Role Fit",
   },
 ];
-

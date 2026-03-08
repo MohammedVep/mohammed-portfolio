@@ -4,30 +4,43 @@ import { MotionDiv } from "@/components/ui/motion";
 
 const arsenal = [
   {
-    group: "Languages",
+    group: "Languages & Runtime",
     items: [
-      { name: "Java", level: "STRONG", note: "OOP fundamentals and backend problem solving." },
-      { name: "Python", level: "STRONG", note: "Scripting, logic implementation, and data workflows." },
-      { name: "TypeScript", level: "ACTIVE", note: "Type-safe full-stack web application development." },
-      { name: "SQL", level: "ACTIVE", note: "Schema design, joins, indexing, and query optimization." },
+      { name: "Go", level: "ACTIVE", note: "Load balancing, concurrency control, and runtime profiling." },
+      { name: "Node.js", level: "ACTIVE", note: "Distributed API services, queue workers, and async processing." },
+      { name: "TypeScript", level: "ACTIVE", note: "Type-safe backend and frontend platform development." },
+      { name: "Python", level: "STRONG", note: "Scripting, logic implementation, and systems tooling support." },
+      { name: "Java", level: "STRONG", note: "Backend fundamentals and object-oriented systems design." },
+      { name: "SQL", level: "ACTIVE", note: "Schema design, indexing, and query optimization." },
     ],
   },
   {
-    group: "Web Development",
+    group: "Infrastructure & Cloud",
     items: [
-      { name: "React", level: "ACTIVE", note: "Component-driven UI with reusable frontend architecture." },
-      { name: "Next.js", level: "ACTIVE", note: "Production-ready frontend and routing workflows." },
-      { name: "Node.js", level: "ACTIVE", note: "API and backend service development." },
-      { name: "Angular", level: "PROJECT", note: "Capstone implementation for complex user flows." },
+      { name: "AWS (Fargate, ALB, VPC)", level: "ACTIVE", note: "Cloud-native deployment and service networking." },
+      { name: "Terraform (IaC)", level: "ACTIVE", note: "Repeatable infrastructure provisioning and change control." },
+      { name: "Docker", level: "ACTIVE", note: "Containerized service packaging and runtime consistency." },
+      { name: "Linux / cgroups", level: "PROJECT", note: "Isolation and resource-bound execution constraints." },
     ],
   },
   {
-    group: "Databases & Engineering Foundations",
+    group: "Observability & Reliability",
+    items: [
+      { name: "Prometheus", level: "ACTIVE", note: "Service metrics for traffic and health behavior visibility." },
+      { name: "Grafana", level: "ACTIVE", note: "Operational dashboards for failure and scaling diagnostics." },
+      { name: "Go pprof", level: "ACTIVE", note: "Heap and CPU profiling for runtime bottleneck elimination." },
+      { name: "Redis / BullMQ DLQ", level: "ACTIVE", note: "Queue durability and dead-letter recovery workflows." },
+      { name: "mTLS + Incident Controls", level: "ACTIVE", note: "Zero-trust communication and alert lifecycle hardening." },
+    ],
+  },
+  {
+    group: "Data & Web Platforms",
     items: [
       { name: "PostgreSQL / MySQL", level: "ACTIVE", note: "Relational data modeling and persistence." },
+      { name: "React / Next.js", level: "ACTIVE", note: "Dashboard and recruiter-facing web interfaces." },
+      { name: "REST / WebSocket APIs", level: "ACTIVE", note: "Realtime and request-response service integration." },
       { name: "Supabase", level: "PROJECT", note: "Rapid full-stack data and auth integration." },
-      { name: "Data Structures", level: "CORE", note: "Applied through coursework and coding projects." },
-      { name: "Algorithms", level: "CORE", note: "Performance-focused implementation and optimization." },
+      { name: "Angular", level: "PROJECT", note: "Capstone implementation for complex user workflows." },
     ],
   },
 ];
@@ -47,7 +60,7 @@ export default function Skills() {
               Recruiter_Ready_Skill_Map
             </p>
           </div>
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-8 lg:grid-cols-4">
             {arsenal.map((group, groupIndex) => (
               <MotionDiv
                 key={group.group}

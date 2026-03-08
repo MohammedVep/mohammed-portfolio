@@ -7,7 +7,7 @@ import { profileData } from "@/content/profile";
 export default function Hero() {
   const baseTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
-    "[0.0005] ACTIVE_SIGNAL: sre_dashboard_preview_march_12",
+    "[0.0005] ACTIVE_SIGNAL: flagship_systems_live",
     "[0.0008] CORE_STACK: go_node_terraform_fargate",
     "[0.0011] PRINCIPLES: frugality_operational_excellence",
     "[0.0014] STATUS: available_hybrid_gta_or_remote_est",
@@ -98,12 +98,6 @@ export default function Hero() {
   return (
     <section className="bg-black py-24">
       <div className="container mx-auto px-6">
-        <a
-          href={profileData.sreDashboardUrl}
-          className="mb-5 inline-flex rounded border border-red-500/50 bg-red-500/10 px-4 py-2 text-xs font-mono uppercase tracking-widest text-red-300 transition hover:border-red-400 hover:text-red-200"
-        >
-          🔴 View SRE Dashboard Preview (Coming March 12)
-        </a>
         <h1 className="mb-2 text-5xl font-bold tracking-tighter text-white md:text-6xl">
           {profileData.name}
         </h1>

@@ -31,7 +31,7 @@ export default function SREDashboardPage() {
     <main className="min-h-screen bg-black py-16 text-neutral-200">
       <div className="container mx-auto max-w-5xl px-6">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-          <h1 className="text-3xl font-bold text-white">SRE Dashboard Preview</h1>
+          <h1 className="text-3xl font-bold text-white">Operational Scaling Dashboard</h1>
           <Link
             href="/"
             className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
@@ -41,10 +41,10 @@ export default function SREDashboardPage() {
         </div>
 
         <section className="mb-6 rounded-xl border border-red-500/30 bg-red-500/5 p-5 font-mono">
-          <p className="text-xs uppercase tracking-[0.3em] text-red-300">Coming March 12, 2026</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-red-300">Internal Preview Workspace</p>
           <p className="mt-3 text-sm leading-relaxed text-neutral-200">
-            Public live telemetry is being finalized. This preview keeps recruiter context intact with
-            architecture-aligned scaling signals and the incident timeline used in system validation.
+            This workspace is used for scaling and recovery instrumentation review while public-facing
+            recruiter links stay focused on completed production systems.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {cloudExecution?.liveUrl ? (
@@ -84,8 +84,7 @@ export default function SREDashboardPage() {
         <section className="mb-6 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
           <h2 className="text-sm uppercase tracking-[0.3em] text-emerald-400">CloudWatch Preview Snapshot</h2>
           <p className="mt-3 text-sm text-neutral-300">
-            Desired vs. running worker trend preview used for recruiter review before the full public
-            metrics feed goes live.
+            Desired vs. running worker trend preview used for internal validation of scaling behavior.
           </p>
           <div className="mt-4 overflow-hidden rounded border border-neutral-800 bg-black p-3">
             <img

@@ -216,10 +216,6 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/cloud-code-execution",
     additionalLinks: [
       {
-        label: "View SRE Dashboard Preview (Mar 12)",
-        url: profileData.sreDashboardUrl,
-      },
-      {
         label: "Execution API",
         url: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
       },

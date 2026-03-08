@@ -344,7 +344,7 @@ We are looking for an engineer who can build distributed backend systems, design
 
 const roleTemplates: RoleTemplate[] = [
   {
-    title: "Tier 1 / Hyper-Scale Fit (Amazon, Stripe, DoorDash)",
+    title: "Hyper-Scale & Cloud-Native Environments (Amazon, Stripe, DoorDash)",
     alignment: [
       "Hyperscale Infrastructure & FinOps Alignment",
       "Operating at scale requires more than functional code; it requires surviving failure and ruthlessly optimizing cloud spend.",
@@ -356,7 +356,7 @@ const roleTemplates: RoleTemplate[] = [
     ],
   },
   {
-    title: "Tier 2 / Deep Tech Fit (Canonical, Veeva, Intuit)",
+    title: "Enterprise SaaS & Mission-Critical Infrastructure (Canonical, Veeva, Intuit)",
     alignment: [
       "Systems Reliability & Secure Cloud Primitives",
       "Enterprise infrastructure demands strict security and zero-downtime operations, especially in Day 2 reliability scenarios.",
@@ -368,7 +368,7 @@ const roleTemplates: RoleTemplate[] = [
     ],
   },
   {
-    title: "Tier 3 / Local Enterprise Fit (GM, Konrad, Zip)",
+    title: "End-to-End Product Engineering & Delivery (GM, Konrad, Zip)",
     alignment: [
       "End-to-End Delivery & Operational Autonomy",
       "High-velocity teams need engineers who own features from local development through AWS production rollout.",

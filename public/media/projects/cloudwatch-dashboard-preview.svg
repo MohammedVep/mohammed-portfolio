@@ -57,6 +57,6 @@
 
   <rect x="84" y="680" width="1232" height="22" rx="4" fill="#111827"/>
   <text x="96" y="696" fill="#9ca3af" font-family="monospace" font-size="13">
-    Preview only. Public live dashboard rollout scheduled for March 12, 2026.
+    Internal preview snapshot for scaling and DLQ recovery signal review.
   </text>
 </svg>

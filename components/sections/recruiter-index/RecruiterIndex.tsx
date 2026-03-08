@@ -8,7 +8,7 @@ export default function RecruiterIndex() {
   const websiteUpdates = [
     "Homepage positioning upgraded to Backend & Infrastructure Engineer with recruiter-first CTAs.",
     "Core Infrastructure Engineering projects remain ahead of non-engineering work history for faster technical validation.",
-    "SRE dashboard now includes a March 12 preview mode with CloudWatch-style scaling evidence.",
+    "Technical skills map now reflects Go, AWS, Terraform, Docker, and reliability tooling used across flagship systems.",
     "Runbooks + engineering blog are integrated with the AI Role Fit evidence pipeline.",
   ];
   const recentUpgrades = projectsData
@@ -95,12 +95,6 @@ export default function RecruiterIndex() {
                   Engineering Blog
                 </a>
                 <a
-                  href={profileData.sreDashboardUrl}
-                  className="rounded border border-red-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-red-300 transition hover:border-red-300 hover:text-red-200"
-                >
-                  SRE Dashboard Preview
-                </a>
-                <a
                   href="/#featured-systems"
                   className="rounded border border-cyan-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
                 >
@@ -138,7 +132,7 @@ export default function RecruiterIndex() {
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
             <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-300">
-                Tier 1 / Hyper-Scale
+                Hyper-Scale & Cloud-Native
               </p>
               <p className="mt-2 text-sm text-neutral-200">Hyperscale Infrastructure & FinOps Alignment</p>
               <p className="mt-2 text-xs leading-relaxed text-neutral-300">
@@ -149,7 +143,9 @@ export default function RecruiterIndex() {
             </div>
 
             <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-4">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300">Tier 2 / Deep Tech</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+                Enterprise SaaS & Mission-Critical Infrastructure
+              </p>
               <p className="mt-2 text-sm text-neutral-200">Systems Reliability & Secure Cloud Primitives</p>
               <p className="mt-2 text-xs leading-relaxed text-neutral-300">
                 Terraform-first IaC delivery, deep observability instrumentation, and secure service
@@ -160,7 +156,7 @@ export default function RecruiterIndex() {
 
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.3em] text-amber-300">
-                Tier 3 / Local Enterprise
+                End-to-End Product Engineering & Delivery
               </p>
               <p className="mt-2 text-sm text-neutral-200">End-to-End Delivery & Operational Autonomy</p>
               <p className="mt-2 text-xs leading-relaxed text-neutral-300">

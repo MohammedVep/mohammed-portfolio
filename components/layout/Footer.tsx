@@ -8,7 +8,6 @@ const quickLinks = [
   { href: "/#improvements", label: "Latest Improvements" },
   { href: "/blog", label: "Engineering Blog" },
   { href: "/#role-fit", label: "Role Fit Brief" },
-  { href: "/sre-dashboard", label: "SRE Dashboard Preview" },
 ];
 
 const Footer = () => {
