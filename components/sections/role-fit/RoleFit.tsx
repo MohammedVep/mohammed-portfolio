@@ -635,7 +635,7 @@ export default function RoleFit() {
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>
             <div className="mt-3 space-y-2 text-sm text-neutral-300">
-              <p>- Pulls evidence from Project Vault and Engineering Blog fields: architecture, upgrades, stress tests, and impact metrics.</p>
+              <p>- Pulls evidence from Core Infrastructure Engineering projects and Engineering Blog fields: architecture, upgrades, stress tests, and impact metrics.</p>
               <p>- Uses deterministic keyword + weighted scoring (no black-box generation).</p>
               <p>- Produces transparent score breakdown plus proof depth from live/repo/design/metrics signals.</p>
               <p>- Automatically updates as portfolio projects evolve, so scoring reflects your latest work.</p>

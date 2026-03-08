@@ -27,7 +27,7 @@ export default function AIRoleFitSystemDesignPage() {
           <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-300">
             <li>Generate recruiter-ready fit briefs grounded in concrete project evidence.</li>
             <li>Keep scoring transparent through explicit weighted categories.</li>
-            <li>Auto-refresh alignment when project metadata changes in Project Vault.</li>
+            <li>Auto-refresh alignment when project metadata changes in Core Infrastructure Engineering.</li>
           </ul>
         </section>
 

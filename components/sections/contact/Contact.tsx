@@ -2,8 +2,33 @@
 
 import { MotionDiv } from "@/components/ui/motion";
 import { profileData } from "@/content/profile";
+import { projectsData } from "@/content/projects";
+
+const liveAppOrder = [
+  "netpulse",
+  "cloud-code-execution",
+  "realtime-transit-telemetry",
+  "mini-load-balancer",
+] as const;
+
+const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
+  netpulse: "NetPulse",
+  "cloud-code-execution": "Cloud Code Execution",
+  "realtime-transit-telemetry": "Transit Telemetry",
+  "mini-load-balancer": "Mini Load Balancer",
+};
 
 export default function Contact() {
+  const liveApps = liveAppOrder
+    .map((id) => projectsData.find((project) => project.id === id))
+    .filter(
+      (project): project is (typeof projectsData)[number] => Boolean(project?.liveUrl)
+    )
+    .map((project) => ({
+      id: project.id as (typeof liveAppOrder)[number],
+      url: project.liveUrl as string,
+    }));
+
   return (
     <MotionDiv
       initial={{ opacity: 0, y: 20 }}
@@ -54,7 +79,26 @@ export default function Contact() {
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8">
+            <p className="mb-3 text-center text-[10px] uppercase tracking-[0.35em] text-emerald-500">
+              Live Portfolio Apps
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {liveApps.map((app) => (
+                <a
+                  key={app.id}
+                  href={app.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-400/60 hover:text-emerald-200"
+                >
+                  {liveAppLabels[app.id]} Live
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href={profileData.resumeUrl}
               target="_blank"
@@ -62,14 +106,6 @@ export default function Contact() {
               className="rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-300 transition hover:border-emerald-400 hover:text-emerald-200"
             >
               Download Resume
-            </a>
-            <a
-              href={profileData.netPulseLiveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-400/60 hover:text-emerald-200"
-            >
-              View NetPulse Live
             </a>
           </div>
         </div>

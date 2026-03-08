@@ -5,6 +5,12 @@ import { blogPostsSorted } from "@/content/blog";
 export default function RecruiterIndex() {
   const liveProjectCount = projectsData.filter((project) => Boolean(project.liveUrl)).length;
   const systemDesignCount = projectsData.filter((project) => Boolean(project.systemDesignUrl)).length;
+  const websiteUpdates = [
+    "Homepage positioning upgraded to Backend & Infrastructure Engineer with recruiter-first CTAs.",
+    "Core Infrastructure Engineering projects remain ahead of non-engineering work history for faster technical validation.",
+    "SRE dashboard now includes a March 12 preview mode with CloudWatch-style scaling evidence.",
+    "Runbooks + engineering blog are integrated with the AI Role Fit evidence pipeline.",
+  ];
   const recentUpgrades = projectsData
     .flatMap((project) =>
       (project.recentUpdates ?? []).slice(0, 1).map((item) => ({
@@ -114,6 +120,17 @@ export default function RecruiterIndex() {
                     - Latest post: <span className="text-neutral-200">{post.title}</span>
                   </p>
                 ))}
+              </div>
+
+              <div className="mt-4 rounded border border-neutral-800 bg-neutral-950 p-3">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                  Website Updates
+                </p>
+                <div className="mt-2 space-y-1 text-[11px] text-neutral-300">
+                  {websiteUpdates.map((item) => (
+                    <p key={item}>- {item}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
