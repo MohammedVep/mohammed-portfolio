@@ -173,13 +173,13 @@ export const projectsData: PortfolioProject[] = [
     hardProblem:
       "Execute untrusted user code safely while controlling runtime limits, output size, and request-level isolation.",
     architecture: `graph LR
-  Client[Web Client]-->App[App Runner Service]
-  App-->API[Execution API Endpoint]
+  Client[Web Client]-->Control[Execution Control API]
+  Control-->API[Execution API Endpoint]
   API-->Queue[Execution Queue]
   Queue-->Worker[Sandboxed Workers]
   Worker-->Result[Execution Result Store]
   Result-->API
-  API-->App`,
+  API-->Control`,
     tradeoffs: [
       "Strict sandbox limits improve safety but can reject edge-case workloads that need higher resource ceilings.",
       "Queue-based execution improves throughput stability, but adds extra latency compared to direct synchronous execution.",
@@ -204,10 +204,10 @@ export const projectsData: PortfolioProject[] = [
     productionCapabilities: [
       "Asynchronous queue-worker execution model with bounded retries and durable result flow.",
       "Tenant-aware API boundary with safer sandbox and runtime guardrails.",
-      "Split deployment topology (App Runner UI + ALB API) for clearer scaling responsibility.",
+      "Terraform-managed infrastructure topology with explicit control-plane and execution-plane separation.",
     ],
     recentUpdates: [
-      "Introduced dual-endpoint deployment model: App Runner for web delivery plus ALB endpoint for execution API.",
+      "Introduced Terraform-governed dual-endpoint model for control plane and execution API traffic separation.",
       "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
       "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
     ],
@@ -334,12 +334,12 @@ export const projectsData: PortfolioProject[] = [
     productionCapabilities: [
       "Multiple runtime-selectable balancing strategies with control-plane visibility.",
       "Health-aware failover with hysteresis and graceful draining for safer lifecycle transitions.",
-      "Operational telemetry endpoints and deployment-ready container/App Runner scripts.",
+      "Operational telemetry endpoints with deployment-ready containerization and infrastructure automation scripts.",
     ],
     recentUpdates: [
       "Built core engine with round robin, least connections, and consistent hashing selection modes.",
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
-      "Added App Runner deployment scripts and recruiter-facing dashboard/control surface.",
+      "Added Consul service-discovery integration and recruiter-facing dashboard/control surface.",
     ],
     liveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
     repoUrl: "https://github.com/MohammedVep/mini-load-balancer",

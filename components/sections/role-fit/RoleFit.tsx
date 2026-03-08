@@ -251,7 +251,6 @@ const keywordOverrides: Record<string, string[]> = {
     "failover",
     "metrics",
     "cloudfront",
-    "app runner",
     "consul",
     "pprof",
     "prometheus",
