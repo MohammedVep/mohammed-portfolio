@@ -348,9 +348,12 @@ export default function Projects() {
   return (
     <section id="projects" className="border-t border-neutral-900 bg-black py-20">
       <div className="container mx-auto px-6">
-        <h2 className="mb-4 text-center text-xs font-mono uppercase tracking-[0.5em] text-emerald-500">
-          Project_Vault
+        <h2 className="mb-2 text-center text-2xl font-bold text-white">
+          Core Infrastructure Engineering
         </h2>
+        <p className="mb-4 text-center text-xs font-mono uppercase tracking-[0.5em] text-emerald-500">
+          Production Systems Portfolio
+        </p>
         <p className="mx-auto mb-6 max-w-3xl text-center text-sm text-neutral-300">
           Core infrastructure systems and reliability engineering projects. All systems are
           provisioned via Infrastructure as Code (Terraform), instrumented with deep observability

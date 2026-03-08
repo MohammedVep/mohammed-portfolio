@@ -72,17 +72,20 @@ export const blogPosts: BlogPost[] = [
       summary:
         "Split control-plane web traffic from execution-plane worker traffic, with queue buffering between API ingestion and sandbox runtimes.",
       diagram: `graph LR
-  Client[UI / API Client]-->Web[App Runner Web Service]
-  Web-->ExecAPI[Execution API (ALB)]
+  Client[UI / API Client]-->Control[Control API (ALB)]
+  Control-->ExecAPI[Execution API Boundary]
   ExecAPI-->Queue[Execution Queue]
-  Queue-->Worker[Sandboxed Workers]
+  Queue-->DLQ[Dead Letter Queue]
+  Queue-->Worker[Fargate Spot Workers]
+  DLQ-->Recovery[EventBridge Replay]
+  Recovery-->Queue
   Worker-->Store[(Result Store)]
   Store-->ExecAPI`,
       components: [
-        "App Runner web service for user-facing workflows",
-        "ALB-backed execution API boundary",
-        "Queue buffering for async execution",
-        "Sandboxed workers with bounded runtime resources",
+        "ALB-backed control and execution API boundaries",
+        "Queue + DLQ buffering for async execution and recovery replay",
+        "Fargate Spot workers with bounded runtime resources",
+        "EventBridge-triggered DLQ recovery automation",
         "Deterministic result formatting and retrieval",
       ],
     },
@@ -93,7 +96,8 @@ export const blogPosts: BlogPost[] = [
         "The request-coupled version showed queueing at the API layer and rising tail latency when multiple jobs fought for runtime resources.",
       evidence: [
         "Execution pipeline stabilized after queue-worker decoupling and bounded retry controls.",
-        "Simulated burst workloads sustained ~500 jobs/min without dropped execution jobs.",
+        "Fargate Spot worker pools reduced asynchronous compute cost by 70% in burst validation runs.",
+        "DLQ replay automation achieved 100% payload recovery during simulated partition events.",
         "Worker-level isolation prevented one heavy job class from starving unrelated requests.",
       ],
     },
@@ -191,7 +195,7 @@ export const blogPosts: BlogPost[] = [
     ],
     links: [
       ...(miniLoadBalancer.liveUrl
-        ? [{ label: "Live App Runner Deployment", url: miniLoadBalancer.liveUrl }]
+        ? [{ label: "Live Deployment", url: miniLoadBalancer.liveUrl }]
         : []),
       ...(miniLoadBalancer.repoUrl
         ? [{ label: "Source Repository", url: miniLoadBalancer.repoUrl }]
@@ -244,8 +248,9 @@ export const blogPosts: BlogPost[] = [
       breakingPoint:
         "Naive incident triggering generated duplicate notifications and noisy state churn for short-lived failures.",
       evidence: [
-        "Alert dedupe + debounce flow reduced duplicate notifications by ~70% in failure simulations.",
-        "P95 check-to-dashboard update latency stayed under 2.5 seconds in validation runs.",
+        "PgBouncer connection pooling prevented Postgres exhaustion during simulated 10,000+ concurrent regional writes.",
+        "mTLS enforcement secured regional checker communication with zero-trust service identity.",
+        "P95 check-to-dashboard update latency held under 45ms in staged validation runs.",
         "Incident lifecycle became auditable from detection through resolution.",
       ],
     },

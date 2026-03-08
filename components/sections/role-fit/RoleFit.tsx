@@ -348,8 +348,8 @@ const roleTemplates: RoleTemplate[] = [
     alignment: [
       "Hyperscale Infrastructure & FinOps Alignment",
       "Operating at scale requires more than functional code; it requires surviving failure and ruthlessly optimizing cloud spend.",
-      "By leveraging AWS Application Auto Tracking with custom BullMQ metrics and AWS Fargate Spot worker pools, I align compute to queue depth while reducing asynchronous compute cost by 70%.",
-      "Automated Dead Letter Queue (DLQ) replays and recovery orchestration are engineered to target zero payload loss during simulated network partitions.",
+      "Demonstrated strict adherence to Amazon's 'Frugality' and 'Operational Excellence' principles by architecting Fargate Spot FinOps and automated DLQ recovery mechanisms.",
+      "AWS autoscaling + queue-depth telemetry aligns worker capacity to demand while targeting zero payload loss during simulated network partitions.",
     ],
     evidence: [
       "Core signals: FinOps, Fargate Spot, DLQ, zero data loss, autoscaling target-breach handling.",
@@ -530,7 +530,7 @@ export default function RoleFit() {
     const referencedBlogs = matchedBlogPosts.slice(0, 2).map((post) => post.title);
 
     const recruiterPitch = [
-      `${profileData.name} now presents as a Systems & Infrastructure New Grad engineer with quantified project outcomes, architecture-first documentation, and production-style reliability focus.`,
+      `${profileData.name} now presents as a production-ready backend and infrastructure engineer with quantified project outcomes, architecture-first documentation, and reliability-first delivery.`,
       matchedProjects[0]
         ? `Top project match: ${matchedProjects[0].title} (${matchedProjects[0].whyItMatters})`
         : "Relevant project evidence is available across multiple live and documented portfolio projects.",
@@ -540,7 +540,7 @@ export default function RoleFit() {
       flagshipMatches > 0
         ? `Flagship systems aligned in this role fit: ${flagshipMatches}/3 (NetPulse, Cloud Code Execution, Real-Time Transit Telemetry).`
         : "Flagship systems are available and can be emphasized with role-specific keyword alignment.",
-      "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, system design docs, and measurable impact metrics.",
+      "Profile focus: full-time software engineering roles (new grad 2026) with public demos, source code, system design docs, and measurable impact metrics.",
     ].join(" ");
 
     const scoreBreakdown = [

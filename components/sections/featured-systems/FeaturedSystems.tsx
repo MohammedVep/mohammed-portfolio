@@ -19,16 +19,16 @@ Alerts + Status Timeline`,
   "cloud-code-execution": `Client UI
    |
    v
-App Runner Service
+Control API (ALB)
    |
    v
-Execution API (ALB)
+Queue + DLQ Orchestrator
    |
    v
-Queue -> Sandboxed Workers
+Fargate Spot Worker Pool
    |
    v
-Result Store + Response API`,
+Result Store + Recovery Replay`,
   "realtime-transit-telemetry": `Transit Feed Ingestion
         |
         v
