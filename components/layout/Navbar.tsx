@@ -26,6 +26,9 @@ const Navbar = () => {
           <Link href="/#skills" className="text-gray-600 hover:text-gray-800">
             Skills
           </Link>
+          <Link href="/#recruiter-index" className="text-gray-600 hover:text-gray-800">
+            Recruiter Index
+          </Link>
           <Link href="/blog" className="text-gray-600 hover:text-gray-800">
             Blog
           </Link>
@@ -101,6 +104,13 @@ const Navbar = () => {
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               Skills
+            </Link>
+            <Link
+              href="/#recruiter-index"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
+            >
+              Recruiter Index
             </Link>
             <Link
               href="/blog"

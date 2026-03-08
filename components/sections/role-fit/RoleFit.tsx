@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from "react";
+import { blogPostsSorted } from "@/content/blog";
 import { profileData } from "@/content/profile";
 import { projectsData } from "@/content/projects";
 
@@ -36,6 +37,14 @@ type RoleTemplate = {
   title: string;
   alignment: string[];
   evidence: string[];
+};
+
+type BlogSignal = {
+  slug: string;
+  title: string;
+  summary: string;
+  targetCompanies: string[];
+  keywords: string[];
 };
 
 const skillSignals: SkillSignal[] = [
@@ -278,6 +287,32 @@ const projectSignals: ProjectSignal[] = projectsData.map((project) => {
   };
 });
 
+const blogSignals: BlogSignal[] = blogPostsSorted.map((post) => {
+  const keywords = Array.from(
+    new Set([
+      ...tokenize(post.title),
+      ...tokenize(post.summary),
+      ...post.tags.flatMap((tag) => tokenize(tag)),
+      ...post.targetCompanies.map((company) => normalize(company)),
+      ...tokenize(post.hook.problem),
+      ...tokenize(post.hook.stakes),
+      ...tokenize(post.architecture.summary),
+      ...post.stressTest.evidence.flatMap((item) => tokenize(item)),
+      ...tokenize(post.bottleneckResolution.rootCause),
+      ...tokenize(post.bottleneckResolution.solution),
+      ...post.businessImpact.flatMap((item) => tokenize(item)),
+    ])
+  ).slice(0, 100);
+
+  return {
+    slug: post.slug,
+    title: post.title,
+    summary: post.summary,
+    targetCompanies: post.targetCompanies,
+    keywords,
+  };
+});
+
 const sampleJobDescription = `New Grad Software Engineer - Full Time
 We are looking for an engineer who can build distributed backend systems, design reliable cloud APIs, and reason about scalability, observability, and performance tradeoffs. You should be comfortable with TypeScript/Java/Python, SQL data models, and production debugging.`;
 
@@ -403,17 +438,34 @@ export default function RoleFit() {
       .filter((project) => project.keywordHits > 0 || project.impactHits > 0 || project.capabilityHits > 0)
       .sort((a, b) => b.projectScore - a.projectScore || b.proofScore - a.proofScore);
 
+    const matchedBlogPosts = blogSignals
+      .map((post) => {
+        const keywordHits = computeKeywordHits(text, post.keywords);
+        const companyHits = computeKeywordHits(
+          text,
+          post.targetCompanies.map((company) => normalize(company))
+        );
+        const blogScore = Math.min(4, keywordHits + companyHits * 2);
+        return { ...post, keywordHits, companyHits, blogScore };
+      })
+      .filter((post) => post.keywordHits > 0 || post.companyHits > 0)
+      .sort((a, b) => b.blogScore - a.blogScore || b.keywordHits - a.keywordHits);
+
     const skillCoverage = Math.min(
-      54,
+      50,
       matchedSkills.reduce((sum, signal) => sum + signal.signalScore, 0)
     );
     const projectCoverage = Math.min(
-      26,
+      24,
       matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.projectScore, 0)
     );
     const proofDepth = Math.min(
       10,
       matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.proofScore, 0)
+    );
+    const blogCoverage = Math.min(
+      8,
+      matchedBlogPosts.slice(0, 2).reduce((sum, post) => sum + post.blogScore, 0)
     );
 
     const stageKeywords = [
@@ -426,7 +478,7 @@ export default function RoleFit() {
       "engineering development program",
     ];
     const stageHits = computeKeywordHits(text, stageKeywords);
-    const stageAlignment = Math.min(6, stageHits * 2);
+    const stageAlignment = Math.min(5, stageHits * 2);
 
     const logisticsKeywords = [
       "canada",
@@ -438,11 +490,18 @@ export default function RoleFit() {
       "work authorization",
     ];
     const logisticsHits = computeKeywordHits(text, logisticsKeywords);
-    const logisticsAlignment = Math.min(4, logisticsHits);
+    const logisticsAlignment = Math.min(3, logisticsHits);
 
     const fitScore = Math.min(
       100,
-      Math.round(skillCoverage + projectCoverage + proofDepth + stageAlignment + logisticsAlignment)
+      Math.round(
+        skillCoverage +
+          projectCoverage +
+          proofDepth +
+          blogCoverage +
+          stageAlignment +
+          logisticsAlignment
+      )
     );
 
     const strongestSignals = matchedSkills.slice(0, 4).map((signal) => signal.label);
@@ -458,12 +517,16 @@ export default function RoleFit() {
       new Set(matchedProjects.slice(0, 3).map((project) => project.projectType))
     );
     const flagshipMatches = matchedProjects.filter((project) => flagshipProjectIds.has(project.id)).length;
+    const referencedBlogs = matchedBlogPosts.slice(0, 2).map((post) => post.title);
 
     const recruiterPitch = [
       `${profileData.name} now presents as a Systems & Infrastructure New Grad engineer with quantified project outcomes, architecture-first documentation, and production-style reliability focus.`,
       matchedProjects[0]
         ? `Top project match: ${matchedProjects[0].title} (${matchedProjects[0].whyItMatters})`
         : "Relevant project evidence is available across multiple live and documented portfolio projects.",
+      matchedBlogPosts[0]
+        ? `Top blog evidence: ${matchedBlogPosts[0].title} (${matchedBlogPosts[0].summary})`
+        : "Engineering blog evidence is available for platform reliability and systems design discussions.",
       flagshipMatches > 0
         ? `Flagship systems aligned in this role fit: ${flagshipMatches}/3 (NetPulse, Cloud Code Execution, Real-Time Transit Telemetry).`
         : "Flagship systems are available and can be emphasized with role-specific keyword alignment.",
@@ -471,11 +534,12 @@ export default function RoleFit() {
     ].join(" ");
 
     const scoreBreakdown = [
-      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 54 },
-      { label: "Systems + Project Relevance", score: Math.round(projectCoverage), max: 26 },
+      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 50 },
+      { label: "Systems + Project Relevance", score: Math.round(projectCoverage), max: 24 },
       { label: "Proof Depth (Live/Repo/Design/Metrics)", score: Math.round(proofDepth), max: 10 },
-      { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 6 },
-      { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 4 },
+      { label: "Engineering Blog Relevance", score: Math.round(blogCoverage), max: 8 },
+      { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 5 },
+      { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 3 },
     ];
 
     const briefText = [
@@ -495,6 +559,9 @@ export default function RoleFit() {
       ...(matchedProjectTypes.length
         ? ["", "Matched Project Types:", ...matchedProjectTypes.map((item) => `- ${item}`)]
         : []),
+      ...(referencedBlogs.length
+        ? ["", "Blog Evidence Referenced:", ...referencedBlogs.map((item) => `- ${item}`)]
+        : []),
       "",
       "Recruiter-Ready Summary:",
       recruiterPitch,
@@ -508,6 +575,7 @@ export default function RoleFit() {
       scoreBreakdown,
       referencedUpdates,
       referencedMetrics,
+      referencedBlogs,
       briefText,
     };
   }, [jobDescription]);
@@ -557,7 +625,7 @@ export default function RoleFit() {
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>
             <div className="mt-3 space-y-2 text-sm text-neutral-300">
-              <p>- Pulls evidence from Project Vault fields: why-it-matters blurbs, impact metrics, architecture summaries, and upgrades.</p>
+              <p>- Pulls evidence from Project Vault and Engineering Blog fields: architecture, upgrades, stress tests, and impact metrics.</p>
               <p>- Uses deterministic keyword + weighted scoring (no black-box generation).</p>
               <p>- Produces transparent score breakdown plus proof depth from live/repo/design/metrics signals.</p>
               <p>- Automatically updates as portfolio projects evolve, so scoring reflects your latest work.</p>
@@ -730,6 +798,19 @@ export default function RoleFit() {
                   </p>
                   <div className="mt-2 space-y-1 text-sm text-neutral-200">
                     {analysis.referencedMetrics.map((item) => (
+                      <p key={item}>- {item}</p>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {analysis.referencedBlogs.length ? (
+                <div className="rounded-xl border border-cyan-500/40 bg-cyan-500/5 p-5 lg:col-span-3">
+                  <p className="text-xs uppercase tracking-widest text-cyan-300">
+                    Blog Evidence Considered
+                  </p>
+                  <div className="mt-2 space-y-1 text-sm text-neutral-200">
+                    {analysis.referencedBlogs.map((item) => (
                       <p key={item}>- {item}</p>
                     ))}
                   </div>

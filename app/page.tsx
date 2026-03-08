@@ -6,6 +6,7 @@ import Experience from "@/components/sections/experience/Experience";
 import FeaturedSystems from "@/components/sections/featured-systems/FeaturedSystems";
 import Hero from "@/components/sections/hero/Hero";
 import Projects from "@/components/sections/projects/Projects";
+import RecruiterIndex from "@/components/sections/recruiter-index/RecruiterIndex";
 import RoleFit from "@/components/sections/role-fit/RoleFit";
 import Skills from "@/components/sections/skills/Skills";
 
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <RecruiterIndex />
       <FeaturedSystems />
       <BlogPreview />
       <About />
