@@ -122,6 +122,21 @@ export default function FeaturedSystems() {
                     Architecture Deep Dive
                   </a>
                 ) : null}
+                {project.additionalLinks?.map((link) => (
+                  <a
+                    key={`${project.id}-${link.label}`}
+                    href={link.url}
+                    target={link.url.startsWith("/") ? undefined : "_blank"}
+                    rel={link.url.startsWith("/") ? undefined : "noreferrer"}
+                    className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest transition ${
+                      link.label.toLowerCase().includes("sre")
+                        ? "border-red-500/40 text-red-300 hover:border-red-300 hover:text-red-200"
+                        : "border-amber-400/40 text-amber-300 hover:border-amber-300 hover:text-amber-200"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </article>
           ))}

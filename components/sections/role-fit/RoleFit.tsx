@@ -95,9 +95,23 @@ const skillSignals: SkillSignal[] = [
   {
     label: "Reliability & Monitoring",
     weight: 8,
-    keywords: ["monitoring", "uptime", "incident", "reliability", "observability", "production"],
+    keywords: ["monitoring", "uptime", "incident", "reliability", "observability", "production", "sre"],
     evidence:
       "Built reliability-focused systems including NetPulse and real-time telemetry operations workflows.",
+  },
+  {
+    label: "FinOps & Cost-Aware Scaling",
+    weight: 8,
+    keywords: ["finops", "cost", "fargate spot", "spot instances", "autoscaling", "queue depth"],
+    evidence:
+      "Implemented cost-aware autoscaling and spot-based worker strategy with DLQ recovery mechanisms.",
+  },
+  {
+    label: "Infrastructure as Code (Terraform)",
+    weight: 7,
+    keywords: ["terraform", "iac", "infrastructure as code", "aws", "alb", "vpc", "eventbridge"],
+    evidence:
+      "Project narratives and runbooks reflect IaC-driven provisioning and repeatable cloud operations.",
   },
   {
     label: "Performance & Problem Solving",
@@ -180,6 +194,9 @@ const keywordOverrides: Record<string, string[]> = {
     "aws",
     "saas",
     "reliability",
+    "pgbouncer",
+    "mtls",
+    "zero-trust",
   ],
   moveysplash: [
     "social",
@@ -199,7 +216,13 @@ const keywordOverrides: Record<string, string[]> = {
     "worker",
     "queue",
     "api",
-    "app runner",
+    "fargate",
+    "fargate spot",
+    "finops",
+    "eventbridge",
+    "terraform",
+    "dlq",
+    "dead letter queue",
     "alb",
     "security",
     "cloud",
@@ -229,6 +252,10 @@ const keywordOverrides: Record<string, string[]> = {
     "metrics",
     "cloudfront",
     "app runner",
+    "consul",
+    "pprof",
+    "prometheus",
+    "grafana",
   ],
   "telecom-network-visualizer": [
     "telecom",
@@ -314,59 +341,43 @@ const blogSignals: BlogSignal[] = blogPostsSorted.map((post) => {
 });
 
 const sampleJobDescription = `New Grad Software Engineer - Full Time
-We are looking for an engineer who can build distributed backend systems, design reliable cloud APIs, and reason about scalability, observability, and performance tradeoffs. You should be comfortable with TypeScript/Java/Python, SQL data models, and production debugging.`;
+We are looking for an engineer who can build distributed backend systems, design reliable cloud APIs, and reason about scalability, observability, and performance tradeoffs. Experience with Terraform IaC, queue-based systems, DLQ recovery workflows, and cost-aware autoscaling (FinOps) is highly preferred.`;
 
 const roleTemplates: RoleTemplate[] = [
   {
-    title: "Amazon SDE Fit",
+    title: "Tier 1 / Hyper-Scale Fit (Amazon, Stripe, DoorDash)",
     alignment: [
-      "Distributed systems ownership with failure handling and operational controls.",
-      "Scalable backend APIs with queue-worker and streaming patterns.",
-      "Production-readiness focus: observability, retries, and reliability tradeoffs.",
+      "Hyperscale Infrastructure & FinOps Alignment",
+      "Operating at scale requires more than functional code; it requires surviving failure and ruthlessly optimizing cloud spend.",
+      "By leveraging AWS Application Auto Tracking with custom BullMQ metrics and AWS Fargate Spot worker pools, I align compute to queue depth while reducing asynchronous compute cost by 70%.",
+      "Automated Dead Letter Queue (DLQ) replays and recovery orchestration are engineered to target zero payload loss during simulated network partitions.",
     ],
     evidence: [
-      "NetPulse + Mini Load Balancer for distributed reliability and routing.",
-      "Cloud Code Execution + Transit Telemetry for async and real-time pipelines.",
-      "System design docs + live demos for fast technical validation.",
+      "Core signals: FinOps, Fargate Spot, DLQ, zero data loss, autoscaling target-breach handling.",
     ],
   },
   {
-    title: "Stripe Platform Fit",
+    title: "Tier 2 / Deep Tech Fit (Canonical, Veeva, Intuit)",
     alignment: [
-      "Backend platform engineering with reliability and failure-handling controls.",
-      "API-first system design with measurable operational signals.",
-      "Strong documentation and architecture communication for reviewer trust.",
+      "Systems Reliability & Secure Cloud Primitives",
+      "Enterprise infrastructure demands strict security and zero-downtime operations, especially in Day 2 reliability scenarios.",
+      "I provision via Terraform (IaC), prioritize deep observability instrumentation, and design for fast breach detection before user-facing impact.",
+      "I leverage AWS Fargate with Firecracker microVM isolation patterns plus secure service-to-service controls such as mTLS and hardened connection pooling.",
     ],
     evidence: [
-      "Cloud Code Execution + NetPulse for platform-level architecture and controls.",
-      "Impact metrics and architecture snapshots included directly on homepage.",
-      "Production capabilities and system design docs linked per project.",
+      "Core signals: Firecracker microVMs, Terraform IaC, secure primitives, operational instrumentation.",
     ],
   },
   {
-    title: "Veeva EDP Fit",
+    title: "Tier 3 / Local Enterprise Fit (GM, Konrad, Zip)",
     alignment: [
-      "Strong CS fundamentals through algorithmic and systems-focused projects.",
-      "Backend architecture depth with clear tradeoff communication.",
-      "New grad profile positioning with documented engineering rigor.",
+      "End-to-End Delivery & Operational Autonomy",
+      "High-velocity teams need engineers who own features from local development through AWS production rollout.",
+      "I do not stop at Node.js/Go implementation; I provision VPC and ALB pathways, wire CI/CD automation, and maintain observable runtime behavior post-deployment.",
+      "Available immediately for hybrid integration in the GTA or remote EST collaboration.",
     ],
     evidence: [
-      "Telecom Network Visualizer + Mini Load Balancer for fundamentals and systems thinking.",
-      "NetPulse + Cloud Code Execution for backend architecture and reliability.",
-      "Role Fit brief + system design documentation for communication quality.",
-    ],
-  },
-  {
-    title: "Backend / Platform New Grad Fit",
-    alignment: [
-      "API and data workflow implementation across full-stack products.",
-      "Operational safety controls for retries, limits, and idempotency.",
-      "Evidence of measurable improvements and deployment ownership.",
-    ],
-    evidence: [
-      "Cloud Code Execution + NetPulse for platform and backend service design.",
-      "Transit Telemetry for streaming semantics and observability.",
-      "moveYSplash + Tutoring for full-stack delivery and SQL-backed workflows.",
+      "Core signals: ownership, deployment autonomy, infra + app integration, fast team ramp-up.",
     ],
   },
 ];
@@ -769,7 +780,11 @@ export default function RoleFit() {
                             href={link.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="rounded border border-amber-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-amber-300"
+                            className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest ${
+                              link.label.toLowerCase().includes("sre")
+                                ? "border-red-500/40 text-red-300"
+                                : "border-amber-400/40 text-amber-300"
+                            }`}
                           >
                             {link.label}
                           </a>

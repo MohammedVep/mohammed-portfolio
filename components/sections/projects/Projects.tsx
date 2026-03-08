@@ -136,7 +136,11 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
                   target="_blank"
                   rel="noreferrer"
                   onClick={(event) => event.stopPropagation()}
-                  className="rounded border border-amber-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+                  className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest transition ${
+                    link.label.toLowerCase().includes("sre")
+                      ? "border-red-500/40 text-red-300 hover:border-red-300 hover:text-red-200"
+                      : "border-amber-400/40 text-amber-300 hover:border-amber-300 hover:text-amber-200"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -229,7 +233,11 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded border border-amber-400/50 px-3 py-2 text-xs uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+                    className={`rounded border px-3 py-2 text-xs uppercase tracking-widest transition ${
+                      link.label.toLowerCase().includes("sre")
+                        ? "border-red-500/50 text-red-300 hover:border-red-300 hover:text-red-200"
+                        : "border-amber-400/50 text-amber-300 hover:border-amber-300 hover:text-amber-200"
+                    }`}
                   >
                     {link.label}
                   </a>
@@ -344,8 +352,9 @@ export default function Projects() {
           Project_Vault
         </h2>
         <p className="mx-auto mb-6 max-w-3xl text-center text-sm text-neutral-300">
-          Each project now includes an immediate value statement, measurable impact metrics, tech and
-          architecture summary, and production-grade capabilities with full system design references.
+          Core infrastructure systems and reliability engineering projects. All systems are
+          provisioned via Infrastructure as Code (Terraform), instrumented with deep observability
+          pipelines, and rigorously tested through chaos simulations and load validation.
         </p>
         <div className="mx-auto mb-10 max-w-4xl rounded-xl border border-neutral-800 bg-neutral-950 p-5 font-mono text-sm text-neutral-300">
           <p className="mb-2 text-xs uppercase tracking-[0.3em] text-amber-300">

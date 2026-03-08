@@ -89,6 +89,12 @@ export default function RecruiterIndex() {
                   Engineering Blog
                 </a>
                 <a
+                  href={profileData.sreDashboardUrl}
+                  className="rounded border border-red-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-red-300 transition hover:border-red-300 hover:text-red-200"
+                >
+                  SRE Dashboard
+                </a>
+                <a
                   href="/#featured-systems"
                   className="rounded border border-cyan-500/40 px-3 py-2 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
                 >
@@ -109,6 +115,42 @@ export default function RecruiterIndex() {
                   </p>
                 ))}
               </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-300">
+                Tier 1 / Hyper-Scale
+              </p>
+              <p className="mt-2 text-sm text-neutral-200">Hyperscale Infrastructure & FinOps Alignment</p>
+              <p className="mt-2 text-xs leading-relaxed text-neutral-300">
+                Built with strict adherence to Amazon's Frugality and Operational Excellence
+                principles by architecting Fargate Spot FinOps optimization and automated DLQ
+                replay mechanisms engineered for zero payload loss during simulated partitions.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300">Tier 2 / Deep Tech</p>
+              <p className="mt-2 text-sm text-neutral-200">Systems Reliability & Secure Cloud Primitives</p>
+              <p className="mt-2 text-xs leading-relaxed text-neutral-300">
+                Terraform-first IaC delivery, deep observability instrumentation, and secure service
+                primitives (mTLS, isolation-first container strategy, hardened data-path controls)
+                for mission-critical platform operations.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-amber-300">
+                Tier 3 / Local Enterprise
+              </p>
+              <p className="mt-2 text-sm text-neutral-200">End-to-End Delivery & Operational Autonomy</p>
+              <p className="mt-2 text-xs leading-relaxed text-neutral-300">
+                Owns features from local environment to AWS production: service code, VPC/ALB
+                deployment path, CI/CD wiring, and runtime health verification. Available for
+                hybrid integration in the GTA or remote EST collaboration.
+              </p>
             </div>
           </div>
         </div>

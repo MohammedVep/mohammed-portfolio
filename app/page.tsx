@@ -8,6 +8,7 @@ import Hero from "@/components/sections/hero/Hero";
 import Projects from "@/components/sections/projects/Projects";
 import RecruiterIndex from "@/components/sections/recruiter-index/RecruiterIndex";
 import RoleFit from "@/components/sections/role-fit/RoleFit";
+import Runbooks from "@/components/sections/runbooks/Runbooks";
 import Skills from "@/components/sections/skills/Skills";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <RecruiterIndex />
       <FeaturedSystems />
       <Projects />
+      <Runbooks />
       <BlogPreview />
       <RoleFit />
       <Skills />

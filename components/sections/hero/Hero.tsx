@@ -6,20 +6,20 @@ import { profileData } from "@/content/profile";
 
 export default function Hero() {
   const baseTelemetry = [
-    "[0.0002] CANDIDATE_PROFILE: new_grad_software_engineer_2026",
-    "[0.0005] ACTIVE_DEPLOYMENT: netpulse_live",
-    "[0.0008] CORE_STACK: go_typescript_python_sql_aws",
-    "[0.0011] FOCUS: distributed_systems_and_infrastructure",
-    "[0.0014] STATUS: open_to_interview",
+    "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
+    "[0.0005] ACTIVE_SIGNAL: live_aws_scaling_dashboard",
+    "[0.0008] CORE_STACK: go_node_terraform_fargate",
+    "[0.0011] PRINCIPLES: frugality_operational_excellence",
+    "[0.0014] STATUS: available_hybrid_gta_or_remote_est",
     "_",
   ];
 
   const hoverTelemetry = [
-    "[0.0002] CANDIDATE_PROFILE: new_grad_software_engineer_2026",
-    "[0.0005] ACTIVE_DEPLOYMENT: netpulse_live",
-    "[0.0008] PROJECT_LINK: moveysplash_live",
-    "[0.0010] RESUME_ASSET: downloadable_doc_ready",
-    "[0.0012] CONTACT_CHANNELS: email_phone_linkedin",
+    "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
+    "[0.0005] FEATURED_SYSTEM: cloud_code_execution_sre",
+    "[0.0008] FEATURED_SYSTEM: netpulse_zero_trust",
+    "[0.0010] FEATURED_SYSTEM: mini_load_balancer_pprof",
+    "[0.0012] CONTACT_CHANNELS: email_linkedin_github",
     "_",
   ];
 
@@ -44,8 +44,8 @@ export default function Hero() {
               {profileData.summary}
             </p>
             <p className="mt-4 text-sm text-neutral-400">
-              Built and shipped distributed systems and cloud-backed platforms including
-              NetPulse, Cloud Code Execution, and a real-time telemetry pipeline.
+              Focused on SRE-grade platform delivery with infrastructure provisioning, cost-aware
+              scaling, and production failure-recovery automation.
             </p>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -98,13 +98,22 @@ export default function Hero() {
   return (
     <section className="bg-black py-24">
       <div className="container mx-auto px-6">
+        <a
+          href={profileData.sreDashboardUrl}
+          className="mb-5 inline-flex rounded border border-red-500/50 bg-red-500/10 px-4 py-2 text-xs font-mono uppercase tracking-widest text-red-300 transition hover:border-red-400 hover:text-red-200"
+        >
+          🔴 View Live AWS Auto-Scaling & DLQ Dashboard
+        </a>
         <h1 className="mb-2 text-5xl font-bold tracking-tighter text-white md:text-6xl">
           {profileData.name}
         </h1>
         <p className="mb-2 font-mono text-emerald-300">{profileData.title}</p>
         <p className="mb-2 max-w-3xl text-sm leading-relaxed text-neutral-300">{profileData.summary}</p>
         <p className="mb-1 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-          Reliability | Observability | Performance
+          Reliability | Observability | FinOps | Operational Excellence
+        </p>
+        <p className="mb-1 inline-flex rounded border border-neutral-800 bg-neutral-950 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-300">
+          {profileData.availability}
         </p>
         <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
           {profileData.location}

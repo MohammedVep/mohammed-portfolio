@@ -1,6 +1,6 @@
 export const profileData = {
   name: "Mohammed Vepari",
-  title: "Systems & Infrastructure Software Engineer | New Grad 2026",
+  title: "Backend & Infrastructure Engineer",
   location: "Brampton, ON",
   phone: "(416) 277-4564",
   email: "mvepari@algomau.ca",
@@ -9,6 +9,8 @@ export const profileData = {
   resumeUrl: "/Mohammed_Vepari_Resume.docx",
   netPulseLiveUrl: "https://main.dpl90cw6xnizn.amplifyapp.com",
   netPulseRepoUrl: "https://github.com/MohammedVep/NetPulse",
+  sreDashboardUrl: "/sre-dashboard",
+  availability: "Available for hybrid roles in the GTA or remote (EST).",
   summary:
-    "I build distributed systems, cloud infrastructure tools, and scalable backend platforms using TypeScript, Go, Python, SQL, and AWS. Focused on reliability, observability, and performance.",
+    "B.Sc. Computer Science (2026) • 87% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Go, Node, and AWS Terraform.",
 } as const;
