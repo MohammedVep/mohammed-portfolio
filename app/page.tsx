@@ -1,4 +1,5 @@
 import About from "@/components/sections/about/About";
+import BlogPreview from "@/components/sections/blog-preview/BlogPreview";
 import Contact from "@/components/sections/contact/Contact";
 import Education from "@/components/sections/education/Education";
 import Experience from "@/components/sections/experience/Experience";
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <Hero />
       <FeaturedSystems />
+      <BlogPreview />
       <About />
       <Education />
       <Experience />

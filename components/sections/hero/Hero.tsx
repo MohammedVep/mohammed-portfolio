@@ -132,6 +132,12 @@ export default function Hero() {
           >
             Request System Design Brief
           </a>
+          <a
+            href="/blog"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+          >
+            Read Engineering Blog
+          </a>
         </div>
         <Bento items={heroItems} />
       </div>

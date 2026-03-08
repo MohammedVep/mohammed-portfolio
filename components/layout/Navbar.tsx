@@ -14,22 +14,25 @@ const Navbar = () => {
           {profileData.name}
         </Link>
         <div className="hidden items-center space-x-6 md:flex">
-          <Link href="#about" className="text-gray-600 hover:text-gray-800">
+          <Link href="/#about" className="text-gray-600 hover:text-gray-800">
             About
           </Link>
-          <Link href="#experience" className="text-gray-600 hover:text-gray-800">
+          <Link href="/#experience" className="text-gray-600 hover:text-gray-800">
             Experience
           </Link>
-          <Link href="#projects" className="text-gray-600 hover:text-gray-800">
+          <Link href="/#projects" className="text-gray-600 hover:text-gray-800">
             Projects
           </Link>
-          <Link href="#skills" className="text-gray-600 hover:text-gray-800">
+          <Link href="/#skills" className="text-gray-600 hover:text-gray-800">
             Skills
           </Link>
-          <Link href="#role-fit" className="text-gray-600 hover:text-gray-800">
+          <Link href="/blog" className="text-gray-600 hover:text-gray-800">
+            Blog
+          </Link>
+          <Link href="/#role-fit" className="text-gray-600 hover:text-gray-800">
             Role Fit
           </Link>
-          <Link href="#contact" className="text-gray-600 hover:text-gray-800">
+          <Link href="/#contact" className="text-gray-600 hover:text-gray-800">
             Contact
           </Link>
         </div>
@@ -72,42 +75,49 @@ const Navbar = () => {
         <div className="bg-white md:hidden">
           <div className="flex flex-col items-center space-y-1 px-2 pb-3 pt-2 sm:px-3">
             <Link
-              href="#about"
+              href="/#about"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               About
             </Link>
             <Link
-              href="#experience"
+              href="/#experience"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               Experience
             </Link>
             <Link
-              href="#projects"
+              href="/#projects"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               Projects
             </Link>
             <Link
-              href="#skills"
+              href="/#skills"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               Skills
             </Link>
             <Link
-              href="#role-fit"
+              href="/blog"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/#role-fit"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >
               Role Fit
             </Link>
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-gray-800"
             >

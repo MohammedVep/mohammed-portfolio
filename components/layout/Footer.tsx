@@ -36,6 +36,9 @@ const Footer = () => {
             >
               NetPulse Live
             </a>
+            <a href="/blog" className="text-gray-600 hover:text-gray-800">
+              Engineering Blog
+            </a>
           </div>
         </div>
       </div>
