@@ -2,12 +2,12 @@ import { profileData } from "@/content/profile";
 
 const quickLinks = [
   { href: "/#featured-systems", label: "Flagship Systems" },
-  { href: "/#projects", label: "Project Vault" },
+  { href: "/#projects", label: "Core Infrastructure" },
   { href: "/#runbooks", label: "Architecture and Runbooks" },
   { href: "/#recruiter-index", label: "Recruiter Index" },
   { href: "/blog", label: "Engineering Blog" },
   { href: "/#role-fit", label: "Role Fit Brief" },
-  { href: "/sre-dashboard", label: "SRE Dashboard" },
+  { href: "/sre-dashboard", label: "SRE Dashboard Preview" },
 ];
 
 const Footer = () => {

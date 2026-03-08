@@ -216,7 +216,7 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/cloud-code-execution",
     additionalLinks: [
       {
-        label: "View SRE Auto-Scaling Dashboard",
+        label: "View SRE Dashboard Preview (Mar 12)",
         url: profileData.sreDashboardUrl,
       },
       {

@@ -31,7 +31,7 @@ export default function SREDashboardPage() {
     <main className="min-h-screen bg-black py-16 text-neutral-200">
       <div className="container mx-auto max-w-5xl px-6">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-          <h1 className="text-3xl font-bold text-white">Live AWS Auto-Scaling and DLQ Dashboard</h1>
+          <h1 className="text-3xl font-bold text-white">SRE Dashboard Preview</h1>
           <Link
             href="/"
             className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
@@ -41,10 +41,10 @@ export default function SREDashboardPage() {
         </div>
 
         <section className="mb-6 rounded-xl border border-red-500/30 bg-red-500/5 p-5 font-mono">
-          <p className="text-xs uppercase tracking-[0.3em] text-red-300">SRE_Scaling_View</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-red-300">Coming March 12, 2026</p>
           <p className="mt-3 text-sm leading-relaxed text-neutral-200">
-            Recruiter-focused operational dashboard for desired vs. running worker count behavior,
-            DLQ replay automation, and burst response timeline.
+            Public live telemetry is being finalized. This preview keeps recruiter context intact with
+            architecture-aligned scaling signals and the incident timeline used in system validation.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {cloudExecution?.liveUrl ? (
@@ -57,24 +57,47 @@ export default function SREDashboardPage() {
                 Cloud Execution Platform
               </a>
             ) : null}
+            {cloudExecution?.systemDesignUrl ? (
+              <a
+                href={cloudExecution.systemDesignUrl}
+                className="rounded border border-cyan-500/40 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+              >
+                System Design Doc
+              </a>
+            ) : null}
             {cloudExecution?.additionalLinks
               ?.filter((link) => !link.label.toLowerCase().includes("sre"))
               .map((link) => (
-              <a
-                key={`${link.label}-${link.url}`}
-                href={link.url}
-                target={link.url.startsWith("/") ? undefined : "_blank"}
-                rel={link.url.startsWith("/") ? undefined : "noreferrer"}
-                className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-red-400 hover:text-red-200"
-              >
-                {link.label}
-              </a>
-            ))}
+                <a
+                  key={`${link.label}-${link.url}`}
+                  href={link.url}
+                  target={link.url.startsWith("/") ? undefined : "_blank"}
+                  rel={link.url.startsWith("/") ? undefined : "noreferrer"}
+                  className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-red-400 hover:text-red-200"
+                >
+                  {link.label}
+                </a>
+              ))}
           </div>
         </section>
 
         <section className="mb-6 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-          <h2 className="text-sm uppercase tracking-[0.3em] text-emerald-400">Desired vs Running</h2>
+          <h2 className="text-sm uppercase tracking-[0.3em] text-emerald-400">CloudWatch Preview Snapshot</h2>
+          <p className="mt-3 text-sm text-neutral-300">
+            Desired vs. running worker trend preview used for recruiter review before the full public
+            metrics feed goes live.
+          </p>
+          <div className="mt-4 overflow-hidden rounded border border-neutral-800 bg-black p-3">
+            <img
+              src="/media/projects/cloudwatch-dashboard-preview.svg"
+              alt="CloudWatch preview showing desired and running worker counts during a burst window"
+              className="w-full"
+            />
+          </div>
+        </section>
+
+        <section className="mb-6 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
+          <h2 className="text-sm uppercase tracking-[0.3em] text-emerald-400">Desired vs Running (Preview)</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <div className="rounded-lg border border-neutral-800 bg-black p-4">
               <p className="text-[10px] uppercase tracking-widest text-neutral-500">Desired Worker Count</p>

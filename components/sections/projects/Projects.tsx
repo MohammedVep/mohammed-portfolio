@@ -251,7 +251,7 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
               System Architecture
             </h4>
             <div className="mt-2 rounded border border-neutral-800 bg-black p-4">
-              <pre className="text-[10px] text-neutral-400">
+              <pre className="overflow-x-auto text-[10px] text-neutral-400">
                 {`mermaid
 ${project.architecture}
 `}
