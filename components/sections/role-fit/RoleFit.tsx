@@ -373,7 +373,7 @@ const roleTemplates: RoleTemplate[] = [
       "End-to-End Delivery & Operational Autonomy",
       "High-velocity teams need engineers who own features from local development through AWS production rollout.",
       "I do not stop at Node.js/Go implementation; I provision VPC and ALB pathways, wire CI/CD automation, and maintain observable runtime behavior post-deployment.",
-      "Available immediately for hybrid integration in the GTA or remote EST collaboration.",
+      "Available immediately for on-site, hybrid, or remote collaboration (EST/EDT).",
     ],
     evidence: [
       "Core signals: ownership, deployment autonomy, infra + app integration, fast team ramp-up.",

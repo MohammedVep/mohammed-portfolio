@@ -10,7 +10,7 @@ export const profileData = {
   netPulseLiveUrl: "https://main.dpl90cw6xnizn.amplifyapp.com",
   netPulseRepoUrl: "https://github.com/MohammedVep/NetPulse",
   sreDashboardUrl: "/sre-dashboard",
-  availability: "Available for hybrid roles in the GTA or remote (EST).",
+  availability: "Available for on-site, hybrid, or remote roles (EST/EDT).",
   summary:
     "B.Sc. Computer Science (2026) • 87% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Go, Node, and AWS Terraform.",
 } as const;

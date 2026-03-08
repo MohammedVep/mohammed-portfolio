@@ -162,7 +162,7 @@ export default function RecruiterIndex() {
               <p className="mt-2 text-xs leading-relaxed text-neutral-300">
                 Owns features from local environment to AWS production: service code, VPC/ALB
                 deployment path, CI/CD wiring, and runtime health verification. Available for
-                hybrid integration in the GTA or remote EST collaboration.
+                on-site, hybrid, or remote collaboration (EST/EDT).
               </p>
             </div>
           </div>

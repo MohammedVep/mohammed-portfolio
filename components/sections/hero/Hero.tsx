@@ -10,7 +10,7 @@ export default function Hero() {
     "[0.0005] ACTIVE_SIGNAL: flagship_systems_live",
     "[0.0008] CORE_STACK: go_node_terraform_fargate",
     "[0.0011] PRINCIPLES: frugality_operational_excellence",
-    "[0.0014] STATUS: available_hybrid_gta_or_remote_est",
+    "[0.0014] STATUS: available_onsite_hybrid_remote_est_edt",
     "_",
   ];
 
