@@ -14,7 +14,13 @@ type SkillSignal = {
 type ProjectSignal = {
   id: string;
   title: string;
+  projectType: string;
   summary: string;
+  whyItMatters: string;
+  architectureSummary: string;
+  impactMetrics: string[];
+  productionCapabilities?: string[];
+  behavioralSignals?: string[];
   keywords: string[];
   liveUrl?: string;
   repoUrl?: string;
@@ -229,12 +235,24 @@ const keywordOverrides: Record<string, string[]> = {
   ],
 };
 
+const flagshipProjectIds = new Set([
+  "netpulse",
+  "cloud-code-execution",
+  "realtime-transit-telemetry",
+]);
+
 const projectSignals: ProjectSignal[] = projectsData.map((project) => {
   const seedKeywords = [
     ...(keywordOverrides[project.id] ?? []),
+    ...tokenize(project.projectType),
     ...project.tags.map((tag) => normalize(tag)),
     ...tokenize(project.title),
     ...tokenize(project.description),
+    ...tokenize(project.whyItMatters),
+    ...tokenize(project.architectureSummary),
+    ...project.impactMetrics.flatMap((item) => tokenize(item)),
+    ...(project.productionCapabilities?.flatMap((item) => tokenize(item)) ?? []),
+    ...(project.behavioralSignals?.flatMap((item) => tokenize(item)) ?? []),
     ...tokenize(project.hardProblem),
     ...(project.recentUpdates?.flatMap((item) => tokenize(item)) ?? []),
   ];
@@ -244,7 +262,13 @@ const projectSignals: ProjectSignal[] = projectsData.map((project) => {
   return {
     id: project.id,
     title: project.title,
+    projectType: project.projectType,
     summary: project.description,
+    whyItMatters: project.whyItMatters,
+    architectureSummary: project.architectureSummary,
+    impactMetrics: project.impactMetrics,
+    productionCapabilities: project.productionCapabilities,
+    behavioralSignals: project.behavioralSignals,
     keywords,
     liveUrl: project.liveUrl,
     repoUrl: project.repoUrl,
@@ -255,7 +279,7 @@ const projectSignals: ProjectSignal[] = projectsData.map((project) => {
 });
 
 const sampleJobDescription = `New Grad Software Engineer - Full Time
-We are looking for an engineer who can build full-stack web applications, work across React/TypeScript and Node.js APIs, and write efficient SQL queries. You should care about reliability, testing, and performance optimization.`;
+We are looking for an engineer who can build distributed backend systems, design reliable cloud APIs, and reason about scalability, observability, and performance tradeoffs. You should be comfortable with TypeScript/Java/Python, SQL data models, and production debugging.`;
 
 const roleTemplates: RoleTemplate[] = [
   {
@@ -269,6 +293,19 @@ const roleTemplates: RoleTemplate[] = [
       "NetPulse + Mini Load Balancer for distributed reliability and routing.",
       "Cloud Code Execution + Transit Telemetry for async and real-time pipelines.",
       "System design docs + live demos for fast technical validation.",
+    ],
+  },
+  {
+    title: "Stripe Platform Fit",
+    alignment: [
+      "Backend platform engineering with reliability and failure-handling controls.",
+      "API-first system design with measurable operational signals.",
+      "Strong documentation and architecture communication for reviewer trust.",
+    ],
+    evidence: [
+      "Cloud Code Execution + NetPulse for platform-level architecture and controls.",
+      "Impact metrics and architecture snapshots included directly on homepage.",
+      "Production capabilities and system design docs linked per project.",
     ],
   },
   {
@@ -326,47 +363,86 @@ export default function RoleFit() {
       .map((project) => {
         const keywordHits = computeKeywordHits(text, project.keywords);
         const upgradeTokens = tokenize(project.recentUpdates?.join(" ") ?? "");
+        const impactTokens = tokenize(project.impactMetrics.join(" "));
+        const architectureTokens = tokenize(project.architectureSummary);
+        const capabilityTokens = tokenize(project.productionCapabilities?.join(" ") ?? "");
+        const behaviorTokens = tokenize(project.behavioralSignals?.join(" ") ?? "");
         const upgradeHits = computeKeywordHits(text, upgradeTokens);
-        const projectScore = Math.min(12, keywordHits * 2 + Math.min(4, upgradeHits));
-        return { ...project, keywordHits, upgradeHits, projectScore };
+        const impactHits = computeKeywordHits(text, impactTokens);
+        const architectureHits = computeKeywordHits(text, architectureTokens);
+        const capabilityHits = computeKeywordHits(text, capabilityTokens);
+        const behaviorHits = computeKeywordHits(text, behaviorTokens);
+        const flagshipBoost = flagshipProjectIds.has(project.id) && keywordHits > 0 ? 2 : 0;
+
+        const projectScore = Math.min(
+          12,
+          keywordHits * 2 +
+            Math.min(3, upgradeHits) +
+            Math.min(3, impactHits + capabilityHits + architectureHits + behaviorHits) +
+            flagshipBoost
+        );
+
+        const proofScore =
+          (project.liveUrl ? 2 : 0) +
+          (project.repoUrl ? 1 : 0) +
+          (project.designUrl ? 1 : 0) +
+          (project.impactMetrics.length > 0 ? 1 : 0);
+
+        return {
+          ...project,
+          keywordHits,
+          upgradeHits,
+          impactHits,
+          capabilityHits,
+          architectureHits,
+          behaviorHits,
+          projectScore,
+          proofScore,
+        };
       })
-      .filter((project) => project.keywordHits > 0)
-      .sort((a, b) => b.projectScore - a.projectScore || b.keywordHits - a.keywordHits);
+      .filter((project) => project.keywordHits > 0 || project.impactHits > 0 || project.capabilityHits > 0)
+      .sort((a, b) => b.projectScore - a.projectScore || b.proofScore - a.proofScore);
 
     const skillCoverage = Math.min(
-      62,
+      54,
       matchedSkills.reduce((sum, signal) => sum + signal.signalScore, 0)
     );
     const projectCoverage = Math.min(
-      30,
+      26,
       matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.projectScore, 0)
+    );
+    const proofDepth = Math.min(
+      10,
+      matchedProjects.slice(0, 3).reduce((sum, project) => sum + project.proofScore, 0)
     );
 
     const stageKeywords = [
       "new grad",
       "recent university graduates",
+      "new graduate",
       "entry level",
       "0-2 years",
       "junior",
       "engineering development program",
     ];
     const stageHits = computeKeywordHits(text, stageKeywords);
-    const stageAlignment = Math.min(10, stageHits * 2);
+    const stageAlignment = Math.min(6, stageHits * 2);
 
     const logisticsKeywords = [
       "canada",
       "toronto",
       "in office",
       "4 days/week",
+      "in-office",
       "work anywhere",
       "work authorization",
     ];
     const logisticsHits = computeKeywordHits(text, logisticsKeywords);
-    const logisticsAlignment = Math.min(8, logisticsHits * 2);
+    const logisticsAlignment = Math.min(4, logisticsHits);
 
     const fitScore = Math.min(
       100,
-      Math.round(skillCoverage + projectCoverage + stageAlignment + logisticsAlignment)
+      Math.round(skillCoverage + projectCoverage + proofDepth + stageAlignment + logisticsAlignment)
     );
 
     const strongestSignals = matchedSkills.slice(0, 4).map((signal) => signal.label);
@@ -374,20 +450,32 @@ export default function RoleFit() {
       .slice(0, 2)
       .flatMap((project) => project.recentUpdates ?? [])
       .slice(0, 3);
+    const referencedMetrics = matchedProjects
+      .slice(0, 2)
+      .flatMap((project) => project.impactMetrics)
+      .slice(0, 3);
+    const matchedProjectTypes = Array.from(
+      new Set(matchedProjects.slice(0, 3).map((project) => project.projectType))
+    );
+    const flagshipMatches = matchedProjects.filter((project) => flagshipProjectIds.has(project.id)).length;
 
     const recruiterPitch = [
-      `${profileData.name} shows strong role alignment through stack fit, practical full-stack delivery, and recent production-style project upgrades.`,
+      `${profileData.name} now presents as a Systems & Infrastructure New Grad engineer with quantified project outcomes, architecture-first documentation, and production-style reliability focus.`,
       matchedProjects[0]
-        ? `Most relevant project: ${matchedProjects[0].title} (${matchedProjects[0].summary})`
+        ? `Top project match: ${matchedProjects[0].title} (${matchedProjects[0].whyItMatters})`
         : "Relevant project evidence is available across multiple live and documented portfolio projects.",
-      "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, system design docs, and recent change history.",
+      flagshipMatches > 0
+        ? `Flagship systems aligned in this role fit: ${flagshipMatches}/3 (NetPulse, Cloud Code Execution, Real-Time Transit Telemetry).`
+        : "Flagship systems are available and can be emphasized with role-specific keyword alignment.",
+      "Profile focus: full-time New Grad Software Engineer (2026) with public demos, source code, system design docs, and measurable impact metrics.",
     ].join(" ");
 
     const scoreBreakdown = [
-      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 62 },
-      { label: "Project Evidence Match", score: Math.round(projectCoverage), max: 30 },
-      { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 10 },
-      { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 8 },
+      { label: "Role + Stack Alignment", score: Math.round(skillCoverage), max: 54 },
+      { label: "Systems + Project Relevance", score: Math.round(projectCoverage), max: 26 },
+      { label: "Proof Depth (Live/Repo/Design/Metrics)", score: Math.round(proofDepth), max: 10 },
+      { label: "New Grad Program Fit", score: Math.round(stageAlignment), max: 6 },
+      { label: "Location / Logistics Match", score: Math.round(logisticsAlignment), max: 4 },
     ];
 
     const briefText = [
@@ -401,6 +489,12 @@ export default function RoleFit() {
       ...(referencedUpdates.length
         ? ["", "Recent Upgrades Referenced:", ...referencedUpdates.map((item) => `- ${item}`)]
         : []),
+      ...(referencedMetrics.length
+        ? ["", "Impact Metrics Referenced:", ...referencedMetrics.map((item) => `- ${item}`)]
+        : []),
+      ...(matchedProjectTypes.length
+        ? ["", "Matched Project Types:", ...matchedProjectTypes.map((item) => `- ${item}`)]
+        : []),
       "",
       "Recruiter-Ready Summary:",
       recruiterPitch,
@@ -413,6 +507,7 @@ export default function RoleFit() {
       recruiterPitch,
       scoreBreakdown,
       referencedUpdates,
+      referencedMetrics,
       briefText,
     };
   }, [jobDescription]);
@@ -440,7 +535,7 @@ export default function RoleFit() {
 
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">Target Role Templates</p>
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
               {roleTemplates.map((template) => (
                 <div key={template.title} className="rounded-xl border border-neutral-800 bg-black p-4">
                   <p className="text-sm font-semibold text-neutral-100">{template.title}</p>
@@ -462,9 +557,9 @@ export default function RoleFit() {
           <div className="mb-6 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
             <p className="text-xs uppercase tracking-widest text-neutral-500">How This AI System Works</p>
             <div className="mt-3 space-y-2 text-sm text-neutral-300">
-              <p>- Pulls evidence directly from your current `Project_Vault` data (projects, links, and recent upgrades).</p>
+              <p>- Pulls evidence from Project Vault fields: why-it-matters blurbs, impact metrics, architecture summaries, and upgrades.</p>
               <p>- Uses deterministic keyword + weighted scoring (no black-box generation).</p>
-              <p>- Produces transparent score breakdown and recruiter summary grounded in verifiable links.</p>
+              <p>- Produces transparent score breakdown plus proof depth from live/repo/design/metrics signals.</p>
               <p>- Automatically updates as portfolio projects evolve, so scoring reflects your latest work.</p>
             </div>
             <div className="mt-4">
@@ -546,8 +641,24 @@ export default function RoleFit() {
                 <div className="mt-3 space-y-3">
                   {analysis.matchedProjects.slice(0, 3).map((project) => (
                     <div key={project.title} className="rounded border border-neutral-800 bg-black p-3">
+                      <p className="text-[10px] uppercase tracking-widest text-cyan-300/90">
+                        {project.projectType}
+                      </p>
                       <p className="text-sm font-semibold text-neutral-100">{project.title}</p>
-                      <p className="mt-1 text-xs text-neutral-400">{project.summary}</p>
+                      <p className="mt-1 text-xs text-neutral-300">{project.whyItMatters}</p>
+                      <p className="mt-1 text-[11px] text-neutral-400">
+                        Architecture: {project.architectureSummary}
+                      </p>
+                      {project.impactMetrics.length ? (
+                        <div className="mt-2 space-y-1 text-[11px] text-emerald-300/90">
+                          <p>- {project.impactMetrics[0]}</p>
+                        </div>
+                      ) : null}
+                      {project.productionCapabilities?.length ? (
+                        <p className="mt-2 text-[11px] text-cyan-300/90">
+                          Capability: {project.productionCapabilities[0]}
+                        </p>
+                      ) : null}
                       {project.recentUpdates?.length ? (
                         <div className="mt-2 space-y-1 text-[11px] text-amber-300/90">
                           {project.recentUpdates.slice(0, 2).map((item, index) => (
@@ -606,6 +717,19 @@ export default function RoleFit() {
                   <p className="text-xs uppercase tracking-widest text-amber-300">Recent Upgrades Considered</p>
                   <div className="mt-2 space-y-1 text-sm text-neutral-200">
                     {analysis.referencedUpdates.map((item) => (
+                      <p key={item}>- {item}</p>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {analysis.referencedMetrics.length ? (
+                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/5 p-5 lg:col-span-3">
+                  <p className="text-xs uppercase tracking-widest text-emerald-300">
+                    Impact Metrics Considered
+                  </p>
+                  <div className="mt-2 space-y-1 text-sm text-neutral-200">
+                    {analysis.referencedMetrics.map((item) => (
                       <p key={item}>- {item}</p>
                     ))}
                   </div>
