@@ -271,6 +271,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
+    repoUrl: "https://github.com/MohammedVep/RealTimeTransitTelementry",
     systemDesignUrl: "/system-design/realtime-transit-telemetry",
   },
   {
@@ -398,7 +399,6 @@ export const projectsData: PortfolioProject[] = [
       "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
     ],
     liveUrl: "https://d1zwy02em6289x.cloudfront.net",
-    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
     systemDesignUrl: "/system-design/telecom-network-visualizer",
   },
   {

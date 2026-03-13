@@ -650,6 +650,14 @@ export default function RoleFit() {
                 AI Live Demo
               </a>
               <a
+                href={profileData.aiRoleFitRepoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mr-3 inline-flex rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
+              >
+                AI Source Repo
+              </a>
+              <a
                 href="/system-design/ai-role-fit"
                 className="inline-flex rounded border border-cyan-400/40 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
               >

@@ -16,6 +16,14 @@ export default function AIRoleFitSystemDesignPage() {
             >
               AI Live Demo
             </a>
+            <a
+              href={profileData.aiRoleFitRepoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-300"
+            >
+              AI Source Repo
+            </a>
             <Link
               href="/#role-fit"
               className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-300"

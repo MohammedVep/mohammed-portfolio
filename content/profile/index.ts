@@ -11,6 +11,7 @@ export const profileData = {
   netPulseRepoUrl: "https://github.com/MohammedVep/NetPulse",
   sreDashboardUrl: "/sre-dashboard",
   aiRoleFitLiveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
+  aiRoleFitRepoUrl: "https://github.com/MohammedVep/ai-system-shared-ai-platform",
   availability: "Available for on-site, hybrid, or remote roles (EST/EDT).",
   summary:
     "B.Sc. Computer Science (2026) • 87% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Go, Node, and AWS Terraform.",
