@@ -4,13 +4,13 @@ export default function LatestImprovements() {
   return (
     <section id="improvements" className="border-t border-neutral-900 bg-black py-20">
       <div className="container mx-auto px-6">
-        <h2 className="mb-2 text-center text-2xl font-bold text-white">Latest Improvements</h2>
+        <h2 className="mb-2 text-center text-2xl font-bold text-white">Recent Engineering Upgrades</h2>
         <p className="mb-4 text-center text-xs font-mono uppercase tracking-[0.5em] text-emerald-500">
-          Updated {improvementsUpdatedAt}
+          Deployed {improvementsUpdatedAt}
         </p>
         <p className="mx-auto mb-8 max-w-3xl text-center text-sm text-neutral-300">
-          Snapshot of recent website and portfolio application upgrades, each with direct proof
-          links for fast recruiter validation.
+          Recent platform and portfolio updates with direct proof links so reviewers can verify
+          shipped improvements without hunting through the site.
         </p>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -32,4 +32,3 @@ export default function LatestImprovements() {
     </section>
   );
 }
-

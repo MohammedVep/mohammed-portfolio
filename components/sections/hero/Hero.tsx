@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { Bento } from "@/components/ui/bento";
+import { blogPostsSorted } from "@/content/blog";
 import { profileData } from "@/content/profile";
+import { projectsData } from "@/content/projects";
 
 export default function Hero() {
+  const liveProjectCount = projectsData.filter((project) => Boolean(project.liveUrl)).length;
+  const systemDesignCount = projectsData.filter((project) => Boolean(project.systemDesignUrl)).length;
+  const blogPostCount = blogPostsSorted.length;
+
   const baseTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
     "[0.0005] ACTIVE_SIGNAL: flagship_systems_live",
@@ -50,20 +56,18 @@ export default function Hero() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href={profileData.netPulseLiveUrl}
-              target="_blank"
-              rel="noreferrer"
+              href="/#featured-systems"
               className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-400 transition hover:border-emerald-400 hover:text-emerald-300"
             >
-              View NetPulse
+              View Flagship Systems
             </a>
             <a
-              href={profileData.resumeUrl}
+              href={profileData.aiRoleFitLiveUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/50 hover:text-emerald-200"
             >
-              Download Resume
+              AI Live Demo
             </a>
           </div>
         </div>
@@ -112,6 +116,20 @@ export default function Hero() {
         <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
           {profileData.location}
         </p>
+        <div className="mb-8 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Live Systems</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-300">{liveProjectCount}</p>
+          </div>
+          <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Design Docs</p>
+            <p className="mt-2 text-2xl font-bold text-cyan-300">{systemDesignCount}</p>
+          </div>
+          <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Engineering Posts</p>
+            <p className="mt-2 text-2xl font-bold text-amber-300">{blogPostCount}</p>
+          </div>
+        </div>
         <div className="mb-8 flex flex-wrap gap-3">
           <a
             href={profileData.resumeUrl}

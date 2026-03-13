@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <FeaturedSystems />
       <RecruiterIndex />
       <LatestImprovements />
-      <FeaturedSystems />
       <Projects />
       <Runbooks />
       <BlogPreview />
