@@ -399,6 +399,7 @@ export const projectsData: PortfolioProject[] = [
       "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
     ],
     liveUrl: "https://d1zwy02em6289x.cloudfront.net",
+    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
     systemDesignUrl: "/system-design/telecom-network-visualizer",
   },
   {
