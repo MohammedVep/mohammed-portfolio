@@ -118,7 +118,7 @@ export const blogPosts: BlogPost[] = [
     ],
     links: [
       ...(cloudCodeExecution.liveUrl
-        ? [{ label: "Live App", url: cloudCodeExecution.liveUrl }]
+        ? [{ label: "Live Execution API", url: cloudCodeExecution.liveUrl }]
         : []),
       ...(cloudCodeExecution.repoUrl
         ? [{ label: "Source Repository", url: cloudCodeExecution.repoUrl }]

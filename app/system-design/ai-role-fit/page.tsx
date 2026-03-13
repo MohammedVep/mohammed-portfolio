@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { profileData } from "@/content/profile";
 
 export default function AIRoleFitSystemDesignPage() {
   return (
@@ -6,12 +7,22 @@ export default function AIRoleFitSystemDesignPage() {
       <div className="container mx-auto max-w-4xl px-6">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <h1 className="text-3xl font-bold tracking-tight text-white">AI Role Fit System Design</h1>
-          <Link
-            href="/#role-fit"
-            className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-300"
-          >
-            Back to Role Fit
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href={profileData.aiRoleFitLiveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-emerald-500/40 px-3 py-2 text-xs uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
+            >
+              AI Live Demo
+            </a>
+            <Link
+              href="/#role-fit"
+              className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-300"
+            >
+              Back to Role Fit
+            </Link>
+          </div>
         </div>
 
         <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">

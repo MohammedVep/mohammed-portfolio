@@ -211,15 +211,10 @@ export const projectsData: PortfolioProject[] = [
       "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
       "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
     ],
-    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
+    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
     repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
     systemDesignUrl: "/system-design/cloud-code-execution",
-    additionalLinks: [
-      {
-        label: "Execution API",
-        url: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
-      },
-    ],
+    additionalLinks: [],
   },
   {
     id: "realtime-transit-telemetry",
@@ -337,16 +332,12 @@ export const projectsData: PortfolioProject[] = [
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
       "Added Consul service-discovery integration and recruiter-facing dashboard/control surface.",
     ],
-    liveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
+    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
     repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
     additionalLinks: [
       {
         label: "Read Incident Report: OOM Debugging",
         url: "/blog/go-load-balancer-failure-handling",
-      },
-      {
-        label: "CloudFront Edge",
-        url: "https://d1zwy02em6289x.cloudfront.net",
       },
     ],
     systemDesignUrl: "/system-design/mini-load-balancer",
@@ -406,6 +397,7 @@ export const projectsData: PortfolioProject[] = [
       "Added dynamic congestion weighting and real-time route heat-style feedback.",
       "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
     ],
+    liveUrl: "https://d1zwy02em6289x.cloudfront.net",
     repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
     systemDesignUrl: "/system-design/telecom-network-visualizer",
   },

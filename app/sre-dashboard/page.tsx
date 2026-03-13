@@ -54,7 +54,7 @@ export default function SREDashboardPage() {
                 rel="noreferrer"
                 className="rounded border border-emerald-500/40 px-3 py-2 text-xs uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
               >
-                Cloud Execution Platform
+                Cloud Execution API
               </a>
             ) : null}
             {cloudExecution?.systemDesignUrl ? (
