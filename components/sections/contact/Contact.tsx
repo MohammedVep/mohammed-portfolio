@@ -10,6 +10,7 @@ const liveAppOrder = [
   "realtime-transit-telemetry",
   "telecom-network-visualizer",
   "mini-load-balancer",
+  "ai-job-match-analysis",
 ] as const;
 
 const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
@@ -18,6 +19,7 @@ const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
   "realtime-transit-telemetry": "Transit Telemetry",
   "telecom-network-visualizer": "Telecom Visualizer",
   "mini-load-balancer": "Mini Load Balancer",
+  "ai-job-match-analysis": "AI Job Match",
 };
 
 export default function Contact() {

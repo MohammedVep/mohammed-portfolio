@@ -403,6 +403,65 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/telecom-network-visualizer",
   },
   {
+    id: "ai-job-match-analysis",
+    title: "AI Job Match Analysis Service",
+    projectType: "Full-Stack Product Engineering",
+    description:
+      "Evidence-grounded AI workflow that turns job requirements into structured fit briefs using project metadata, prompt orchestration, and a live web interface.",
+    whyItMatters:
+      "Shows applied AI product engineering without relying on generic chat UX: structured outputs, grounding, and reviewer-visible system behavior are first-class concerns.",
+    architectureSummary:
+      "Web client -> requirement parser -> project evidence retrieval -> prompt orchestration layer -> LLM response formatter -> fit brief UI.",
+    metrics: "Structured LLM Workflow | Grounded Role Analysis",
+    impactMetrics: [
+      "Converted unstructured job descriptions into normalized requirement signals and evidence-backed summaries for repeatable analysis.",
+      "Grounded generated output in project metadata so responses reference concrete systems, system design docs, and shipped artifacts instead of generic claims.",
+      "Published a live deployed interface and source repository to expose prompt orchestration, response formatting, and product UX decisions end to end.",
+    ],
+    tags: ["Next.js", "TypeScript", "LLM Integration", "Prompt Orchestration", "Structured Outputs"],
+    hardProblem:
+      "Generate useful role-alignment summaries while keeping outputs grounded in real project evidence and preventing generic or inflated AI responses.",
+    architecture: `graph LR
+  Client[Web Client]-->Parser[Requirement Parser]
+  Parser-->Retriever[Project Evidence Retrieval]
+  Retriever-->Prompt[Prompt Orchestration Layer]
+  Prompt-->LLM[LLM Analysis Service]
+  LLM-->Formatter[Structured Response Formatter]
+  Formatter-->Client`,
+    tradeoffs: [
+      "More aggressive prompt shaping improves consistency but can reduce flexibility for unusual job descriptions.",
+      "Evidence grounding improves trust, but requires curated project metadata to avoid thin or repetitive output.",
+      "Structured outputs improve readability, but can hide nuance if the scoring schema is too rigid.",
+    ],
+    invariants: [
+      "Generated summaries remain tied to explicit project evidence instead of free-form unsupported claims.",
+      "Output structure is stable enough for quick skim and comparison across roles.",
+      "Live UI remains usable without forcing the reviewer through a multi-step workflow.",
+    ],
+    highlights: [
+      "Built a live AI-backed product rather than a static prompt demo.",
+      "Grounded outputs in concrete portfolio evidence to reduce hallucinated summaries.",
+      "Exposed both the deployed app and source repository for technical review.",
+    ],
+    behavioralSignals: [
+      "Treated applied AI as a product and systems problem, not just a model wrapper.",
+      "Optimized for explainability and grounding over novelty-only interaction patterns.",
+      "Kept the default portfolio narrative understandable even without using the tool.",
+    ],
+    productionCapabilities: [
+      "Requirement parsing and evidence retrieval before prompt execution.",
+      "Structured response generation designed for consistent skimability.",
+      "Live deployed interface with supporting repository and architecture documentation.",
+    ],
+    recentUpdates: [
+      "Repositioned the AI workflow as a supporting portfolio project instead of a primary homepage workflow.",
+      "Kept live deployment and source access while shifting default landing-page alignment into passive summaries.",
+    ],
+    liveUrl: profileData.aiSystemLiveUrl,
+    repoUrl: profileData.aiSystemRepoUrl,
+    systemDesignUrl: "/system-design/ai-job-match-analysis",
+  },
+  {
     id: "tutoring",
     title: "Online Tutoring Management System (Capstone)",
     projectType: "Full-Stack Product Engineering",

@@ -10,6 +10,24 @@ export default function Hero() {
   const liveProjectCount = projectsData.filter((project) => Boolean(project.liveUrl)).length;
   const systemDesignCount = projectsData.filter((project) => Boolean(project.systemDesignUrl)).length;
   const blogPostCount = blogPostsSorted.length;
+  const roleSummaryCards = [
+    {
+      title: "Backend Engineer",
+      detail: "Node.js APIs, queue-worker execution paths, Postgres/Redis persistence, and clear service boundaries.",
+    },
+    {
+      title: "Platform Engineer",
+      detail: "Terraform-managed cloud topology, ALB/Fargate deployment paths, and infrastructure-first design decisions.",
+    },
+    {
+      title: "Infrastructure / SRE",
+      detail: "Monitoring, DLQ recovery, autoscaling guardrails, load validation, and public observability surfaces.",
+    },
+    {
+      title: "New Grad SWE",
+      detail: "B.Sc. Computer Science (2026) with shipped live systems, architecture docs, and incident-style technical writing.",
+    },
+  ];
 
   const baseTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
@@ -125,6 +143,24 @@ export default function Hero() {
           <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
             <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Engineering Posts</p>
             <p className="mt-2 text-2xl font-bold text-amber-300">{blogPostCount}</p>
+          </div>
+        </div>
+        <div className="mb-8 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
+          <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-cyan-300">
+            Role Alignment Snapshot
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-300">
+            If someone is scanning for role fit, this is the shortest honest summary of where I add value.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {roleSummaryCards.map((card) => (
+              <div key={card.title} className="rounded-xl border border-neutral-800 bg-black p-4">
+                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">
+                  {card.title}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-300">{card.detail}</p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="mb-8 flex flex-wrap gap-3">
