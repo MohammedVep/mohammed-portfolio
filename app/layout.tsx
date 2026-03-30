@@ -13,7 +13,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: `${profileData.name} | Systems and Infrastructure Engineer`,
   description:
-    "Systems and infrastructure portfolio featuring flagship distributed systems, incident-style engineering blog posts, and recruiter-ready role fit analysis.",
+    "Systems and infrastructure portfolio featuring flagship distributed systems, architecture runbooks, and incident-style engineering blog posts.",
 };
 
 export default function RootLayout({

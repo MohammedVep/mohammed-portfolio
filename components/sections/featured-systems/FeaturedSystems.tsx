@@ -56,8 +56,8 @@ export default function FeaturedSystems() {
           Featured_Systems
         </h2>
         <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-300">
-          Three flagship systems selected for fast recruiter review. Each includes architecture
-          snapshot, measurable impact, and direct links to live evidence.
+          Three flagship systems surfaced first so engineers can validate architecture, operating
+          constraints, and live evidence without digging through the rest of the site.
         </p>
 
         <div className="grid gap-5 lg:grid-cols-3">

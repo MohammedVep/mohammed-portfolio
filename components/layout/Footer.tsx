@@ -4,10 +4,9 @@ const quickLinks = [
   { href: "/#featured-systems", label: "Flagship Systems" },
   { href: "/#projects", label: "Core Infrastructure" },
   { href: "/#runbooks", label: "Architecture and Runbooks" },
-  { href: "/#recruiter-index", label: "Recruiter Index" },
-  { href: "/#improvements", label: "Latest Improvements" },
   { href: "/blog", label: "Engineering Blog" },
-  { href: "/#role-fit", label: "Role Fit Brief" },
+  { href: "/#skills", label: "Technical Skills" },
+  { href: "/#improvements", label: "Recent Updates" },
 ];
 
 const Footer = () => {
@@ -68,8 +67,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-neutral-900 pt-5 text-xs text-neutral-500">
-          &copy; {new Date().getFullYear()} {profileData.name}. Built for recruiter-first technical
-          validation.
+          &copy; {new Date().getFullYear()} {profileData.name}. Built to surface live systems,
+          architecture decisions, and incident-style engineering writing.
         </div>
       </div>
     </footer>

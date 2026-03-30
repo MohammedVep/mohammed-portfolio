@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
       evidence: [
         "Execution pipeline stabilized after queue-worker decoupling and bounded retry controls.",
         "Fargate Spot worker pools reduced asynchronous compute cost by 70% in burst validation runs.",
-        "DLQ replay automation achieved 100% payload recovery during simulated partition events.",
+        "DLQ replay automation achieved 100% payload recovery during staged partition drills.",
         "Worker-level isolation prevented one heavy job class from starving unrelated requests.",
       ],
     },
@@ -114,7 +114,7 @@ export const blogPosts: BlogPost[] = [
     businessImpact: [
       "Improved platform reliability under burst load by isolating user-facing and execution-facing concerns.",
       "Reduced operational risk from untrusted workloads through bounded runtime controls.",
-      "Created an architecture recruiters and interviewers can validate through live endpoints + system design docs.",
+      "Created an architecture that can be validated directly through live endpoints and system design docs.",
     ],
     links: [
       ...(cloudCodeExecution.liveUrl
@@ -248,7 +248,7 @@ export const blogPosts: BlogPost[] = [
       breakingPoint:
         "Naive incident triggering generated duplicate notifications and noisy state churn for short-lived failures.",
       evidence: [
-        "PgBouncer connection pooling prevented Postgres exhaustion during simulated 10,000+ concurrent regional writes.",
+        "PgBouncer connection pooling prevented Postgres exhaustion during 10,000+ concurrent regional write load tests.",
         "mTLS enforcement secured regional checker communication with zero-trust service identity.",
         "P95 check-to-dashboard update latency held under 45ms in staged validation runs.",
         "Incident lifecycle became auditable from detection through resolution.",

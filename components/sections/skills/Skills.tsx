@@ -37,7 +37,7 @@ const arsenal = [
     group: "Data & Web Platforms",
     items: [
       { name: "PostgreSQL / MySQL", level: "ACTIVE", note: "Relational data modeling and persistence." },
-      { name: "React / Next.js", level: "ACTIVE", note: "Dashboard and recruiter-facing web interfaces." },
+      { name: "React / Next.js", level: "ACTIVE", note: "Dashboards and technical web interfaces." },
       { name: "REST / WebSocket APIs", level: "ACTIVE", note: "Realtime and request-response service integration." },
       { name: "Supabase", level: "PROJECT", note: "Rapid full-stack data and auth integration." },
       { name: "Angular", level: "PROJECT", note: "Capstone implementation for complex user workflows." },
@@ -57,7 +57,7 @@ export default function Skills() {
           <div className="mb-12 text-center">
             <h2 className="mb-3 text-3xl font-bold tracking-tight text-white">Technical Skills</h2>
             <p className="text-xs font-mono uppercase tracking-[0.4em] text-emerald-500">
-              Recruiter_Ready_Skill_Map
+              Systems_Stack_Map
             </p>
           </div>
           <div className="grid gap-8 lg:grid-cols-4">

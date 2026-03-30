@@ -44,7 +44,7 @@ export const projectsData: PortfolioProject[] = [
       "mTLS regional checkers -> queue -> monitoring engine -> PgBouncer + Postgres/Redis -> status dashboard + incident lifecycle.",
     metrics: "PgBouncer + mTLS | 10k+ Regional Write Spike Validation",
     impactMetrics: [
-      "Implemented PgBouncer for advanced PostgreSQL connection pooling, preventing database connection exhaustion during simulated spikes of 10,000+ concurrent regional worker writes.",
+      "Implemented PgBouncer for advanced PostgreSQL connection pooling, preventing database connection exhaustion during 10,000+ concurrent regional worker write load tests.",
       "Enforced Zero-Trust architecture by establishing Mutual TLS (mTLS) encryption between distributed regional checkers and the centralized monitoring engine.",
       "P95 check-to-dashboard update latency maintained strictly under 45ms during aggressive JMeter staging validation runs.",
     ],
@@ -68,7 +68,7 @@ export const projectsData: PortfolioProject[] = [
       "Alert pipelines avoid duplicate notifications for the same incident window.",
     ],
     highlights: [
-      "Shipped a production deployment and public source code for recruiter and interviewer review.",
+      "Shipped a production deployment and public source code for external technical review.",
       "Implemented status dashboards that let users track service health over time instead of isolated check events.",
       "Designed alert flow with retry/debounce behavior to reduce noisy false alarms.",
     ],
@@ -79,12 +79,12 @@ export const projectsData: PortfolioProject[] = [
     ],
     productionCapabilities: [
       "Tenant-aware authentication and onboarding via Cognito registration + login.",
-      "Public demo-safe read-only API mode for recruiter review without privileged credentials.",
+      "Public demo-safe read-only API mode for external review without privileged credentials.",
       "Multi-region probe workflow with incident lifecycle and alert deduplication controls.",
     ],
     recentUpdates: [
       "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
-      "Introduced public read-only demo API mode so recruiters can evaluate functionality without tenant credentials.",
+      "Introduced public read-only demo API mode so external reviewers can evaluate functionality without tenant credentials.",
       "Expanded integration test + deployment workflows for stronger end-to-end operational confidence.",
     ],
     liveUrl: profileData.netPulseLiveUrl,
@@ -111,7 +111,7 @@ export const projectsData: PortfolioProject[] = [
     impactMetrics: [
       "Search latency improved by ~90% after SQL query and indexing optimization.",
       "Maintained responsive interaction across mobile and desktop breakpoints.",
-      "Published a live deployment for recruiter/interviewer walk-throughs.",
+      "Published a live deployment for external technical walk-throughs.",
     ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     hardProblem:
@@ -143,7 +143,7 @@ export const projectsData: PortfolioProject[] = [
     productionCapabilities: [
       "Responsive multi-device UX with authenticated user workflows.",
       "SQL-backed persistence with query optimization and indexing strategy.",
-      "Live deployment availability for external recruiter/interviewer validation.",
+      "Live deployment availability for external technical validation.",
     ],
     recentUpdates: [
       "Published a live deployment link to make academic project outcomes directly reviewable.",
@@ -166,7 +166,7 @@ export const projectsData: PortfolioProject[] = [
     metrics: "Fargate Spot FinOps + DLQ Recovery | 15k+ Req/Min Burst Tests",
     impactMetrics: [
       "Architected a highly elastic worker pool utilizing AWS Fargate Spot instances via Terraform, reducing distributed compute costs by 70% for asynchronous payload processing.",
-      "Engineered a self-healing queue ecosystem using Redis Dead Letter Queues (DLQ) and AWS EventBridge cron triggers, achieving 100% payload recovery during simulated network partitions.",
+      "Engineered a self-healing queue ecosystem using Redis Dead Letter Queues (DLQ) and AWS EventBridge cron triggers, achieving 100% payload recovery during staged network partition drills.",
       "Tuned Node.js V8 garbage collection and libuv thread-pool sizing to prevent memory leaks during sustained 15,000+ req/min payload spikes.",
     ],
     tags: ["Node.js", "AWS Fargate", "EventBridge", "Terraform (IaC)", "FinOps"],
@@ -257,7 +257,7 @@ export const projectsData: PortfolioProject[] = [
     behavioralSignals: [
       "Implemented reliability controls before adding feature complexity.",
       "Documented stream-processing tradeoffs around freshness and consistency.",
-      "Built recruiter-visible observability signals for operational credibility.",
+      "Built public observability signals for operational credibility.",
     ],
     productionCapabilities: [
       "Event-time ordering + idempotency dedupe for resilient streaming semantics.",
@@ -316,7 +316,7 @@ export const projectsData: PortfolioProject[] = [
     highlights: [
       "Implemented three routing strategies with runtime switch support.",
       "Added circuit breaker, active health checks, graceful draining, and failover mechanics.",
-      "Exposed control plane + Prometheus-style metrics for recruiter-visible operations evidence.",
+      "Exposed control plane + Prometheus-style metrics for public operations evidence.",
     ],
     behavioralSignals: [
       "Designed bounded retry logic to avoid runaway failure loops.",
@@ -331,7 +331,7 @@ export const projectsData: PortfolioProject[] = [
     recentUpdates: [
       "Built core engine with round robin, least connections, and consistent hashing selection modes.",
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
-      "Added Consul service-discovery integration and recruiter-facing dashboard/control surface.",
+      "Added Consul service-discovery integration and operator-facing dashboard/control surface.",
     ],
     liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
     repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
@@ -384,7 +384,7 @@ export const projectsData: PortfolioProject[] = [
       "Exposed route quality metrics for latency, hops, cost, and drop-rate interpretation.",
     ],
     behavioralSignals: [
-      "Translated algorithm-heavy concepts into recruiter-friendly visuals.",
+      "Translated algorithm-heavy concepts into accessible technical visuals.",
       "Documented tradeoffs between runtime efficiency and simulation fidelity.",
       "Maintained deterministic outputs for repeatable demonstrations.",
     ],
@@ -396,7 +396,7 @@ export const projectsData: PortfolioProject[] = [
     recentUpdates: [
       "Initial release of telecom network routing visualizer with core graph/routing primitives.",
       "Added dynamic congestion weighting and real-time route heat-style feedback.",
-      "Expanded metrics surface for recruiter-readable network decision tradeoffs.",
+      "Expanded metrics surface for clearer network decision tradeoffs.",
     ],
     liveUrl: "https://d1zwy02em6289x.cloudfront.net",
     repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",

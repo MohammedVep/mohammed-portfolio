@@ -8,10 +8,8 @@ const navLinks = [
   { href: "/#featured-systems", label: "Flagship" },
   { href: "/#projects", label: "Projects" },
   { href: "/#runbooks", label: "Runbooks" },
-  { href: "/#recruiter-index", label: "Recruiter Index" },
-  { href: "/#improvements", label: "Improvements" },
   { href: "/blog", label: "Blog" },
-  { href: "/#role-fit", label: "Role Fit" },
+  { href: "/#skills", label: "Skills" },
   { href: "/#contact", label: "Contact" },
 ];
 

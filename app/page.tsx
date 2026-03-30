@@ -7,8 +7,6 @@ import FeaturedSystems from "@/components/sections/featured-systems/FeaturedSyst
 import Hero from "@/components/sections/hero/Hero";
 import LatestImprovements from "@/components/sections/latest-improvements/LatestImprovements";
 import Projects from "@/components/sections/projects/Projects";
-import RecruiterIndex from "@/components/sections/recruiter-index/RecruiterIndex";
-import RoleFit from "@/components/sections/role-fit/RoleFit";
 import Runbooks from "@/components/sections/runbooks/Runbooks";
 import Skills from "@/components/sections/skills/Skills";
 
@@ -17,12 +15,10 @@ export default function Home() {
     <>
       <Hero />
       <FeaturedSystems />
-      <RecruiterIndex />
-      <LatestImprovements />
-      <Projects />
       <Runbooks />
       <BlogPreview />
-      <RoleFit />
+      <Projects />
+      <LatestImprovements />
       <Skills />
       <Experience />
       <Education />

@@ -43,8 +43,8 @@ export default function SREDashboardPage() {
         <section className="mb-6 rounded-xl border border-red-500/30 bg-red-500/5 p-5 font-mono">
           <p className="text-xs uppercase tracking-[0.3em] text-red-300">Internal Preview Workspace</p>
           <p className="mt-3 text-sm leading-relaxed text-neutral-200">
-            This workspace is used for scaling and recovery instrumentation review while public-facing
-            recruiter links stay focused on completed production systems.
+            This workspace is used for scaling and recovery instrumentation review while the main
+            portfolio stays focused on completed production systems.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {cloudExecution?.liveUrl ? (

@@ -30,8 +30,8 @@ export const latestImprovements: Improvement[] = [
   },
   {
     id: "live-app-cta",
-    title: "Live Portfolio Apps in Contact",
-    scope: "Recruiter Experience",
+    title: "Live Portfolio Apps Centralized",
+    scope: "Access Paths",
     detail:
       "Contact section now includes direct live links for NetPulse, Cloud Code Execution, Transit Telemetry, and Mini Load Balancer.",
     proofHref: "/#contact",
@@ -47,12 +47,12 @@ export const latestImprovements: Improvement[] = [
     proofLabel: "View Flagship Systems",
   },
   {
-    id: "role-fit-upgrade",
-    title: "Role Fit Alignment Hardened",
-    scope: "Application Readiness",
+    id: "runbooks-elevated",
+    title: "Runbooks Elevated in Homepage Flow",
+    scope: "Narrative Structure",
     detail:
-      "Role Fit and recruiter templates now map directly to infra-focused signals and leadership-principle style outcomes.",
-    proofHref: "/#role-fit",
-    proofLabel: "Open Role Fit",
+      "Architecture runbooks and incident-style writing now sit near the top of the homepage to keep the portfolio centered on engineering proof.",
+    proofHref: "/#runbooks",
+    proofLabel: "Open Runbooks",
   },
 ];

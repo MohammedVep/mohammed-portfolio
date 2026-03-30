@@ -30,7 +30,6 @@ export default function Hero() {
   ];
 
   const [telemetry, setTelemetry] = useState(baseTelemetry);
-  const systemDesignBriefMailto = `mailto:${profileData.email}?subject=System%20Design%20Brief%20Request&body=Hi%20Mohammed%2C%0A%0AI%20reviewed%20your%20portfolio%20and%20would%20like%20a%20system%20design%20brief%20for%20a%20specific%20project.%0A%0AProject%3A%20%0ARole%3A%20%0ACompany%3A%20`;
 
   const heroItems = [
     {
@@ -62,12 +61,10 @@ export default function Hero() {
               View Flagship Systems
             </a>
             <a
-              href={profileData.aiRoleFitLiveUrl}
-              target="_blank"
-              rel="noreferrer"
+              href="/#runbooks"
               className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/50 hover:text-emerald-200"
             >
-              AI Live Demo
+              View Runbooks
             </a>
           </div>
         </div>
@@ -148,16 +145,16 @@ export default function Hero() {
             View GitHub
           </a>
           <a
-            href={systemDesignBriefMailto}
+            href="/#runbooks"
             className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
           >
-            Request System Design Brief
+            View Runbooks
           </a>
           <a
             href="/blog"
             className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
           >
-            Read Engineering Blog
+            Read Post-Mortems
           </a>
         </div>
         <Bento items={heroItems} />

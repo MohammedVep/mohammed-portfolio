@@ -357,7 +357,7 @@ export default function Projects() {
         <p className="mx-auto mb-6 max-w-3xl text-center text-sm text-neutral-300">
           Core infrastructure systems and reliability engineering projects. All systems are
           provisioned via Infrastructure as Code (Terraform), instrumented with deep observability
-          pipelines, and rigorously tested through chaos simulations and load validation.
+          pipelines, and rigorously tested through chaos drills and load validation.
         </p>
         <div className="mx-auto mb-10 max-w-4xl rounded-xl border border-neutral-800 bg-neutral-950 p-5 font-mono text-sm text-neutral-300">
           <p className="mb-2 text-xs uppercase tracking-[0.3em] text-amber-300">
