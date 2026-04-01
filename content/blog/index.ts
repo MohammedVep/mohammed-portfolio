@@ -35,6 +35,7 @@ export type BlogPost = {
     solution: string;
     tradeoffs: string[];
   };
+  alternatives?: string[];
   businessImpact: string[];
   links: PostLink[];
 };
@@ -51,8 +52,99 @@ const netPulse = getProject("netpulse");
 const cloudCodeExecution = getProject("cloud-code-execution");
 const miniLoadBalancer = getProject("mini-load-balancer");
 const transitTelemetry = getProject("realtime-transit-telemetry");
+const aiGateway = getProject("ai-job-match-analysis");
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "app-runner-to-ecs-migration-notes",
+    title: "Migrating from AWS App Runner to ECS: Why I Split the AI Gateway and Go Load Balancer by Workload Fit",
+    summary:
+      "Why App Runner was useful for first delivery, where it stopped fitting these workloads, how I moved the AI gateway to ECS Express Mode and the Go load balancer to regular ECS, and which AWS alternatives remained viable.",
+    publishedAt: "2026-04-01",
+    readTimeMinutes: 11,
+    targetCompanies: ["Amazon", "Canonical", "Veeva", "Stripe"],
+    tags: ["AWS", "ECS", "App Runner", "Migration", "Go", "LLM Systems", "Platform Engineering"],
+    hook: {
+      problem:
+        "AWS App Runner got both services live quickly, but the Go load balancer and AI gateway eventually needed different kinds of control over deployment behavior, ingress, warm-state handling, and runtime inspection than the managed platform exposed.",
+      stakes:
+        "Once the deployment platform fights the workload shape, delivery speed turns into operational drag: debugging slows down, routing behavior is harder to reason about, and one generic hosting model stops fitting very different services.",
+    },
+    architecture: {
+      summary:
+        "Both services moved off App Runner, but not to the same target. The AI gateway moved to ECS Express Mode for a lighter managed path, while the Go load balancer moved to regular ECS for deeper service and networking control.",
+      diagram: `graph LR
+  Users[Users / Reviewers]-->DNS[Custom Domains]
+  DNS-->Mini[miniloadbalancer.io]
+  DNS-->AI[sharedaigateway.com]
+  Mini-->MiniIngress[ALB + Regular ECS]
+  AI-->AIIngress[ECS Express Mode Service]
+  MiniIngress-->GoLB[Go Load Balancer]
+  GoLB-->Consul[Consul + Backend Pool]
+  GoLB-->Metrics[Prometheus / Grafana]
+  AIIngress-->AIGateway[AI Gateway Service]
+  AIGateway-->Retriever[Evidence Retrieval]
+  AIGateway-->LLM[Prompt Orchestration / LLM]`,
+      components: [
+        "Custom domains for public cutover and stable reviewer-facing access",
+        "AI gateway on ECS Express Mode for lighter managed service behavior",
+        "Mini load balancer on regular ECS for deeper networking and rollout control",
+        "Ingress and service behavior made more explicit than App Runner defaults",
+        "Independent deployment models chosen based on workload shape rather than one platform for everything",
+      ],
+    },
+    stressTest: {
+      setup:
+        "I compared the original App Runner deployments against requirements that needed different levels of ingress, rollout, routing, and warm-path control.",
+      breakingPoint:
+        "App Runner accelerated first launch, but it became an awkward fit once the proxy-heavy workload needed regular ECS-level service control and the AI workload needed a middle ground between App Runner simplicity and fully hand-tuned orchestration.",
+      evidence: [
+        "The mini load balancer now serves traffic through miniloadbalancer.io on a regular ECS service path with retained control-plane and metrics visibility.",
+        "The AI gateway now serves traffic through sharedaigateway.com on an ECS Express Mode service path with a lighter managed footprint than regular ECS.",
+        "Splitting the target platform by workload removed the one-size-fits-all friction of keeping both services on App Runner.",
+        "The migration increased deployment/orchestration ownership, but made service behavior more explicit and workload-appropriate.",
+      ],
+    },
+    bottleneckResolution: {
+      rootCause:
+        "App Runner was a strong speed-to-first-deploy choice, but these workloads no longer matched one managed runtime profile: the load balancer wanted regular ECS-level control, while the AI gateway wanted more flexibility than App Runner without taking on the full operational surface of the load balancer stack.",
+      solution:
+        "I moved both services to ECS, but chose different deployment modes by workload. The AI gateway moved to ECS Express Mode for a lighter managed path, while the load balancer moved to regular ECS so routing, ingress, and rollout behavior could be tuned more directly.",
+      tradeoffs: [
+        "Regular ECS adds task definitions, service orchestration, and deeper deployment surface area compared with App Runner.",
+        "ECS Express Mode keeps more convenience than regular ECS, but does not replace the need for regular ECS when a service needs heavier networking control.",
+        "This is a workload-fit decision, not a blanket rule that every service should leave App Runner.",
+      ],
+    },
+    alternatives: [
+      "Stay on App Runner for straightforward HTTP services where fast deploys matter more than deep process or networking control.",
+      "Move to ECS Express Mode for services that need more flexibility than App Runner without the full operational surface of regular ECS.",
+      "Use regular ECS when the workload needs more explicit service, ingress, and rollout behavior, especially for networking-heavy services.",
+      "Use Elastic Beanstalk for classic web app deployment when a higher-level managed path is still acceptable.",
+      "Use Lambda + API Gateway for bursty request-response workloads that do not need long-lived proxy behavior or warm-path tuning.",
+    ],
+    businessImpact: [
+      "Matched the deployment model to the workload shape instead of forcing both services through the same managed runtime.",
+      "Improved operational control for the networking-heavy load balancer while keeping a lighter managed posture for the AI gateway.",
+      "Created clearer future scaling options because App Runner, ECS Express Mode, and regular ECS are now treated as deliberate workload-fit choices rather than interchangeable defaults.",
+    ],
+    links: [
+      ...(miniLoadBalancer.liveUrl
+        ? [{ label: "Mini Load Balancer Live", url: miniLoadBalancer.liveUrl }]
+        : []),
+      ...(miniLoadBalancer.repoUrl
+        ? [{ label: "Mini Load Balancer Repo", url: miniLoadBalancer.repoUrl }]
+        : []),
+      ...(miniLoadBalancer.systemDesignUrl
+        ? [{ label: "Mini Load Balancer System Design", url: miniLoadBalancer.systemDesignUrl }]
+        : []),
+      ...(aiGateway.liveUrl ? [{ label: "Shared AI Gateway Live", url: aiGateway.liveUrl }] : []),
+      ...(aiGateway.repoUrl ? [{ label: "Shared AI Gateway Repo", url: aiGateway.repoUrl }] : []),
+      ...(aiGateway.systemDesignUrl
+        ? [{ label: "Shared AI Gateway System Design", url: aiGateway.systemDesignUrl }]
+        : []),
+    ],
+  },
   {
     slug: "queue-first-cloud-code-execution",
     title: "Queue-First Cloud Code Execution: Preventing Worker Starvation Under Burst Load",

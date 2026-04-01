@@ -279,18 +279,18 @@ export const projectsData: PortfolioProject[] = [
     title: "Mini Load Balancer (Go)",
     projectType: "Distributed Systems & Cloud APIs",
     description:
-      "Deep-profiled Go load balancer with dynamic discovery, observability pipeline integration, and high-throughput failover control.",
+      "Regular ECS-hosted Go load balancer migrated off AWS App Runner to gain direct control over proxy behavior, service rollout, and networking diagnostics.",
     whyItMatters:
-      "Demonstrates infrastructure-level performance tuning where routing logic is backed by runtime profiling, service discovery, and production observability.",
+      "Shows when a networking-heavy service outgrows App Runner and needs regular ECS service-level control for proxying, health management, and deployment behavior.",
     architectureSummary:
-      "Client traffic -> Go proxy + concurrency scheduler -> Consul discovery and health model -> backend pool -> Prometheus/Grafana telemetry.",
-    metrics: "Go pprof + Consul Discovery | Prometheus/Grafana Observability",
+      "miniloadbalancer.io -> ALB/TLS ingress -> regular ECS service running Go proxy + control plane -> Consul discovery -> backend pool -> Prometheus/Grafana telemetry.",
+    metrics: "App Runner -> Regular ECS | Go pprof + Consul | Prometheus/Grafana",
     impactMetrics: [
+      "Migrated the service from AWS App Runner to regular ECS so service rollout policy, health-probe cadence, task behavior, and ingress wiring could be controlled directly.",
       "Conducted deep runtime profiling using Go pprof to identify and eliminate memory allocation bottlenecks, optimizing goroutine scheduling for high-throughput TCP proxying.",
-      "Integrated dynamic service discovery via Consul, enabling zero-downtime backend node registration and sub-second health-aware failover.",
-      "Exported real-time routing metrics (active connections, 5xx error rates) to a Prometheus and Grafana observability pipeline.",
+      "Integrated dynamic service discovery via Consul, enabling zero-downtime backend node registration, sub-second health-aware failover, and ECS-backed routing introspection.",
     ],
-    tags: ["Go", "Consul", "Prometheus", "Grafana", "pprof"],
+    tags: ["AWS ECS", "Go", "Consul", "Prometheus", "Grafana", "pprof"],
     hardProblem:
       "Route traffic predictably under backend failure while minimizing flapping, maintaining idempotent retry behavior, and preserving operational insight.",
     architecture: `graph LR
@@ -307,6 +307,7 @@ export const projectsData: PortfolioProject[] = [
       "Consistent hashing improves stickiness and cache locality, but can create uneven load if key distribution is skewed.",
       "Aggressive health probing catches failures quickly, but risks false flaps without hysteresis thresholds.",
       "Retry with failover improves success rates, but must stay bounded to avoid amplifying tail latency.",
+      "Regular ECS restores deeper service and networking control, but adds task definitions, deployment orchestration, and load balancer/service wiring overhead.",
     ],
     invariants: [
       "Only healthy backends receive routed traffic unless explicitly in drain-aware transition.",
@@ -316,29 +317,34 @@ export const projectsData: PortfolioProject[] = [
     highlights: [
       "Implemented three routing strategies with runtime switch support.",
       "Added circuit breaker, active health checks, graceful draining, and failover mechanics.",
-      "Exposed control plane + Prometheus-style metrics for public operations evidence.",
+      "Cut over the public deployment to miniloadbalancer.io on a regular ECS-backed runtime with public operations evidence.",
     ],
     behavioralSignals: [
       "Designed bounded retry logic to avoid runaway failure loops.",
       "Added graceful draining and hysteresis to reduce operational flapping.",
       "Prioritized introspection endpoints for easier incident investigation.",
+      "Accepted more orchestration ownership when the workload demanded lower-level control than App Runner exposed.",
     ],
     productionCapabilities: [
       "Multiple runtime-selectable balancing strategies with control-plane visibility.",
       "Health-aware failover with hysteresis and graceful draining for safer lifecycle transitions.",
-      "Operational telemetry endpoints with deployment-ready containerization and infrastructure automation scripts.",
+      "Regular ECS runtime with explicit service deployment policy, ingress control, and operator-visible telemetry endpoints.",
     ],
     recentUpdates: [
-      "Built core engine with round robin, least connections, and consistent hashing selection modes.",
+      "Migrated the public deployment from AWS App Runner to regular ECS and cut over the live endpoint to miniloadbalancer.io.",
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
       "Added Consul service-discovery integration and operator-facing dashboard/control surface.",
     ],
-    liveUrl: "https://42mtnmhqya.us-east-1.awsapprunner.com/",
+    liveUrl: "https://miniloadbalancer.io",
     repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
     additionalLinks: [
       {
         label: "Read Incident Report: OOM Debugging",
         url: "/blog/go-load-balancer-failure-handling",
+      },
+      {
+        label: "Read Migration Deep Dive",
+        url: "/blog/app-runner-to-ecs-migration-notes",
       },
     ],
     systemDesignUrl: "/system-design/mini-load-balancer",
@@ -404,21 +410,21 @@ export const projectsData: PortfolioProject[] = [
   },
   {
     id: "ai-job-match-analysis",
-    title: "AI Job Match Analysis Service",
+    title: "Shared AI Gateway",
     projectType: "Full-Stack Product Engineering",
     description:
-      "Evidence-grounded AI workflow that turns job requirements into structured fit briefs using project metadata, prompt orchestration, and a live web interface.",
+      "ECS Express Mode-hosted AI gateway that turns job requirements into structured fit briefs using project metadata, prompt orchestration, and a public web interface.",
     whyItMatters:
-      "Shows applied AI product engineering without relying on generic chat UX: structured outputs, grounding, and reviewer-visible system behavior are first-class concerns.",
+      "Shows applied AI product engineering plus infrastructure judgment: App Runner was fast for first launch, but ECS Express Mode became a better fit once deployment behavior, ingress policy, and service tuning mattered more.",
     architectureSummary:
-      "Web client -> requirement parser -> project evidence retrieval -> prompt orchestration layer -> LLM response formatter -> fit brief UI.",
-    metrics: "Structured LLM Workflow | Grounded Role Analysis",
+      "sharedaigateway.com -> ingress -> ECS Express Mode service -> requirement parser -> project evidence retrieval -> prompt orchestration -> structured fit brief UI.",
+    metrics: "App Runner -> ECS Express Mode | Structured LLM Workflow",
     impactMetrics: [
+      "Migrated the AI service from AWS App Runner to ECS Express Mode to keep a lighter managed experience while gaining more explicit control over deployment behavior and service tuning.",
       "Converted unstructured job descriptions into normalized requirement signals and evidence-backed summaries for repeatable analysis.",
       "Grounded generated output in project metadata so responses reference concrete systems, system design docs, and shipped artifacts instead of generic claims.",
-      "Published a live deployed interface and source repository to expose prompt orchestration, response formatting, and product UX decisions end to end.",
     ],
-    tags: ["Next.js", "TypeScript", "LLM Integration", "Prompt Orchestration", "Structured Outputs"],
+    tags: ["AWS ECS Express Mode", "Next.js", "TypeScript", "LLM Integration", "Prompt Orchestration", "Structured Outputs"],
     hardProblem:
       "Generate useful role-alignment summaries while keeping outputs grounded in real project evidence and preventing generic or inflated AI responses.",
     architecture: `graph LR
@@ -432,6 +438,7 @@ export const projectsData: PortfolioProject[] = [
       "More aggressive prompt shaping improves consistency but can reduce flexibility for unusual job descriptions.",
       "Evidence grounding improves trust, but requires curated project metadata to avoid thin or repetitive output.",
       "Structured outputs improve readability, but can hide nuance if the scoring schema is too rigid.",
+      "ECS Express Mode keeps more convenience than regular ECS, but still requires clearer service boundaries and deployment discipline than App Runner.",
     ],
     invariants: [
       "Generated summaries remain tied to explicit project evidence instead of free-form unsupported claims.",
@@ -439,7 +446,7 @@ export const projectsData: PortfolioProject[] = [
       "Live UI remains usable without forcing the reviewer through a multi-step workflow.",
     ],
     highlights: [
-      "Built a live AI-backed product rather than a static prompt demo.",
+      "Cut over the public deployment to sharedaigateway.com on an ECS Express Mode service path.",
       "Grounded outputs in concrete portfolio evidence to reduce hallucinated summaries.",
       "Exposed both the deployed app and source repository for technical review.",
     ],
@@ -451,14 +458,20 @@ export const projectsData: PortfolioProject[] = [
     productionCapabilities: [
       "Requirement parsing and evidence retrieval before prompt execution.",
       "Structured response generation designed for consistent skimability.",
-      "Live deployed interface with supporting repository and architecture documentation.",
+      "ECS Express Mode runtime with explicit service configuration, ingress behavior, and architecture documentation.",
     ],
     recentUpdates: [
-      "Repositioned the AI workflow as a supporting portfolio project instead of a primary homepage workflow.",
-      "Kept live deployment and source access while shifting default landing-page alignment into passive summaries.",
+      "Migrated the public deployment from AWS App Runner to ECS Express Mode and cut over the live endpoint to sharedaigateway.com.",
+      "Documented the migration path, why App Runner stopped fitting the workload, and where regular ECS remained the better choice for networking-heavy services.",
     ],
     liveUrl: profileData.aiSystemLiveUrl,
     repoUrl: profileData.aiSystemRepoUrl,
+    additionalLinks: [
+      {
+        label: "Read Migration Deep Dive",
+        url: "/blog/app-runner-to-ecs-migration-notes",
+      },
+    ],
     systemDesignUrl: "/system-design/ai-job-match-analysis",
   },
   {

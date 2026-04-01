@@ -138,6 +138,19 @@ ${post.architecture.diagram}
           </ul>
         </section>
 
+        {post.alternatives?.length ? (
+          <section className="mb-6 rounded-xl border border-violet-500/30 bg-violet-500/5 p-5">
+            <h2 className="text-sm uppercase tracking-[0.3em] text-violet-300">
+              AWS Alternatives Considered
+            </h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-neutral-200">
+              {post.alternatives.map((item, index) => (
+                <li key={`${post.slug}-alternative-${index}`}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         <section className="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-5">
           <h2 className="text-sm uppercase tracking-[0.3em] text-emerald-300">5. Business Impact</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-neutral-200">

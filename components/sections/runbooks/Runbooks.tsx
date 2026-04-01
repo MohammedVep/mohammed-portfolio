@@ -1,5 +1,12 @@
 const runbookItems = [
   {
+    title: "Migration Notes: App Runner to ECS for the AI Gateway and Go Load Balancer",
+    summary:
+      "Why both services outgrew App Runner, why the AI gateway moved to ECS Express Mode while the load balancer moved to regular ECS, and which AWS alternatives remained viable.",
+    href: "/blog/app-runner-to-ecs-migration-notes",
+    label: "Read Migration Notes",
+  },
+  {
     title: "ADR: Fargate Spot and Firecracker Isolation Strategy",
     summary:
       "Why I selected AWS Fargate Spot + isolation-first execution boundaries over EC2 worker fleets for asynchronous payload workloads.",
@@ -34,7 +41,7 @@ export default function Runbooks() {
           economics. This is the evidence layer behind the project metrics.
         </p>
 
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
           {runbookItems.map((item) => (
             <article
               key={item.title}

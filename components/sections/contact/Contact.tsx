@@ -19,7 +19,7 @@ const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
   "realtime-transit-telemetry": "Transit Telemetry",
   "telecom-network-visualizer": "Telecom Visualizer",
   "mini-load-balancer": "Mini Load Balancer",
-  "ai-job-match-analysis": "AI Job Match",
+  "ai-job-match-analysis": "Shared AI Gateway",
 };
 
 export default function Contact() {

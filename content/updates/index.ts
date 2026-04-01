@@ -7,9 +7,18 @@ export type Improvement = {
   proofLabel: string;
 };
 
-export const improvementsUpdatedAt = "March 2026";
+export const improvementsUpdatedAt = "April 2026";
 
 export const latestImprovements: Improvement[] = [
+  {
+    id: "ecs-migration-cutover",
+    title: "ECS Migration Reflected for AI and Load Balancer",
+    scope: "Deployment Architecture",
+    detail:
+      "Shared AI Gateway and Mini Load Balancer now document the App Runner to ECS migration path, public domain cutovers, and why workload fit drove ECS Express Mode for AI versus regular ECS for the load balancer.",
+    proofHref: "/blog/app-runner-to-ecs-migration-notes",
+    proofLabel: "Open Migration Deep Dive",
+  },
   {
     id: "core-infra-order",
     title: "Core Infrastructure Positioned First",

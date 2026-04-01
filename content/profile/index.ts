@@ -10,7 +10,7 @@ export const profileData = {
   netPulseLiveUrl: "https://main.dpl90cw6xnizn.amplifyapp.com",
   netPulseRepoUrl: "https://github.com/MohammedVep/NetPulse",
   sreDashboardUrl: "/sre-dashboard",
-  aiSystemLiveUrl: "https://wvighhwvmf.us-east-1.awsapprunner.com",
+  aiSystemLiveUrl: "https://sharedaigateway.com",
   aiSystemRepoUrl: "https://github.com/MohammedVep/ai-system-shared-ai-platform",
   availability: "Available for on-site, hybrid, or remote roles (EST/EDT).",
   summary:
