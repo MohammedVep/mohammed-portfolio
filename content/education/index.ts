@@ -5,7 +5,7 @@ export const educationData: Education[] = [
     institution: 'Algoma University',
     degree: 'Honours Bachelor of Computer Science',
     date: 'Expected Graduation: 2026',
-    gpa: '87%',
+    gpa: '83.95%',
     honours: true,
   },
   {
