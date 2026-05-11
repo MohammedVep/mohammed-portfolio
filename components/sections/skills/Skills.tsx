@@ -17,11 +17,11 @@ const arsenal = [
   {
     group: "CS Fundamentals",
     items: [
+      { name: "Operating Systems", level: "COMPLETE", note: "Relevant coursework for systems and infrastructure roles." },
+      { name: "Distributed Systems", level: "85%", note: "Coursework aligned with monitoring, queues, and reliability tradeoffs." },
+      { name: "Theory of Computing", level: "COMPLETE", note: "Formal foundations for computation, language, and complexity reasoning." },
       { name: "Data Structures", level: "STRONG", note: "Core interview preparation and project data-modeling decisions." },
       { name: "Algorithms", level: "STRONG", note: "Routing visualizer, graph traversal, and complexity tradeoffs." },
-      { name: "OOP", level: "STRONG", note: "Java-backed design fundamentals and maintainable service boundaries." },
-      { name: "Databases", level: "ACTIVE", note: "SQL schemas, indexes, transactions, and persistence tradeoffs." },
-      { name: "Technical Writing", level: "ACTIVE", note: "Architecture docs, migration notes, and incident-style writeups." },
     ],
   },
   {

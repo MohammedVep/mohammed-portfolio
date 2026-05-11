@@ -8,6 +8,9 @@ export const educationData: Education[] = [
     gpa: '83.95%',
     honours: true,
     coursework: [
+      'Operating Systems',
+      'Distributed Systems (85%)',
+      'Theory of Computing',
       'Data Structures and Algorithms',
       'Object-Oriented Programming',
       'Database Systems',

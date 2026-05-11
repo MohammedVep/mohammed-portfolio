@@ -27,7 +27,7 @@ export default function Hero() {
     {
       title: "CS Fundamentals",
       detail:
-        "Data structures, algorithms, OOP, databases, and discrete math surfaced alongside live systems and architecture docs.",
+        "Operating Systems, Distributed Systems (85%), Theory of Computing, data structures, algorithms, and databases.",
     },
   ];
 
@@ -138,12 +138,12 @@ export default function Hero() {
             5-Second Summary
           </p>
           <p className="mt-3 max-w-4xl text-lg font-semibold leading-relaxed text-white md:text-xl">
-            New-grad backend engineer with Java/Python fundamentals, Toronto-area office availability,
-            and shipped cloud systems covering monitoring, code execution, ECS migration, and load balancing.
+            Backend / Systems Engineer building reliable distributed systems focused on concurrency,
+            failure handling, observability, and scalable backend design.
           </p>
           <p className="mt-2 max-w-4xl text-sm leading-relaxed text-neutral-300">
-            Best fit: enterprise SaaS teams that value strong CS foundations, clear technical writing,
-            and engineers who can reason about reliability and production tradeoffs.
+            Flagship project: NetPulse. Academic foundation includes Operating Systems,
+            Distributed Systems (85%), Theory of Computing, Java, Python, and database systems.
           </p>
         </div>
         <div className="mb-8 grid gap-3 sm:grid-cols-3">
