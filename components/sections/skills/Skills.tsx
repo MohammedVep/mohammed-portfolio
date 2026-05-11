@@ -6,12 +6,22 @@ const arsenal = [
   {
     group: "Languages & Runtime",
     items: [
-      { name: "Go", level: "ACTIVE", note: "Load balancing, concurrency control, and runtime profiling." },
-      { name: "Node.js", level: "ACTIVE", note: "Distributed API services, queue workers, and async processing." },
-      { name: "TypeScript", level: "ACTIVE", note: "Type-safe backend and frontend platform development." },
-      { name: "Python", level: "STRONG", note: "Scripting, logic implementation, and systems tooling support." },
       { name: "Java", level: "STRONG", note: "Backend fundamentals and object-oriented systems design." },
+      { name: "Python", level: "STRONG", note: "Coding challenge preparation, scripting, and systems tooling support." },
+      { name: "TypeScript", level: "ACTIVE", note: "Type-safe backend and frontend platform development." },
+      { name: "Node.js", level: "ACTIVE", note: "Distributed API services, queue workers, and async processing." },
+      { name: "Go", level: "ACTIVE", note: "Load balancing, concurrency control, and runtime profiling." },
       { name: "SQL", level: "ACTIVE", note: "Schema design, indexing, and query optimization." },
+    ],
+  },
+  {
+    group: "CS Fundamentals",
+    items: [
+      { name: "Data Structures", level: "STRONG", note: "Core interview preparation and project data-modeling decisions." },
+      { name: "Algorithms", level: "STRONG", note: "Routing visualizer, graph traversal, and complexity tradeoffs." },
+      { name: "OOP", level: "STRONG", note: "Java-backed design fundamentals and maintainable service boundaries." },
+      { name: "Databases", level: "ACTIVE", note: "SQL schemas, indexes, transactions, and persistence tradeoffs." },
+      { name: "Technical Writing", level: "ACTIVE", note: "Architecture docs, migration notes, and incident-style writeups." },
     ],
   },
   {
@@ -60,7 +70,7 @@ export default function Skills() {
               Systems_Stack_Map
             </p>
           </div>
-          <div className="grid gap-8 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-5">
             {arsenal.map((group, groupIndex) => (
               <MotionDiv
                 key={group.group}

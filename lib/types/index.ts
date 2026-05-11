@@ -11,6 +11,7 @@ export interface Education {
   date: string;
   gpa: string;
   honours: boolean;
+  coursework?: string[];
 }
 
 export interface Project {

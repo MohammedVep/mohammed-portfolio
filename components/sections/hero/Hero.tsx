@@ -12,20 +12,22 @@ export default function Hero() {
   const blogPostCount = blogPostsSorted.length;
   const roleSummaryCards = [
     {
+      title: "Enterprise SaaS New Grad",
+      detail:
+        "BCS 2026, 83.95% GPA, Java/Python/TypeScript foundation, and Toronto-area availability for office-based teams.",
+    },
+    {
       title: "Backend Engineer",
-      detail: "Node.js APIs, queue-worker execution paths, Postgres/Redis persistence, and clear service boundaries.",
+      detail: "Java/Python-ready fundamentals, Node.js APIs, queue-worker execution paths, Postgres/Redis persistence, and clear service boundaries.",
     },
     {
       title: "Platform Engineer",
-      detail: "Terraform-managed cloud topology, ALB/Fargate deployment paths, and infrastructure-first design decisions.",
+      detail: "AWS ECS/Fargate, Terraform-managed topology, ALB deployment paths, and infrastructure-first design decisions.",
     },
     {
-      title: "Infrastructure / SRE",
-      detail: "Monitoring, DLQ recovery, autoscaling guardrails, load validation, and public observability surfaces.",
-    },
-    {
-      title: "New Grad SWE",
-      detail: "B.Sc. Computer Science (2026) with shipped live systems, architecture docs, and incident-style technical writing.",
+      title: "CS Fundamentals",
+      detail:
+        "Data structures, algorithms, OOP, databases, and discrete math surfaced alongside live systems and architecture docs.",
     },
   ];
 
@@ -131,6 +133,19 @@ export default function Hero() {
         <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
           {profileData.location}
         </p>
+        <div className="mb-8 border-l-2 border-emerald-500 bg-neutral-950 px-5 py-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-emerald-400">
+            5-Second Summary
+          </p>
+          <p className="mt-3 max-w-4xl text-lg font-semibold leading-relaxed text-white md:text-xl">
+            New-grad backend engineer with Java/Python fundamentals, Toronto-area office availability,
+            and shipped cloud systems covering monitoring, code execution, ECS migration, and load balancing.
+          </p>
+          <p className="mt-2 max-w-4xl text-sm leading-relaxed text-neutral-300">
+            Best fit: enterprise SaaS teams that value strong CS foundations, clear technical writing,
+            and engineers who can reason about reliability and production tradeoffs.
+          </p>
+        </div>
         <div className="mb-8 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
             <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Live Systems</p>
@@ -147,10 +162,11 @@ export default function Hero() {
         </div>
         <div className="mb-8 rounded-2xl border border-neutral-800 bg-neutral-950 p-5">
           <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-cyan-300">
-            Role Alignment Snapshot
+            Enterprise SaaS Alignment Snapshot
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-300">
-            If someone is scanning for role fit, this is the shortest honest summary of where I add value.
+            Fast scan for new-grad backend and enterprise SaaS teams: fundamentals, office readiness,
+            communication through documentation, and shipped systems.
           </p>
           <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             {roleSummaryCards.map((card) => (

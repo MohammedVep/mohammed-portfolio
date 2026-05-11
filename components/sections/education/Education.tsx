@@ -36,6 +36,23 @@ export default function Education() {
                   </div>
                 )}
               </div>
+              {edu.coursework?.length ? (
+                <div className="mt-5">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                    Relevant Coursework
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {edu.coursework.map((course) => (
+                      <span
+                        key={`${edu.institution}-${course}`}
+                        className="rounded border border-neutral-700 bg-black px-2 py-1 text-[10px] text-neutral-300"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </MotionDiv>
           ))}
         </div>

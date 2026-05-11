@@ -7,6 +7,13 @@ export const educationData: Education[] = [
     date: 'Expected Graduation: 2026',
     gpa: '83.95%',
     honours: true,
+    coursework: [
+      'Data Structures and Algorithms',
+      'Object-Oriented Programming',
+      'Database Systems',
+      'Discrete Mathematics',
+      'Web Application Development',
+    ],
   },
   {
     institution: 'George Brown College',
@@ -14,5 +21,6 @@ export const educationData: Education[] = [
     date: '2022 - 2023',
     gpa: '3.72/4.0',
     honours: true,
+    coursework: ['Java', 'Python', 'SQL', 'Software Design', 'Web Development'],
   },
 ];
