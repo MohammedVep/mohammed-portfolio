@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useState } from "react";
 import { Bento } from "@/components/ui/bento";
 import { blogPostsSorted } from "@/content/blog";
@@ -74,18 +75,18 @@ export default function Hero() {
             </p>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
+            <Link
               href="/#featured-systems"
               className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-400 transition hover:border-emerald-400 hover:text-emerald-300"
             >
               View Flagship Systems
-            </a>
-            <a
+            </Link>
+            <Link
               href="/#runbooks"
               className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/50 hover:text-emerald-200"
             >
               View Runbooks
-            </a>
+            </Link>
           </div>
         </div>
       ),
@@ -196,18 +197,18 @@ export default function Hero() {
           >
             View GitHub
           </a>
-          <a
+          <Link
             href="/#runbooks"
             className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
           >
             View Runbooks
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
           >
             Read Post-Mortems
-          </a>
+          </Link>
         </div>
         <Bento items={heroItems} />
       </div>

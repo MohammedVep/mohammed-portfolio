@@ -192,6 +192,40 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
             <p className="mt-2 text-neutral-300">{project.hardProblem}</p>
           </div>
 
+          {project.implementationNotes ? (
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-300">
+                Build Notes
+              </h4>
+              <div className="mt-2 grid gap-3 md:grid-cols-3">
+                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                    What I Owned
+                  </p>
+                  <p className="mt-2 text-neutral-200">
+                    {project.implementationNotes.ownerSummary}
+                  </p>
+                </div>
+                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                    Hard Lesson
+                  </p>
+                  <p className="mt-2 text-neutral-200">
+                    {project.implementationNotes.hardLesson}
+                  </p>
+                </div>
+                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                    Next Enhancement
+                  </p>
+                  <p className="mt-2 text-neutral-200">
+                    {project.implementationNotes.nextEnhancement}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           {project.liveUrl ||
           project.repoUrl ||
           project.systemDesignUrl ||

@@ -109,6 +109,36 @@ export default async function ProjectSystemDesignPage({ params }: SystemDesignPa
           <p className="text-sm text-neutral-300">{project.hardProblem}</p>
         </section>
 
+        {project.implementationNotes ? (
+          <section className="mb-8 rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-5">
+            <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-cyan-300">
+              Build Notes
+            </h2>
+            <div className="grid gap-3 md:grid-cols-3">
+              <div className="rounded border border-neutral-800 bg-black/40 p-4">
+                <p className="text-xs uppercase tracking-widest text-neutral-500">What I Owned</p>
+                <p className="mt-2 text-sm text-neutral-200">
+                  {project.implementationNotes.ownerSummary}
+                </p>
+              </div>
+              <div className="rounded border border-neutral-800 bg-black/40 p-4">
+                <p className="text-xs uppercase tracking-widest text-neutral-500">Hard Lesson</p>
+                <p className="mt-2 text-sm text-neutral-200">
+                  {project.implementationNotes.hardLesson}
+                </p>
+              </div>
+              <div className="rounded border border-neutral-800 bg-black/40 p-4">
+                <p className="text-xs uppercase tracking-widest text-neutral-500">
+                  Next Enhancement
+                </p>
+                <p className="mt-2 text-sm text-neutral-200">
+                  {project.implementationNotes.nextEnhancement}
+                </p>
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         <section className="mb-8 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
           <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">
             High-Level Architecture

@@ -198,6 +198,40 @@ export default function FeaturedSystems() {
             </div>
           </div>
 
+          {netPulse.implementationNotes ? (
+            <div className="mt-6 border border-neutral-800 bg-black p-4">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+                Build Notes
+              </p>
+              <div className="grid gap-3 md:grid-cols-3">
+                <div className="border border-neutral-900 bg-neutral-950 p-3">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+                    What I Owned
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+                    {netPulse.implementationNotes.ownerSummary}
+                  </p>
+                </div>
+                <div className="border border-neutral-900 bg-neutral-950 p-3">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+                    Hard Lesson
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+                    {netPulse.implementationNotes.hardLesson}
+                  </p>
+                </div>
+                <div className="border border-neutral-900 bg-neutral-950 p-3">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+                    Next Enhancement
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+                    {netPulse.implementationNotes.nextEnhancement}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           <div className="mt-6">
             <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cyan-300">
               Engineering Decisions
@@ -229,83 +263,85 @@ export default function FeaturedSystems() {
           </p>
           <div className="grid gap-5 lg:grid-cols-2">
             {secondaryProjects.map((project) => (
-            <article
-              key={project.id}
-              className="border border-neutral-800 bg-neutral-950 p-5 font-mono"
-            >
-              <p className="text-[10px] uppercase tracking-widest text-cyan-300/90">
-                {project.projectType}
-              </p>
-              <h3 className="mt-2 text-lg font-bold text-neutral-100">{project.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-300">{project.whyItMatters}</p>
-
-              <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
-                {project.productionCapabilities?.slice(0, 3).map((capability, index) => (
-                  <p key={`${project.id}-capability-${index}`}>- {capability}</p>
-                ))}
-              </div>
-
-              <div className="mt-4">
-                <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-emerald-500">
-                  Architecture Snapshot
+              <article
+                key={project.id}
+                className="border border-neutral-800 bg-neutral-950 p-5 font-mono"
+              >
+                <p className="text-[10px] uppercase tracking-widest text-cyan-300/90">
+                  {project.projectType}
                 </p>
-                <pre className="overflow-x-auto rounded border border-neutral-800 bg-black p-3 text-[10px] text-neutral-400">
-                  {architectureSnapshots[project.id as (typeof flagshipIds)[number]]}
-                </pre>
-              </div>
+                <h3 className="mt-2 text-lg font-bold text-neutral-100">{project.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+                  {project.whyItMatters}
+                </p>
 
-              <div className="mt-4 space-y-1 text-[11px] text-neutral-300">
-                {project.impactMetrics.slice(0, 2).map((metric, index) => (
-                  <p key={`${project.id}-metric-${index}`}>- {metric}</p>
-                ))}
-              </div>
+                <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
+                  {project.productionCapabilities?.slice(0, 3).map((capability, index) => (
+                    <p key={`${project.id}-capability-${index}`}>- {capability}</p>
+                  ))}
+                </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded border border-emerald-500/40 px-2 py-1 text-[10px] uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
-                  >
-                    Live Demo
-                  </a>
-                ) : null}
-                {project.repoUrl ? (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-neutral-500 hover:text-neutral-200"
-                  >
-                    GitHub
-                  </a>
-                ) : null}
-                {project.systemDesignUrl ? (
-                  <a
-                    href={project.systemDesignUrl}
-                    className="rounded border border-cyan-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
-                  >
-                    Architecture Deep Dive
-                  </a>
-                ) : null}
-                {project.additionalLinks?.map((link) => (
-                  <a
-                    key={`${project.id}-${link.label}`}
-                    href={link.url}
-                    target={link.url.startsWith("/") ? undefined : "_blank"}
-                    rel={link.url.startsWith("/") ? undefined : "noreferrer"}
-                    className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest transition ${
-                      link.label.toLowerCase().includes("sre")
-                        ? "border-red-500/40 text-red-300 hover:border-red-300 hover:text-red-200"
-                        : "border-amber-400/40 text-amber-300 hover:border-amber-300 hover:text-amber-200"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </article>
+                <div className="mt-4">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-emerald-500">
+                    Architecture Snapshot
+                  </p>
+                  <pre className="overflow-x-auto rounded border border-neutral-800 bg-black p-3 text-[10px] text-neutral-400">
+                    {architectureSnapshots[project.id as (typeof flagshipIds)[number]]}
+                  </pre>
+                </div>
+
+                <div className="mt-4 space-y-1 text-[11px] text-neutral-300">
+                  {project.impactMetrics.slice(0, 2).map((metric, index) => (
+                    <p key={`${project.id}-metric-${index}`}>- {metric}</p>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded border border-emerald-500/40 px-2 py-1 text-[10px] uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300 hover:text-emerald-200"
+                    >
+                      Live Demo
+                    </a>
+                  ) : null}
+                  {project.repoUrl ? (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-neutral-500 hover:text-neutral-200"
+                    >
+                      GitHub
+                    </a>
+                  ) : null}
+                  {project.systemDesignUrl ? (
+                    <a
+                      href={project.systemDesignUrl}
+                      className="rounded border border-cyan-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                    >
+                      Architecture Deep Dive
+                    </a>
+                  ) : null}
+                  {project.additionalLinks?.map((link) => (
+                    <a
+                      key={`${project.id}-${link.label}`}
+                      href={link.url}
+                      target={link.url.startsWith("/") ? undefined : "_blank"}
+                      rel={link.url.startsWith("/") ? undefined : "noreferrer"}
+                      className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest transition ${
+                        link.label.toLowerCase().includes("sre")
+                          ? "border-red-500/40 text-red-300 hover:border-red-300 hover:text-red-200"
+                          : "border-amber-400/40 text-amber-300 hover:border-amber-300 hover:text-amber-200"
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </div>

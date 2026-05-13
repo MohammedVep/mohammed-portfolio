@@ -1,37 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mohammed Vepari Portfolio
 
-## Getting Started
+Next.js portfolio focused on backend, distributed systems, reliability, and project proof-of-work.
 
-First, run the development server:
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validate Before Push
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## Content Editing Map
 
-To learn more about Next.js, take a look at the following resources:
+- `content/projects/index.ts`: primary project data, metrics, links, implementation notes, tradeoffs, and next enhancements.
+- `content/blog/index.ts`: engineering blog posts and runbook-style writing.
+- `content/profile/index.ts`: personal links, contact URLs, and external project URLs.
+- `content/education/index.ts`: education, GPA/percentage, and coursework.
+- `components/sections/featured-systems/FeaturedSystems.tsx`: homepage NetPulse flagship section.
+- `components/sections/projects/Projects.tsx`: project grid and deep-dive modal rendering.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Human Editing Workflow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Update the project facts in `content/projects/index.ts`.
+2. Replace generic claims with concrete first-person build notes.
+3. Add proof links: live demo, repo, system design, screenshot, or blog post.
+4. Run `npm run build`.
+5. Smoke-test the homepage, project modals, and external links.
 
-## Deploy on Vercel
+Use `docs/HUMAN_CONTENT_GUIDE.md` when rewriting the portfolio so the copy stays specific, defensible, and interview-ready.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# mohammed-portfolio
