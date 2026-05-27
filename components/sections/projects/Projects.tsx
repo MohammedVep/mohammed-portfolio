@@ -81,6 +81,11 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
               Update: {project.recentUpdates[0]}
             </p>
           ) : null}
+          {project.phaseImprovements?.length ? (
+            <p className="mt-2 text-[11px] text-cyan-300/90">
+              Roadmap: {project.phaseImprovements.map((item) => item.phase).join(" + ")} improvements documented
+            </p>
+          ) : null}
         </div>
         <div className="mt-4">
           <div className="flex flex-wrap gap-2">
@@ -360,6 +365,46 @@ ${project.architecture}
               <div className="mt-2 space-y-2 rounded border border-amber-500/30 bg-amber-500/5 p-4 text-neutral-200">
                 {project.recentUpdates.map((item, updateIndex) => (
                   <p key={`${project.id}-update-${updateIndex}`}>- {item}</p>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {project.phaseImprovements?.length ? (
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-300">
+                Phase Improvements
+              </h4>
+              <div className="mt-2 grid gap-3 md:grid-cols-2">
+                {project.phaseImprovements.map((item) => (
+                  <article
+                    key={`${project.id}-${item.phase}`}
+                    className="rounded border border-cyan-500/30 bg-cyan-500/5 p-4 text-neutral-200"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+                        {item.phase}
+                      </p>
+                      <span className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-400">
+                        {item.status}
+                      </span>
+                    </div>
+                    <h5 className="mt-2 text-sm font-semibold text-neutral-100">{item.title}</h5>
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-300">{item.summary}</p>
+                    <div className="mt-3 space-y-2 text-sm text-neutral-300">
+                      {item.bullets.map((bullet) => (
+                        <p key={`${project.id}-${item.phase}-${bullet}`}>- {bullet}</p>
+                      ))}
+                    </div>
+                    {item.proofHref && item.proofLabel ? (
+                      <a
+                        href={item.proofHref}
+                        className="mt-4 inline-flex rounded border border-cyan-400/50 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                      >
+                        {item.proofLabel}
+                      </a>
+                    ) : null}
+                  </article>
                 ))}
               </div>
             </div>

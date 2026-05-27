@@ -6,6 +6,7 @@ import { profileData } from "@/content/profile";
 
 const navLinks = [
   { href: "/#featured-systems", label: "Flagship" },
+  { href: "/#system-designs", label: "Design Docs" },
   { href: "/#projects", label: "Projects" },
   { href: "/#runbooks", label: "Runbooks" },
   { href: "/blog", label: "Blog" },

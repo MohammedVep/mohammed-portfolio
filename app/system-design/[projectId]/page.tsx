@@ -209,6 +209,41 @@ ${project.architecture}
           </section>
         ) : null}
 
+        {project.phaseImprovements?.length ? (
+          <section className="mb-8 rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-5">
+            <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-cyan-300">
+              Phase Improvements
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {project.phaseImprovements.map((item) => (
+                <article key={`${project.id}-${item.phase}`} className="rounded border border-neutral-800 bg-black/40 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-xs uppercase tracking-widest text-cyan-300">{item.phase}</p>
+                    <span className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-400">
+                      {item.status}
+                    </span>
+                  </div>
+                  <h3 className="mt-2 text-base font-semibold text-neutral-100">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-300">{item.summary}</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-neutral-200">
+                    {item.bullets.map((bullet) => (
+                      <li key={`${project.id}-${item.phase}-${bullet}`}>{bullet}</li>
+                    ))}
+                  </ul>
+                  {item.proofHref && item.proofLabel ? (
+                    <a
+                      href={item.proofHref}
+                      className="mt-4 inline-flex rounded border border-cyan-400/50 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                    >
+                      {item.proofLabel}
+                    </a>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
           <h2 className="mb-3 text-sm uppercase tracking-[0.3em] text-emerald-400">Outcome Highlights</h2>
           <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-300">

@@ -7,9 +7,27 @@ export type Improvement = {
   proofLabel: string;
 };
 
-export const improvementsUpdatedAt = "April 2026";
+export const improvementsUpdatedAt = "May 2026";
 
 export const latestImprovements: Improvement[] = [
+  {
+    id: "system-design-library",
+    title: "Project System Design Library Added",
+    scope: "Architecture Evidence",
+    detail:
+      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and product/algorithm projects.",
+    proofHref: "/#system-designs",
+    proofLabel: "View Design Docs",
+  },
+  {
+    id: "netpulse-phase-2-3-track",
+    title: "NetPulse Phase 2-3 Track Published",
+    scope: "Flagship Roadmap",
+    detail:
+      "NetPulse now calls out Phase 2 onboarding/demo-access improvements and the Phase 3 real-user evidence plan for public status pages, timestamped uptime summaries, and demo-mode boundaries.",
+    proofHref: "/system-design/netpulse",
+    proofLabel: "Open NetPulse Design",
+  },
   {
     id: "ecs-migration-cutover",
     title: "ECS Migration Reflected for AI and Load Balancer",

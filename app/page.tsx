@@ -9,12 +9,14 @@ import LatestImprovements from "@/components/sections/latest-improvements/Latest
 import Projects from "@/components/sections/projects/Projects";
 import Runbooks from "@/components/sections/runbooks/Runbooks";
 import Skills from "@/components/sections/skills/Skills";
+import SystemDesigns from "@/components/sections/system-designs/SystemDesigns";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <FeaturedSystems />
+      <SystemDesigns />
       <Runbooks />
       <BlogPreview />
       <Projects />

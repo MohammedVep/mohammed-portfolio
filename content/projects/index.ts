@@ -34,6 +34,15 @@ export type PortfolioProject = {
   behavioralSignals?: string[];
   productionCapabilities?: string[];
   recentUpdates?: string[];
+  phaseImprovements?: {
+    phase: string;
+    title: string;
+    status: string;
+    summary: string;
+    bullets: string[];
+    proofHref?: string;
+    proofLabel?: string;
+  }[];
   liveUrl?: string;
   repoUrl?: string;
   systemDesignUrl?: string;
@@ -59,6 +68,7 @@ export const projectsData: PortfolioProject[] = [
       "Implemented PgBouncer for advanced PostgreSQL connection pooling, preventing database connection exhaustion during 10,000+ concurrent regional worker write load tests.",
       "Enforced Zero-Trust architecture by establishing Mutual TLS (mTLS) encryption between distributed regional checkers and the centralized monitoring engine.",
       "P95 check-to-dashboard update latency maintained strictly under 45ms during aggressive JMeter staging validation runs.",
+      "Expanded the product story beyond staged load validation with Phase 2 onboarding/demo-access work and a Phase 3 real-user evidence plan.",
     ],
     tags: ["Next.js", "Node.js", "PostgreSQL", "PgBouncer", "mTLS", "Docker"],
     hardProblem:
@@ -106,6 +116,36 @@ export const projectsData: PortfolioProject[] = [
       "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
       "Introduced public read-only demo API mode so external reviewers can evaluate functionality without tenant credentials.",
       "Expanded integration test + deployment workflows for stronger end-to-end operational confidence.",
+    ],
+    phaseImprovements: [
+      {
+        phase: "Phase 2",
+        title: "Production Onboarding + Reviewer-Safe Demo Access",
+        status: "Implemented",
+        summary:
+          "Strengthened NetPulse from an architecture demo into a reviewable SaaS workflow with Cognito registration, email verification, login, and demo-safe access paths.",
+        bullets: [
+          "Added tenant-aware registration and login flow so the system can be evaluated like a real monitoring product.",
+          "Introduced read-only demo API behavior for external reviewers without exposing privileged user actions.",
+          "Expanded deployment and integration validation around the onboarding and monitoring paths.",
+        ],
+        proofHref: "/system-design/netpulse",
+        proofLabel: "Open NetPulse System Design",
+      },
+      {
+        phase: "Phase 3",
+        title: "Real-User Evidence + Public Status Page Upgrade",
+        status: "Next Build Target",
+        summary:
+          "Moves NetPulse from staged validation language toward verifiable live-product evidence through public status pages, timestamped uptime summaries, and safer demo-mode boundaries.",
+        bullets: [
+          "Expose public status pages that hide private owner data while showing uptime, incidents, and last-check time.",
+          "Keep demo mode isolated so reviewers can inspect behavior without mutating privileged tenant data.",
+          "Differentiate real usage evidence from staged JMeter/load-test validation in portfolio copy.",
+        ],
+        proofHref: "/blog/netpulse-incident-noise-reduction",
+        proofLabel: "Read Incident Writeup",
+      },
     ],
     liveUrl: profileData.netPulseLiveUrl,
     repoUrl: profileData.netPulseRepoUrl,

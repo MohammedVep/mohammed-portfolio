@@ -101,7 +101,8 @@ export default function FeaturedSystems() {
         </h2>
         <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-300">
           NetPulse is the primary proof system on this portfolio. The rest of the projects support
-          the same backend, reliability, and infrastructure story.
+          the same backend, reliability, and infrastructure story, with the current NetPulse
+          roadmap split into Phase 2 onboarding work and Phase 3 real-user evidence.
         </p>
 
         <article className="border border-emerald-500/30 bg-neutral-950 p-5 font-mono md:p-6">
@@ -197,6 +198,43 @@ export default function FeaturedSystems() {
               </div>
             </div>
           </div>
+
+          {netPulse.phaseImprovements?.length ? (
+            <div className="mt-6 border border-cyan-500/30 bg-cyan-500/5 p-4">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cyan-300">
+                NetPulse Phase 2-3 Upgrade Track
+              </p>
+              <div className="grid gap-4 lg:grid-cols-2">
+                {netPulse.phaseImprovements.map((item) => (
+                  <article key={item.phase} className="border border-neutral-800 bg-black p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-300">
+                        {item.phase}
+                      </p>
+                      <span className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-400">
+                        {item.status}
+                      </span>
+                    </div>
+                    <h4 className="mt-2 text-sm font-bold text-neutral-100">{item.title}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-300">{item.summary}</p>
+                    <div className="mt-3 space-y-1 text-[11px] text-neutral-300">
+                      {item.bullets.map((bullet) => (
+                        <p key={`${item.phase}-${bullet}`}>- {bullet}</p>
+                      ))}
+                    </div>
+                    {item.proofHref && item.proofLabel ? (
+                      <a
+                        href={item.proofHref}
+                        className="mt-4 inline-flex rounded border border-cyan-400/40 px-3 py-2 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                      >
+                        {item.proofLabel}
+                      </a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           {netPulse.implementationNotes ? (
             <div className="mt-6 border border-neutral-800 bg-black p-4">
