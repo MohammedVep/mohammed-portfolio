@@ -8,7 +8,6 @@ const liveAppOrder = [
   "netpulse",
   "cloud-code-execution",
   "realtime-transit-telemetry",
-  "telecom-network-visualizer",
   "mini-load-balancer",
   "ai-job-match-analysis",
 ] as const;
@@ -17,7 +16,6 @@ const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
   netpulse: "NetPulse",
   "cloud-code-execution": "Cloud Code Execution",
   "realtime-transit-telemetry": "Transit Telemetry",
-  "telecom-network-visualizer": "Telecom Visualizer",
   "mini-load-balancer": "Mini Load Balancer",
   "ai-job-match-analysis": "Shared AI Gateway",
 };
