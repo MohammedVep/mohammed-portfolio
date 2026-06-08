@@ -1,5 +1,12 @@
 const runbookItems = [
   {
+    title: "Upgrade Log: Portfolio Apps as Production-Style Systems",
+    summary:
+      "How NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash now map to clearer architecture proof and live evidence paths.",
+    href: "/blog/portfolio-production-architecture-upgrades",
+    label: "Read Upgrade Log",
+  },
+  {
     title: "Migration Notes: App Runner to ECS for the AI Gateway and Go Load Balancer",
     summary:
       "Why both services outgrew App Runner, why the AI gateway moved to ECS Express Mode while the load balancer moved to regular ECS, and which AWS alternatives remained viable.",
@@ -41,7 +48,7 @@ export default function Runbooks() {
           economics. This is the evidence layer behind the project metrics.
         </p>
 
-        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
           {runbookItems.map((item) => (
             <article
               key={item.title}

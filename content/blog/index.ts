@@ -49,12 +49,124 @@ const getProject = (id: string) => {
 };
 
 const netPulse = getProject("netpulse");
+const moveYSplash = getProject("moveysplash");
 const cloudCodeExecution = getProject("cloud-code-execution");
 const miniLoadBalancer = getProject("mini-load-balancer");
 const transitTelemetry = getProject("realtime-transit-telemetry");
 const aiGateway = getProject("ai-job-match-analysis");
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "portfolio-production-architecture-upgrades",
+    title: "Portfolio App Upgrade Log: Queues, ECS, Pooling, and Evidence-Grounded AI",
+    summary:
+      "How I upgraded the portfolio apps from isolated demos into reviewable production-style systems with clearer runtime boundaries, system design docs, and live evidence paths.",
+    publishedAt: "2026-06-08",
+    readTimeMinutes: 12,
+    targetCompanies: ["Veeva", "Amazon", "Stripe", "Canonical"],
+    tags: ["System Design", "AWS", "Reliability", "Observability", "Platform Engineering"],
+    hook: {
+      problem:
+        "A portfolio can fail even when the projects are strong if reviewers have to reverse-engineer what changed, which deployment is live, and which claims are staged versus production evidence.",
+      stakes:
+        "The upgrade goal was to make every major app easier to verify: live endpoint, source code, system design, architecture tradeoffs, and an honest distinction between deployed behavior, staged load validation, and next-build targets.",
+    },
+    architecture: {
+      summary:
+        "The portfolio now treats each app as part of one backend and infrastructure story: NetPulse is the flagship monitoring system, while the execution engine, transit telemetry dashboard, load balancer, and AI gateway each prove a different operational capability.",
+      diagram: `graph LR
+  Reviewer[Reviewer / Recruiter]-->Portfolio[Portfolio Homepage]
+  Portfolio-->NetPulse[NetPulse Flagship]
+  Portfolio-->CCEE[Cloud Code Execution API]
+  Portfolio-->Transit[Transit Telemetry Dashboard]
+  Portfolio-->LoadBalancer[Mini Load Balancer]
+  Portfolio-->AI[Shared AI Gateway]
+  Portfolio-->Product[moveYSplash Product Prototype]
+  NetPulse-->NetPulseOps[PgBouncer / mTLS / Incident Lifecycle]
+  CCEE-->ExecutionOps[ALB API / Queue / DLQ / Worker Isolation]
+  Transit-->TransitOps[Event-Time Ordering / Backpressure / WebSocket Push]
+  LoadBalancer-->LBOps[Regular ECS / Consul / pprof / Prometheus]
+  AI-->AIOps[ECS Express Mode / Evidence Retrieval / Structured Output]
+  Product-->ProductOps[Supabase Auth / Indexed Search / Responsive UX]`,
+      components: [
+        "NetPulse stays above the fold as the primary proof system instead of forcing every project to compete equally.",
+        "Each app now exposes a verification path: live demo or API, GitHub repository when available, and a system design page.",
+        "Architecture summaries call out runtime boundaries such as ALB ingress, queue/DLQ lanes, ECS deployment mode, connection pooling, and evidence retrieval.",
+        "Metrics are framed as live behavior, staged validation, or planned evidence so the site avoids implying real-user scale where the proof is still load-test based.",
+        "Removed undeployed projects from the public portfolio to avoid dead-link credibility loss.",
+      ],
+    },
+    stressTest: {
+      setup:
+        "I reviewed the site as a recruiter and technical reviewer would: 5-second hero scan, flagship project scan, live-link verification, system design page check, and blog/runbook evidence check.",
+      breakingPoint:
+        "The old portfolio risk was not a code failure; it was an evidence failure. Strong apps were present, but the reviewer still had to connect deployment changes, architecture decisions, and upgrade history manually.",
+      evidence: [
+        "NetPulse now leads the homepage with queue-based monitoring, PgBouncer pooling, mTLS checker traffic, and incident lifecycle controls.",
+        "Cloud Code Execution is positioned as a live ALB-backed execution API with asynchronous queue/DLQ recovery and worker isolation.",
+        "Mini Load Balancer is separated from App Runner-era language and now explains why regular ECS fits a networking-heavy Go service.",
+        "Shared AI Gateway is framed as an evidence-grounded AI product on ECS Express Mode instead of a generic recruiter gimmick.",
+        "Undeployed or lower-signal projects were removed so reviewers do not encounter stale or irrelevant links.",
+      ],
+    },
+    bottleneckResolution: {
+      rootCause:
+        "The projects had stronger architecture than the narrative showed. Without a single upgrade log and clearer cross-links, the portfolio made reviewers inspect too many cards before understanding the production story.",
+      solution:
+        "I tightened the project copy around workload-fit decisions, added this upgrade log as a central explanation, linked affected project cards back to it, and surfaced the post in the homepage runbooks section.",
+      tradeoffs: [
+        "A stronger narrative improves scan speed, but it must stay defensible; metrics now avoid presenting staged validation as live customer traffic.",
+        "Removing weaker or undeployed projects reduces project count, but increases trust because every remaining card has a cleaner proof path.",
+        "Centralizing the upgrade story helps reviewers, but individual system design pages still need enough detail for technical interview follow-up.",
+      ],
+    },
+    alternatives: [
+      "Keep simple frontend-heavy apps on Vercel, Amplify, S3, or CloudFront when the workload does not require container orchestration.",
+      "Use App Runner for fast first deployment of straightforward HTTP services where managed simplicity is more valuable than lower-level control.",
+      "Use ECS Express Mode for services like the AI gateway that need more service control than App Runner while avoiding the full regular ECS operational surface.",
+      "Use regular ECS for networking-heavy services like the Go load balancer where ingress, rollout, health checks, and runtime diagnostics matter.",
+      "Use Lambda + API Gateway for bursty stateless APIs, but avoid it for long-running proxy behavior or workloads that need stable warm runtime state.",
+    ],
+    businessImpact: [
+      "Reduced reviewer cognitive load by turning several separate app upgrades into one coherent production architecture story.",
+      "Improved credibility by removing undeployed projects and keeping proof links close to project claims.",
+      "Made the portfolio easier to discuss in interviews because each app now maps to a clear engineering decision: pooling, queueing, deployment mode, observability, or evidence grounding.",
+      "Kept the positioning broad enough for backend, infrastructure, platform, and new-grad software engineering roles without over-indexing on a single company or recruiter workflow.",
+    ],
+    links: [
+      ...(netPulse.liveUrl ? [{ label: "NetPulse Live", url: netPulse.liveUrl }] : []),
+      ...(netPulse.repoUrl ? [{ label: "NetPulse Repo", url: netPulse.repoUrl }] : []),
+      ...(netPulse.systemDesignUrl
+        ? [{ label: "NetPulse System Design", url: netPulse.systemDesignUrl }]
+        : []),
+      ...(cloudCodeExecution.liveUrl
+        ? [{ label: "Cloud Code Execution API", url: cloudCodeExecution.liveUrl }]
+        : []),
+      ...(cloudCodeExecution.systemDesignUrl
+        ? [{ label: "Cloud Code Execution Design", url: cloudCodeExecution.systemDesignUrl }]
+        : []),
+      ...(transitTelemetry.liveUrl
+        ? [{ label: "Transit Telemetry Live", url: transitTelemetry.liveUrl }]
+        : []),
+      ...(transitTelemetry.systemDesignUrl
+        ? [{ label: "Transit Telemetry Design", url: transitTelemetry.systemDesignUrl }]
+        : []),
+      ...(miniLoadBalancer.liveUrl
+        ? [{ label: "Mini Load Balancer Live", url: miniLoadBalancer.liveUrl }]
+        : []),
+      ...(miniLoadBalancer.systemDesignUrl
+        ? [{ label: "Mini Load Balancer Design", url: miniLoadBalancer.systemDesignUrl }]
+        : []),
+      ...(aiGateway.liveUrl ? [{ label: "Shared AI Gateway Live", url: aiGateway.liveUrl }] : []),
+      ...(aiGateway.systemDesignUrl
+        ? [{ label: "Shared AI Gateway Design", url: aiGateway.systemDesignUrl }]
+        : []),
+      ...(moveYSplash.liveUrl ? [{ label: "moveYSplash Live", url: moveYSplash.liveUrl }] : []),
+      ...(moveYSplash.systemDesignUrl
+        ? [{ label: "moveYSplash Design", url: moveYSplash.systemDesignUrl }]
+        : []),
+    ],
+  },
   {
     slug: "app-runner-to-ecs-migration-notes",
     title: "Migrating from AWS App Runner to ECS: Why I Split the AI Gateway and Go Load Balancer by Workload Fit",

@@ -116,6 +116,7 @@ export const projectsData: PortfolioProject[] = [
       "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
       "Introduced public read-only demo API mode so external reviewers can evaluate functionality without tenant credentials.",
       "Expanded integration test + deployment workflows for stronger end-to-end operational confidence.",
+      "Linked NetPulse into the cross-project production architecture upgrade log so pooling, mTLS, queueing, and incident lifecycle decisions are easier to verify.",
     ],
     phaseImprovements: [
       {
@@ -151,6 +152,10 @@ export const projectsData: PortfolioProject[] = [
     repoUrl: profileData.netPulseRepoUrl,
     systemDesignUrl: "/system-design/netpulse",
     additionalLinks: [
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
+      },
       {
         label: "Read ADR: Connection Pooling Tradeoffs",
         url: "/blog/netpulse-incident-noise-reduction",
@@ -216,9 +221,16 @@ export const projectsData: PortfolioProject[] = [
     recentUpdates: [
       "Published a live deployment link to make academic project outcomes directly reviewable.",
       "Added a dedicated system design doc page to explain architecture and performance decisions.",
+      "Linked the project into the production upgrade log as the product-facing example: Supabase auth, indexed search, and responsive UX.",
     ],
     liveUrl: "https://move-y-splash-new.vercel.app",
     repoUrl: "https://github.com/MohammedVep/MoveYSplashNew",
+    additionalLinks: [
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
+      },
+    ],
     systemDesignUrl: "/system-design/moveysplash",
   },
   {
@@ -286,11 +298,17 @@ export const projectsData: PortfolioProject[] = [
       "Introduced Terraform-governed dual-endpoint model for control plane and execution API traffic separation.",
       "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
       "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
+      "Clarified the live ALB endpoint as the execution API proof path and documented queue/DLQ recovery in the production upgrade log.",
     ],
     liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
     repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
     systemDesignUrl: "/system-design/cloud-code-execution",
-    additionalLinks: [],
+    additionalLinks: [
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
+      },
+    ],
   },
   {
     id: "realtime-transit-telemetry",
@@ -352,10 +370,17 @@ export const projectsData: PortfolioProject[] = [
       "Added event-time ordering, idempotency dedupe, and late-arrival correction for robust stream semantics.",
       "Introduced adaptive backpressure controls and streaming analytics signal generation for high-throughput conditions.",
       "Expanded operations readiness with CloudWatch alarms/dashboard integration and real-time WebSocket push.",
+      "Added cross-project architecture framing so the dashboard reads as telemetry infrastructure rather than only a visualization project.",
     ],
     liveUrl:
       "http://realtimetransittelemetryst-dashboardbucket5758873d-fjkmwbutvpc8.s3-website-us-east-1.amazonaws.com",
     repoUrl: "https://github.com/MohammedVep/RealTimeTransitTelementry",
+    additionalLinks: [
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
+      },
+    ],
     systemDesignUrl: "/system-design/realtime-transit-telemetry",
   },
   {
@@ -426,6 +451,7 @@ export const projectsData: PortfolioProject[] = [
       "Migrated the public deployment from AWS App Runner to regular ECS and cut over the live endpoint to miniloadbalancer.io.",
       "Added reliability mechanisms including circuit breaker, bounded retries, and health-check hysteresis.",
       "Added Consul service-discovery integration and operator-facing dashboard/control surface.",
+      "Documented the migration as a workload-fit decision: regular ECS for networking-heavy proxy control, not a blanket rejection of App Runner.",
     ],
     liveUrl: "https://miniloadbalancer.io",
     repoUrl: "https://github.com/MohammedVep/mini-load-balancer",
@@ -437,6 +463,10 @@ export const projectsData: PortfolioProject[] = [
       {
         label: "Read Migration Deep Dive",
         url: "/blog/app-runner-to-ecs-migration-notes",
+      },
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
       },
     ],
     systemDesignUrl: "/system-design/mini-load-balancer",
@@ -504,6 +534,7 @@ export const projectsData: PortfolioProject[] = [
     recentUpdates: [
       "Migrated the public deployment from AWS App Runner to ECS Express Mode and cut over the live endpoint to sharedaigateway.com.",
       "Documented the migration path, why App Runner stopped fitting the workload, and where regular ECS remained the better choice for networking-heavy services.",
+      "Reframed the AI feature around evidence retrieval, structured output, and deployment tradeoffs so it reads as product engineering instead of AI bloat.",
     ],
     liveUrl: profileData.aiSystemLiveUrl,
     repoUrl: profileData.aiSystemRepoUrl,
@@ -511,6 +542,10 @@ export const projectsData: PortfolioProject[] = [
       {
         label: "Read Migration Deep Dive",
         url: "/blog/app-runner-to-ecs-migration-notes",
+      },
+      {
+        label: "Read Production Upgrade Log",
+        url: "/blog/portfolio-production-architecture-upgrades",
       },
     ],
     systemDesignUrl: "/system-design/ai-job-match-analysis",

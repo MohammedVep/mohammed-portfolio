@@ -7,15 +7,24 @@ export type Improvement = {
   proofLabel: string;
 };
 
-export const improvementsUpdatedAt = "May 2026";
+export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
+  {
+    id: "portfolio-production-upgrade-log",
+    title: "Production Architecture Upgrade Log Published",
+    scope: "Architecture Evidence",
+    detail:
+      "New blog post explains the latest app upgrades across NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash with proof links and workload-fit tradeoffs.",
+    proofHref: "/blog/portfolio-production-architecture-upgrades",
+    proofLabel: "Read Upgrade Log",
+  },
   {
     id: "system-design-library",
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and product/algorithm projects.",
+      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },
@@ -60,7 +69,7 @@ export const latestImprovements: Improvement[] = [
     title: "Live Portfolio Apps Centralized",
     scope: "Access Paths",
     detail:
-      "Contact section now includes direct live links for NetPulse, Cloud Code Execution, Transit Telemetry, and Mini Load Balancer.",
+      "Contact section now includes direct live links for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, and Shared AI Gateway.",
     proofHref: "/#contact",
     proofLabel: "Open Contact Section",
   },
@@ -69,7 +78,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project Metrics Upgraded",
     scope: "Project Evidence",
     detail:
-      "Project cards now emphasize FinOps, DLQ recovery, PgBouncer/mTLS, and pprof-driven optimization outcomes.",
+      "Project cards now emphasize workload-fit deployment choices, queue/DLQ recovery, PgBouncer/mTLS, event-time telemetry, and pprof-driven optimization outcomes.",
     proofHref: "/#featured-systems",
     proofLabel: "View Flagship Systems",
   },
