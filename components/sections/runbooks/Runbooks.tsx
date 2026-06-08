@@ -2,14 +2,14 @@ const runbookItems = [
   {
     title: "Upgrade Log: Portfolio Apps as Production-Style Systems",
     summary:
-      "How NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash now map to clearer architecture proof and live evidence paths.",
+      "How NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash now map to clearer architecture proof and live evidence paths.",
     href: "/blog/portfolio-production-architecture-upgrades",
     label: "Read Upgrade Log",
   },
   {
-    title: "Migration Notes: App Runner to ECS for the AI Gateway and Go Load Balancer",
+    title: "Migration Notes: App Runner to ECS for AI Gateway Platform and Edge Balancer",
     summary:
-      "Why both services outgrew App Runner, why the AI gateway moved to ECS Express Mode while the load balancer moved to regular ECS, and which AWS alternatives remained viable.",
+      "Why both services outgrew App Runner, why AI Gateway Platform moved to ECS Express Mode while Edge Balancer moved to regular ECS, and which AWS alternatives remained viable.",
     href: "/blog/app-runner-to-ecs-migration-notes",
     label: "Read Migration Notes",
   },

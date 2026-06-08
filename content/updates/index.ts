@@ -15,7 +15,7 @@ export const latestImprovements: Improvement[] = [
     title: "Production Architecture Upgrade Log Published",
     scope: "Architecture Evidence",
     detail:
-      "New blog post explains the latest app upgrades across NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash with proof links and workload-fit tradeoffs.",
+      "New blog post explains the latest app upgrades across NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash with proof links and workload-fit tradeoffs.",
     proofHref: "/blog/portfolio-production-architecture-upgrades",
     proofLabel: "Read Upgrade Log",
   },
@@ -24,7 +24,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, Shared AI Gateway, and moveYSplash.",
+      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },
@@ -39,10 +39,10 @@ export const latestImprovements: Improvement[] = [
   },
   {
     id: "ecs-migration-cutover",
-    title: "ECS Migration Reflected for AI and Load Balancer",
+    title: "ECS Migration Reflected for AI Gateway Platform and Edge Balancer",
     scope: "Deployment Architecture",
     detail:
-      "Shared AI Gateway and Mini Load Balancer now document the App Runner to ECS migration path, public domain cutovers, and why workload fit drove ECS Express Mode for AI versus regular ECS for the load balancer.",
+      "AI Gateway Platform and Edge Balancer now document the App Runner to ECS migration path, public domain cutovers, and why workload fit drove ECS Express Mode for AI Gateway Platform versus regular ECS for Edge Balancer.",
     proofHref: "/blog/app-runner-to-ecs-migration-notes",
     proofLabel: "Open Migration Deep Dive",
   },
@@ -69,7 +69,7 @@ export const latestImprovements: Improvement[] = [
     title: "Live Portfolio Apps Centralized",
     scope: "Access Paths",
     detail:
-      "Contact section now includes direct live links for NetPulse, Cloud Code Execution, Transit Telemetry, Mini Load Balancer, and Shared AI Gateway.",
+      "Contact section now includes direct live links for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
     proofHref: "/#contact",
     proofLabel: "Open Contact Section",
   },

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Use this flow when building any new app feature for NetPulse, Shared AI Gateway, Mini Load Balancer, or the portfolio site.
+Use this flow when building any new app feature for NetPulse, AI Gateway Platform, Edge Balancer, or the portfolio site.
 
 ## Manager-To-Engineer Flow
 

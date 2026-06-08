@@ -1,8 +1,8 @@
-# Build Brief: Mini Load Balancer Failure Replay
+# Build Brief: Edge Balancer Failure Replay
 
 ## Manager Summary
 
-Add a failure replay mode to the Mini Load Balancer so reviewers can observe routing behavior when a backend becomes unhealthy and later recovers.
+Add a failure replay mode to the Edge Balancer so reviewers can observe routing behavior when a backend becomes unhealthy and later recovers.
 
 ## Why This Matters
 
@@ -16,7 +16,7 @@ Load balancer claims are easier to trust when the reviewer can watch failover, r
 
 ## Current Problem
 
-The load balancer has strong concepts, but the proof can be easier to consume if failure behavior is replayable.
+Edge Balancer has strong concepts, but the proof can be easier to consume if failure behavior is replayable.
 
 ## Desired Behavior
 
@@ -70,4 +70,3 @@ route request:
 - Confirm unhealthy backend receives no new traffic after threshold.
 - Confirm recovered backend waits before receiving traffic.
 - Confirm route metrics remain readable on mobile.
-

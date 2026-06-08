@@ -1,4 +1,4 @@
-# Pseudocode: Mini Load Balancer Flow
+# Pseudocode: Edge Balancer Flow
 
 ## Request Routing
 

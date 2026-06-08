@@ -1,4 +1,4 @@
-# Pseudocode: Shared AI Gateway Flow
+# Pseudocode: AI Gateway Platform Flow
 
 ## Requirement Parsing
 

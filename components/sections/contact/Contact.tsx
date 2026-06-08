@@ -14,10 +14,10 @@ const liveAppOrder = [
 
 const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
   netpulse: "NetPulse",
-  "cloud-code-execution": "Cloud Code Execution",
+  "cloud-code-execution": "Cloud Sandbox",
   "realtime-transit-telemetry": "Transit Telemetry",
-  "mini-load-balancer": "Mini Load Balancer",
-  "ai-job-match-analysis": "Shared AI Gateway",
+  "mini-load-balancer": "Edge Balancer",
+  "ai-job-match-analysis": "AI Gateway Platform",
 };
 
 export default function Contact() {

@@ -75,7 +75,7 @@ Add these over time to make the site feel less generated and more owned:
 - Small diagrams you created by hand or from actual architecture.
 - Short notes about bugs you hit during deployment.
 - Commit links for important changes.
-- A short demo video or GIF for NetPulse and the load balancer.
+- A short demo video or GIF for NetPulse and Edge Balancer.
 - Load test command snippets and exact environment assumptions.
 - Real user or real reviewer feedback if you can get it.
 
@@ -112,5 +112,4 @@ Before applying to a role:
 - Remove any claim that sounds stronger than the code proves.
 - Open every live link and repo link.
 - Read the top NetPulse section out loud. If it sounds robotic, rewrite one sentence in your own words.
-- Prepare a 90-second explanation for NetPulse, Cloud Code Execution, and Mini Load Balancer.
-
+- Prepare a 90-second explanation for NetPulse, Cloud Sandbox, and Edge Balancer.

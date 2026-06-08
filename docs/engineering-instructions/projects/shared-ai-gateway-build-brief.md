@@ -1,8 +1,8 @@
-# Build Brief: Shared AI Gateway Evidence Panel
+# Build Brief: AI Gateway Platform Evidence Panel
 
 ## Manager Summary
 
-Enhance Shared AI Gateway with an evidence panel so generated role-fit output shows which portfolio facts, projects, and links were used. The goal is credibility, not AI flashiness.
+Enhance AI Gateway Platform with an evidence panel so generated role-fit output shows which portfolio facts, projects, and links were used. The goal is credibility, not AI flashiness.
 
 ## Why This Matters
 

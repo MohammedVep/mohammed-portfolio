@@ -235,12 +235,12 @@ export const projectsData: PortfolioProject[] = [
   },
   {
     id: "cloud-code-execution",
-    title: "Cloud Code Execution Environment",
+    title: "Cloud Sandbox",
     projectType: "Scaling & Messaging Systems",
     description:
-      "Fault-tolerant asynchronous code execution platform designed for FinOps efficiency, queue resilience, and high-throughput payload processing.",
+      "Fault-tolerant cloud sandbox platform for isolated code execution, queue resilience, and high-throughput payload processing.",
     whyItMatters:
-      "Shows SRE-first backend platform engineering where autoscaling, queue durability, and cost-efficiency are designed as first-class requirements.",
+      "Shows SRE-first backend platform engineering where sandbox isolation, autoscaling, queue durability, and cost-efficiency are first-class requirements.",
     architectureSummary:
       "ALB execution ingress -> queue and DLQ lanes -> Fargate Spot worker pool -> result store -> recovery scheduler via EventBridge.",
     metrics: "Fargate Spot FinOps + DLQ Recovery | 15k+ Req/Min Burst Tests",
@@ -296,7 +296,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     recentUpdates: [
       "Introduced Terraform-governed dual-endpoint model for control plane and execution API traffic separation.",
-      "Expanded engine scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
+      "Expanded Cloud Sandbox scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
       "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
       "Clarified the live ALB endpoint as the execution API proof path and documented queue/DLQ recovery in the production upgrade log.",
     ],
@@ -385,12 +385,12 @@ export const projectsData: PortfolioProject[] = [
   },
   {
     id: "mini-load-balancer",
-    title: "Mini Load Balancer (Go)",
+    title: "Edge Balancer (Go)",
     projectType: "Distributed Systems & Cloud APIs",
     description:
-      "Regular ECS-hosted Go load balancer migrated off AWS App Runner to gain direct control over proxy behavior, service rollout, and networking diagnostics.",
+      "Regular ECS-hosted Go-based Edge Balancer migrated off AWS App Runner to gain direct control over proxy behavior, service rollout, and networking diagnostics.",
     whyItMatters:
-      "Shows when a networking-heavy service outgrows App Runner and needs regular ECS service-level control for proxying, health management, and deployment behavior.",
+      "Shows when an edge-routing service outgrows App Runner and needs regular ECS service-level control for proxying, health management, and deployment behavior.",
     architectureSummary:
       "miniloadbalancer.io -> ALB/TLS ingress -> regular ECS service running Go proxy + control plane -> Consul discovery -> backend pool -> Prometheus/Grafana telemetry.",
     metrics: "App Runner -> Regular ECS | Go pprof + Consul | Prometheus/Grafana",
@@ -403,7 +403,7 @@ export const projectsData: PortfolioProject[] = [
     hardProblem:
       "Route traffic predictably under backend failure while minimizing flapping, maintaining idempotent retry behavior, and preserving operational insight.",
     architecture: `graph LR
-  Client[User Traffic]-->LB[Go Load Balancer]
+  Client[User Traffic]-->LB[Edge Balancer]
   LB-->CP[Control Plane /admin/*]
   LB-->Proxy[Proxy Plane /proxy/*]
   Proxy-->B1[Backend A]
@@ -416,7 +416,7 @@ export const projectsData: PortfolioProject[] = [
       "Consistent hashing improves stickiness and cache locality, but can create uneven load if key distribution is skewed.",
       "Aggressive health probing catches failures quickly, but risks false flaps without hysteresis thresholds.",
       "Retry with failover improves success rates, but must stay bounded to avoid amplifying tail latency.",
-      "Regular ECS restores deeper service and networking control, but adds task definitions, deployment orchestration, and load balancer/service wiring overhead.",
+      "Regular ECS restores deeper service and networking control, but adds task definitions, deployment orchestration, and Edge Balancer service-wiring overhead.",
     ],
     invariants: [
       "Only healthy backends receive routed traffic unless explicitly in drain-aware transition.",
@@ -432,7 +432,7 @@ export const projectsData: PortfolioProject[] = [
       ownerSummary:
         "This is my networking fundamentals project: I wanted a small enough Go service to explain line by line, but realistic enough to discuss health checks, retries, draining, and observability.",
       hardLesson:
-        "The main lesson was that a load balancer is dangerous if failure handling is too aggressive; bounded retries and hysteresis matter because naive retries can amplify an outage.",
+        "The main lesson was that an edge balancer is dangerous if failure handling is too aggressive; bounded retries and hysteresis matter because naive retries can amplify an outage.",
       nextEnhancement:
         "Next I would publish a short traffic replay demo that compares round robin, least connections, and consistent hashing under the same backend failure scenario.",
     },
@@ -473,10 +473,10 @@ export const projectsData: PortfolioProject[] = [
   },
   {
     id: "ai-job-match-analysis",
-    title: "Shared AI Gateway",
+    title: "AI Gateway Platform",
     projectType: "Full-Stack Product Engineering",
     description:
-      "ECS Express Mode-hosted AI gateway that turns job requirements into structured fit briefs using project metadata, prompt orchestration, and a public web interface.",
+      "ECS Express Mode-hosted AI Gateway Platform that turns job requirements into structured fit briefs using project metadata, prompt orchestration, and a public web interface.",
     whyItMatters:
       "Shows applied AI product engineering plus infrastructure judgment: App Runner was fast for first launch, but ECS Express Mode became a better fit once deployment behavior, ingress policy, and service tuning mattered more.",
     architectureSummary:

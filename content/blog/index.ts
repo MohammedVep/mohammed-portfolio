@@ -50,10 +50,10 @@ const getProject = (id: string) => {
 
 const netPulse = getProject("netpulse");
 const moveYSplash = getProject("moveysplash");
-const cloudCodeExecution = getProject("cloud-code-execution");
-const miniLoadBalancer = getProject("mini-load-balancer");
+const cloudSandbox = getProject("cloud-code-execution");
+const edgeBalancer = getProject("mini-load-balancer");
 const transitTelemetry = getProject("realtime-transit-telemetry");
-const aiGateway = getProject("ai-job-match-analysis");
+const aiGatewayPlatform = getProject("ai-job-match-analysis");
 
 export const blogPosts: BlogPost[] = [
   {
@@ -73,14 +73,14 @@ export const blogPosts: BlogPost[] = [
     },
     architecture: {
       summary:
-        "The portfolio now treats each app as part of one backend and infrastructure story: NetPulse is the flagship monitoring system, while the execution engine, transit telemetry dashboard, load balancer, and AI gateway each prove a different operational capability.",
+        "The portfolio now treats each app as part of one backend and infrastructure story: NetPulse is the flagship monitoring system, while Cloud Sandbox, the transit telemetry dashboard, Edge Balancer, and AI Gateway Platform each prove a different operational capability.",
       diagram: `graph LR
   Reviewer[Reviewer / Recruiter]-->Portfolio[Portfolio Homepage]
   Portfolio-->NetPulse[NetPulse Flagship]
-  Portfolio-->CCEE[Cloud Code Execution API]
+  Portfolio-->CCEE[Cloud Sandbox API]
   Portfolio-->Transit[Transit Telemetry Dashboard]
-  Portfolio-->LoadBalancer[Mini Load Balancer]
-  Portfolio-->AI[Shared AI Gateway]
+  Portfolio-->LoadBalancer[Edge Balancer]
+  Portfolio-->AI[AI Gateway Platform]
   Portfolio-->Product[moveYSplash Product Prototype]
   NetPulse-->NetPulseOps[PgBouncer / mTLS / Incident Lifecycle]
   CCEE-->ExecutionOps[ALB API / Queue / DLQ / Worker Isolation]
@@ -103,9 +103,9 @@ export const blogPosts: BlogPost[] = [
         "The old portfolio risk was not a code failure; it was an evidence failure. Strong apps were present, but the reviewer still had to connect deployment changes, architecture decisions, and upgrade history manually.",
       evidence: [
         "NetPulse now leads the homepage with queue-based monitoring, PgBouncer pooling, mTLS checker traffic, and incident lifecycle controls.",
-        "Cloud Code Execution is positioned as a live ALB-backed execution API with asynchronous queue/DLQ recovery and worker isolation.",
-        "Mini Load Balancer is separated from App Runner-era language and now explains why regular ECS fits a networking-heavy Go service.",
-        "Shared AI Gateway is framed as an evidence-grounded AI product on ECS Express Mode instead of a generic recruiter gimmick.",
+        "Cloud Sandbox is positioned as a live ALB-backed execution API with asynchronous queue/DLQ recovery and worker isolation.",
+        "Edge Balancer is separated from App Runner-era language and now explains why regular ECS fits a networking-heavy Go service.",
+        "AI Gateway Platform is framed as an evidence-grounded AI product on ECS Express Mode instead of a generic recruiter gimmick.",
         "Undeployed or lower-signal projects were removed so reviewers do not encounter stale or irrelevant links.",
       ],
     },
@@ -123,8 +123,8 @@ export const blogPosts: BlogPost[] = [
     alternatives: [
       "Keep simple frontend-heavy apps on Vercel, Amplify, S3, or CloudFront when the workload does not require container orchestration.",
       "Use App Runner for fast first deployment of straightforward HTTP services where managed simplicity is more valuable than lower-level control.",
-      "Use ECS Express Mode for services like the AI gateway that need more service control than App Runner while avoiding the full regular ECS operational surface.",
-      "Use regular ECS for networking-heavy services like the Go load balancer where ingress, rollout, health checks, and runtime diagnostics matter.",
+      "Use ECS Express Mode for services like the AI Gateway Platform that need more service control than App Runner while avoiding the full regular ECS operational surface.",
+      "Use regular ECS for networking-heavy services like Edge Balancer where ingress, rollout, health checks, and runtime diagnostics matter.",
       "Use Lambda + API Gateway for bursty stateless APIs, but avoid it for long-running proxy behavior or workloads that need stable warm runtime state.",
     ],
     businessImpact: [
@@ -139,11 +139,11 @@ export const blogPosts: BlogPost[] = [
       ...(netPulse.systemDesignUrl
         ? [{ label: "NetPulse System Design", url: netPulse.systemDesignUrl }]
         : []),
-      ...(cloudCodeExecution.liveUrl
-        ? [{ label: "Cloud Code Execution API", url: cloudCodeExecution.liveUrl }]
+      ...(cloudSandbox.liveUrl
+        ? [{ label: "Cloud Sandbox API", url: cloudSandbox.liveUrl }]
         : []),
-      ...(cloudCodeExecution.systemDesignUrl
-        ? [{ label: "Cloud Code Execution Design", url: cloudCodeExecution.systemDesignUrl }]
+      ...(cloudSandbox.systemDesignUrl
+        ? [{ label: "Cloud Sandbox Design", url: cloudSandbox.systemDesignUrl }]
         : []),
       ...(transitTelemetry.liveUrl
         ? [{ label: "Transit Telemetry Live", url: transitTelemetry.liveUrl }]
@@ -151,15 +151,15 @@ export const blogPosts: BlogPost[] = [
       ...(transitTelemetry.systemDesignUrl
         ? [{ label: "Transit Telemetry Design", url: transitTelemetry.systemDesignUrl }]
         : []),
-      ...(miniLoadBalancer.liveUrl
-        ? [{ label: "Mini Load Balancer Live", url: miniLoadBalancer.liveUrl }]
+      ...(edgeBalancer.liveUrl
+        ? [{ label: "Edge Balancer Live", url: edgeBalancer.liveUrl }]
         : []),
-      ...(miniLoadBalancer.systemDesignUrl
-        ? [{ label: "Mini Load Balancer Design", url: miniLoadBalancer.systemDesignUrl }]
+      ...(edgeBalancer.systemDesignUrl
+        ? [{ label: "Edge Balancer Design", url: edgeBalancer.systemDesignUrl }]
         : []),
-      ...(aiGateway.liveUrl ? [{ label: "Shared AI Gateway Live", url: aiGateway.liveUrl }] : []),
-      ...(aiGateway.systemDesignUrl
-        ? [{ label: "Shared AI Gateway Design", url: aiGateway.systemDesignUrl }]
+      ...(aiGatewayPlatform.liveUrl ? [{ label: "AI Gateway Platform Live", url: aiGatewayPlatform.liveUrl }] : []),
+      ...(aiGatewayPlatform.systemDesignUrl
+        ? [{ label: "AI Gateway Platform Design", url: aiGatewayPlatform.systemDesignUrl }]
         : []),
       ...(moveYSplash.liveUrl ? [{ label: "moveYSplash Live", url: moveYSplash.liveUrl }] : []),
       ...(moveYSplash.systemDesignUrl
@@ -169,29 +169,29 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "app-runner-to-ecs-migration-notes",
-    title: "Migrating from AWS App Runner to ECS: Why I Split the AI Gateway and Go Load Balancer by Workload Fit",
+    title: "Migrating from AWS App Runner to ECS: Why I Split AI Gateway Platform and Edge Balancer by Workload Fit",
     summary:
-      "Why App Runner was useful for first delivery, where it stopped fitting these workloads, how I moved the AI gateway to ECS Express Mode and the Go load balancer to regular ECS, and which AWS alternatives remained viable.",
+      "Why App Runner was useful for first delivery, where it stopped fitting these workloads, how I moved AI Gateway Platform to ECS Express Mode and Edge Balancer to regular ECS, and which AWS alternatives remained viable.",
     publishedAt: "2026-04-01",
     readTimeMinutes: 11,
     targetCompanies: ["Amazon", "Canonical", "Veeva", "Stripe"],
     tags: ["AWS", "ECS", "App Runner", "Migration", "Go", "LLM Systems", "Platform Engineering"],
     hook: {
       problem:
-        "AWS App Runner got both services live quickly, but the Go load balancer and AI gateway eventually needed different kinds of control over deployment behavior, ingress, warm-state handling, and runtime inspection than the managed platform exposed.",
+        "AWS App Runner got both services live quickly, but Edge Balancer and AI Gateway Platform eventually needed different kinds of control over deployment behavior, ingress, warm-state handling, and runtime inspection than the managed platform exposed.",
       stakes:
         "Once the deployment platform fights the workload shape, delivery speed turns into operational drag: debugging slows down, routing behavior is harder to reason about, and one generic hosting model stops fitting very different services.",
     },
     architecture: {
       summary:
-        "Both services moved off App Runner, but not to the same target. The AI gateway moved to ECS Express Mode for a lighter managed path, while the Go load balancer moved to regular ECS for deeper service and networking control.",
+        "Both services moved off App Runner, but not to the same target. AI Gateway Platform moved to ECS Express Mode for a lighter managed path, while Edge Balancer moved to regular ECS for deeper service and networking control.",
       diagram: `graph LR
   Users[Users / Reviewers]-->DNS[Custom Domains]
   DNS-->Mini[miniloadbalancer.io]
   DNS-->AI[sharedaigateway.com]
   Mini-->MiniIngress[ALB + Regular ECS]
   AI-->AIIngress[ECS Express Mode Service]
-  MiniIngress-->GoLB[Go Load Balancer]
+  MiniIngress-->GoLB[Edge Balancer]
   GoLB-->Consul[Consul + Backend Pool]
   GoLB-->Metrics[Prometheus / Grafana]
   AIIngress-->AIGateway[AI Gateway Service]
@@ -199,8 +199,8 @@ export const blogPosts: BlogPost[] = [
   AIGateway-->LLM[Prompt Orchestration / LLM]`,
       components: [
         "Custom domains for public cutover and stable reviewer-facing access",
-        "AI gateway on ECS Express Mode for lighter managed service behavior",
-        "Mini load balancer on regular ECS for deeper networking and rollout control",
+        "AI Gateway Platform on ECS Express Mode for lighter managed service behavior",
+        "Edge Balancer on regular ECS for deeper networking and rollout control",
         "Ingress and service behavior made more explicit than App Runner defaults",
         "Independent deployment models chosen based on workload shape rather than one platform for everything",
       ],
@@ -211,17 +211,17 @@ export const blogPosts: BlogPost[] = [
       breakingPoint:
         "App Runner accelerated first launch, but it became an awkward fit once the proxy-heavy workload needed regular ECS-level service control and the AI workload needed a middle ground between App Runner simplicity and fully hand-tuned orchestration.",
       evidence: [
-        "The mini load balancer now serves traffic through miniloadbalancer.io on a regular ECS service path with retained control-plane and metrics visibility.",
-        "The AI gateway now serves traffic through sharedaigateway.com on an ECS Express Mode service path with a lighter managed footprint than regular ECS.",
+        "Edge Balancer now serves traffic through miniloadbalancer.io on a regular ECS service path with retained control-plane and metrics visibility.",
+        "AI Gateway Platform now serves traffic through sharedaigateway.com on an ECS Express Mode service path with a lighter managed footprint than regular ECS.",
         "Splitting the target platform by workload removed the one-size-fits-all friction of keeping both services on App Runner.",
         "The migration increased deployment/orchestration ownership, but made service behavior more explicit and workload-appropriate.",
       ],
     },
     bottleneckResolution: {
       rootCause:
-        "App Runner was a strong speed-to-first-deploy choice, but these workloads no longer matched one managed runtime profile: the load balancer wanted regular ECS-level control, while the AI gateway wanted more flexibility than App Runner without taking on the full operational surface of the load balancer stack.",
+        "App Runner was a strong speed-to-first-deploy choice, but these workloads no longer matched one managed runtime profile: Edge Balancer wanted regular ECS-level control, while AI Gateway Platform wanted more flexibility than App Runner without taking on the full operational surface of the Edge Balancer stack.",
       solution:
-        "I moved both services to ECS, but chose different deployment modes by workload. The AI gateway moved to ECS Express Mode for a lighter managed path, while the load balancer moved to regular ECS so routing, ingress, and rollout behavior could be tuned more directly.",
+        "I moved both services to ECS, but chose different deployment modes by workload. AI Gateway Platform moved to ECS Express Mode for a lighter managed path, while Edge Balancer moved to regular ECS so routing, ingress, and rollout behavior could be tuned more directly.",
       tradeoffs: [
         "Regular ECS adds task definitions, service orchestration, and deeper deployment surface area compared with App Runner.",
         "ECS Express Mode keeps more convenience than regular ECS, but does not replace the need for regular ECS when a service needs heavier networking control.",
@@ -237,29 +237,29 @@ export const blogPosts: BlogPost[] = [
     ],
     businessImpact: [
       "Matched the deployment model to the workload shape instead of forcing both services through the same managed runtime.",
-      "Improved operational control for the networking-heavy load balancer while keeping a lighter managed posture for the AI gateway.",
+      "Improved operational control for the networking-heavy Edge Balancer while keeping a lighter managed posture for AI Gateway Platform.",
       "Created clearer future scaling options because App Runner, ECS Express Mode, and regular ECS are now treated as deliberate workload-fit choices rather than interchangeable defaults.",
     ],
     links: [
-      ...(miniLoadBalancer.liveUrl
-        ? [{ label: "Mini Load Balancer Live", url: miniLoadBalancer.liveUrl }]
+      ...(edgeBalancer.liveUrl
+        ? [{ label: "Edge Balancer Live", url: edgeBalancer.liveUrl }]
         : []),
-      ...(miniLoadBalancer.repoUrl
-        ? [{ label: "Mini Load Balancer Repo", url: miniLoadBalancer.repoUrl }]
+      ...(edgeBalancer.repoUrl
+        ? [{ label: "Edge Balancer Repo", url: edgeBalancer.repoUrl }]
         : []),
-      ...(miniLoadBalancer.systemDesignUrl
-        ? [{ label: "Mini Load Balancer System Design", url: miniLoadBalancer.systemDesignUrl }]
+      ...(edgeBalancer.systemDesignUrl
+        ? [{ label: "Edge Balancer System Design", url: edgeBalancer.systemDesignUrl }]
         : []),
-      ...(aiGateway.liveUrl ? [{ label: "Shared AI Gateway Live", url: aiGateway.liveUrl }] : []),
-      ...(aiGateway.repoUrl ? [{ label: "Shared AI Gateway Repo", url: aiGateway.repoUrl }] : []),
-      ...(aiGateway.systemDesignUrl
-        ? [{ label: "Shared AI Gateway System Design", url: aiGateway.systemDesignUrl }]
+      ...(aiGatewayPlatform.liveUrl ? [{ label: "AI Gateway Platform Live", url: aiGatewayPlatform.liveUrl }] : []),
+      ...(aiGatewayPlatform.repoUrl ? [{ label: "AI Gateway Platform Repo", url: aiGatewayPlatform.repoUrl }] : []),
+      ...(aiGatewayPlatform.systemDesignUrl
+        ? [{ label: "AI Gateway Platform System Design", url: aiGatewayPlatform.systemDesignUrl }]
         : []),
     ],
   },
   {
     slug: "queue-first-cloud-code-execution",
-    title: "Queue-First Cloud Code Execution: Preventing Worker Starvation Under Burst Load",
+    title: "Queue-First Cloud Sandbox: Preventing Worker Starvation Under Burst Load",
     summary:
       "How I shifted from request-coupled execution to queue-worker isolation to keep execution throughput stable under burst traffic.",
     publishedAt: "2026-03-07",
@@ -321,16 +321,16 @@ export const blogPosts: BlogPost[] = [
       "Created an architecture that can be validated directly through live endpoints and system design docs.",
     ],
     links: [
-      ...(cloudCodeExecution.liveUrl
-        ? [{ label: "Live Execution API", url: cloudCodeExecution.liveUrl }]
+      ...(cloudSandbox.liveUrl
+        ? [{ label: "Live Execution API", url: cloudSandbox.liveUrl }]
         : []),
-      ...(cloudCodeExecution.repoUrl
-        ? [{ label: "Source Repository", url: cloudCodeExecution.repoUrl }]
+      ...(cloudSandbox.repoUrl
+        ? [{ label: "Source Repository", url: cloudSandbox.repoUrl }]
         : []),
-      ...(cloudCodeExecution.systemDesignUrl
-        ? [{ label: "System Design", url: cloudCodeExecution.systemDesignUrl }]
+      ...(cloudSandbox.systemDesignUrl
+        ? [{ label: "System Design", url: cloudSandbox.systemDesignUrl }]
         : []),
-      ...(cloudCodeExecution.additionalLinks ?? []).map((link) => ({
+      ...(cloudSandbox.additionalLinks ?? []).map((link) => ({
         label: link.label,
         url: link.url,
       })),
@@ -338,9 +338,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "go-load-balancer-failure-handling",
-    title: "Go Load Balancer Failure Handling: Circuit Breakers, Hysteresis, and Bounded Retries",
+    title: "Edge Balancer Failure Handling: Circuit Breakers, Hysteresis, and Bounded Retries",
     summary:
-      "A breakdown of how I hardened a Go load balancer against backend flapping with health-aware routing and controlled retry behavior.",
+      "A breakdown of how I hardened a Go-based Edge Balancer against backend flapping with health-aware routing and controlled retry behavior.",
     publishedAt: "2026-03-06",
     readTimeMinutes: 8,
     targetCompanies: ["Canonical", "DoorDash", "Amazon"],
@@ -355,7 +355,7 @@ export const blogPosts: BlogPost[] = [
       summary:
         "A dual-plane design routes user traffic through proxy logic while exposing an admin control plane for strategy and health inspection.",
       diagram: `graph LR
-  Client[Incoming Traffic]-->LB[Go Load Balancer]
+  Client[Incoming Traffic]-->LB[Edge Balancer]
   LB-->Proxy[Proxy Plane]
   LB-->Admin[Control Plane /admin/*]
   Proxy-->B1[Backend A]
@@ -398,16 +398,16 @@ export const blogPosts: BlogPost[] = [
       "Demonstrated production-style systems thinking relevant to infra and platform teams.",
     ],
     links: [
-      ...(miniLoadBalancer.liveUrl
-        ? [{ label: "Live Deployment", url: miniLoadBalancer.liveUrl }]
+      ...(edgeBalancer.liveUrl
+        ? [{ label: "Live Deployment", url: edgeBalancer.liveUrl }]
         : []),
-      ...(miniLoadBalancer.repoUrl
-        ? [{ label: "Source Repository", url: miniLoadBalancer.repoUrl }]
+      ...(edgeBalancer.repoUrl
+        ? [{ label: "Source Repository", url: edgeBalancer.repoUrl }]
         : []),
-      ...(miniLoadBalancer.systemDesignUrl
-        ? [{ label: "System Design", url: miniLoadBalancer.systemDesignUrl }]
+      ...(edgeBalancer.systemDesignUrl
+        ? [{ label: "System Design", url: edgeBalancer.systemDesignUrl }]
         : []),
-      ...(miniLoadBalancer.additionalLinks ?? []).map((link) => ({
+      ...(edgeBalancer.additionalLinks ?? []).map((link) => ({
         label: link.label,
         url: link.url,
       })),
