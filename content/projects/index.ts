@@ -220,12 +220,17 @@ export const projectsData: PortfolioProject[] = [
     ],
     recentUpdates: [
       "Published a live deployment link to make academic project outcomes directly reviewable.",
+      "Added the Fall 2025 COSC 4086 project report PDF for reviewers who want the full academic writeup.",
       "Added a dedicated system design doc page to explain architecture and performance decisions.",
       "Linked the project into the production upgrade log as the product-facing example: Supabase auth, indexed search, and responsive UX.",
     ],
     liveUrl: "https://move-y-splash-new.vercel.app",
     repoUrl: "https://github.com/MohammedVep/MoveYSplashNew",
     additionalLinks: [
+      {
+        label: "Read Project Report PDF",
+        url: "/Mohammed_Vepari_moveYSplash_Project_Report_Fall_2025.pdf",
+      },
       {
         label: "Read Production Upgrade Log",
         url: "/blog/portfolio-production-architecture-upgrades",
