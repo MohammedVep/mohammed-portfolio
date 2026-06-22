@@ -479,6 +479,74 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/mini-load-balancer",
   },
   {
+    id: "telecom-network-routing-visualizer",
+    title: "Telecom Network Routing Visualizer",
+    projectType: "Algorithms & Visualization",
+    description:
+      "React + TypeScript traffic-engineering simulator for route selection, outage response, SLA-aware traffic classes, and algorithm comparison.",
+    whyItMatters:
+      "Shows core CS routing fundamentals in a reviewer-friendly interface: Dijkstra, A*, weighted graph updates, outage simulation, and clear tradeoff visualization.",
+    architectureSummary:
+      "React/Vite UI -> weighted telecom graph model -> Dijkstra/A* routing engine -> traffic-class SLA evaluator -> outage simulator -> ops/AI recommendation panel.",
+    metrics: "Dijkstra + A* | SLA-Aware Routing | Repo/System Design Only",
+    impactMetrics: [
+      "Implemented deterministic Dijkstra and heuristic A* route comparison across identical weighted graph states.",
+      "Added dynamic link-weight simulation for traffic load, outages, route switching, and congestion-aware rerouting.",
+      "Built SLA-aware traffic classes for voice, video, bulk data, and emergency traffic with latency/loss/hop-margin feedback.",
+      "Kept the old CloudFront live link removed after undeployment so reviewers only see valid repo and design links.",
+    ],
+    tags: ["React", "TypeScript", "Vite", "Algorithms", "Traffic Engineering", "Visualization"],
+    hardProblem:
+      "Make routing algorithm behavior legible while the network is changing due to traffic pressure, link failures, and different SLA priorities.",
+    architecture: `graph LR
+  UI[React Visualization UI]-->Graph[Weighted Telecom Graph]
+  Graph-->Routing[Dijkstra + A* Engines]
+  Routing-->SLA[SLA Evaluator]
+  Graph-->Outages[Outage Simulator]
+  SLA-->Insights[Ops + AI Recommendation Panel]
+  Insights-->UI`,
+    tradeoffs: [
+      "Dijkstra gives deterministic shortest-path behavior, while A* can reduce explored nodes when the heuristic is useful.",
+      "More realistic traffic modeling improves credibility, but the simulator must stay explainable enough for reviewers to inspect quickly.",
+      "Keeping the app repo/design-only avoids credibility damage from linking to a deleted CloudFront deployment.",
+    ],
+    invariants: [
+      "Route calculations run against the same weighted graph state when comparing Dijkstra and A*.",
+      "Outage links are excluded from candidate routes before SLA and mitigation analysis.",
+      "Control-plane actions remain bounded by rate limits, retries, and safe local fallback behavior.",
+    ],
+    highlights: [
+      "Built scenario presets for baseline, rush-hour, fiber-cut, and storm-event conditions.",
+      "Added route switch timeline, benchmark comparison, SLA margin panels, and capacity planning hints.",
+      "Documented an AWS S3 + CloudFront deployment script while keeping stale deployment links out of the portfolio.",
+    ],
+    implementationNotes: {
+      ownerSummary:
+        "This project is my algorithms visualization proof: it makes pathfinding, weighted graph updates, outages, and route-quality tradeoffs visible instead of hiding them in console output.",
+      hardLesson:
+        "The hard part was balancing realism with readability; too many telecom signals can make the UI noisy, so the route, SLA, and mitigation panels need to explain why the path changed.",
+      nextEnhancement:
+        "Next I would redeploy it behind a fresh custom domain and add a recorded scenario walkthrough so reviewers can see route recovery without needing to run the repo locally.",
+    },
+    behavioralSignals: [
+      "Removed stale deployment links instead of leaving a broken CloudFront URL on the portfolio.",
+      "Explained algorithmic tradeoffs with visual evidence and scenario-driven behavior.",
+      "Built scaffolding for authentication, rate limiting, retries, telemetry, and safe fallback around control-plane actions.",
+    ],
+    productionCapabilities: [
+      "Cognito/JWT guard path for control-plane actions when environment variables are configured.",
+      "Token-bucket rate limiting, retry with exponential backoff, structured trace IDs, and error-boundary fallback.",
+      "Reusable AWS S3 + CloudFront deployment script for future static redeployment.",
+    ],
+    recentUpdates: [
+      "Reintroduced the project as repo/system-design evidence only because the previous CloudFront deployment was intentionally undeployed.",
+      "Removed stale live-link expectations while preserving the GitHub repository and architecture writeup for technical review.",
+      "Documented SLA-aware routing, algorithm comparison, ops telemetry, and AI recommendation panels as the project evidence path.",
+    ],
+    repoUrl: "https://github.com/MohammedVep/telecom-network-routing-visualizer",
+    systemDesignUrl: "/system-design/telecom-network-routing-visualizer",
+  },
+  {
     id: "ai-job-match-analysis",
     title: "AI Gateway Platform",
     projectType: "Full-Stack Product Engineering",

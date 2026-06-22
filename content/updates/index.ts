@@ -20,6 +20,15 @@ export const latestImprovements: Improvement[] = [
     proofLabel: "Open Homepage",
   },
   {
+    id: "telecom-visualizer-reintroduced",
+    title: "Telecom Network Visualizer Reintroduced as Repo/System Design Evidence",
+    scope: "Project Evidence",
+    detail:
+      "Telecom Network Routing Visualizer is back on the portfolio without a stale live link; reviewers now get the GitHub repo and system design page while the old CloudFront deployment remains intentionally removed.",
+    proofHref: "/system-design/telecom-network-routing-visualizer",
+    proofLabel: "Open Telecom Design",
+  },
+  {
     id: "cloud-sandbox-access-domain",
     title: "Cloud Sandbox Dedicated Access Domain Added",
     scope: "Live Access",
@@ -51,7 +60,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
+      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, Telecom Network Visualizer, AI Gateway Platform, and moveYSplash.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },
