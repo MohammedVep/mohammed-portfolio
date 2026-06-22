@@ -113,6 +113,7 @@ export const projectsData: PortfolioProject[] = [
       "Multi-region probe workflow with incident lifecycle and alert deduplication controls.",
     ],
     recentUpdates: [
+      "Cut over reviewer access to netpulsemanage.dev so the live NetPulse path uses a dedicated production-style domain.",
       "Added dedicated registration with Cognito email verification and full login flow for production-style onboarding.",
       "Introduced public read-only demo API mode so external reviewers can evaluate functionality without tenant credentials.",
       "Expanded integration test + deployment workflows for stronger end-to-end operational confidence.",

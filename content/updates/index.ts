@@ -11,6 +11,15 @@ export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
   {
+    id: "netpulse-access-domain",
+    title: "NetPulse Dedicated Access Domain Added",
+    scope: "Live Access",
+    detail:
+      "NetPulse reviewer access now points to netpulsemanage.dev, giving the flagship project a cleaner production-style domain instead of an Amplify-generated URL.",
+    proofHref: "https://netpulsemanage.dev",
+    proofLabel: "Open NetPulse",
+  },
+  {
     id: "portfolio-production-upgrade-log",
     title: "Production Architecture Upgrade Log Published",
     scope: "Architecture Evidence",
