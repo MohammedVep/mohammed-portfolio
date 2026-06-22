@@ -15,9 +15,18 @@ export const latestImprovements: Improvement[] = [
     title: "Current Public Deployment Links Surfaced",
     scope: "Live Access",
     detail:
-      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
+      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, SentinelMesh, Cloud Sandbox, AutoScale OS, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
     proofHref: "/",
     proofLabel: "Open Homepage",
+  },
+  {
+    id: "sentinelmesh-autoscaleos-added",
+    title: "SentinelMesh and AutoScale OS Added",
+    scope: "Project Evidence",
+    detail:
+      "Portfolio now includes SentinelMesh as a zero-trust service-mesh control-plane project and AutoScale OS as a Java/Kubernetes/Redis autoscaling orchestration project, each with live access and a system-design page.",
+    proofHref: "/#projects",
+    proofLabel: "View Projects",
   },
   {
     id: "transit-telemetry-access-domain",
@@ -60,7 +69,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
+      "Homepage now surfaces dedicated system design docs for NetPulse, SentinelMesh, Cloud Sandbox, AutoScale OS, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },
@@ -105,7 +114,7 @@ export const latestImprovements: Improvement[] = [
     title: "Live Portfolio Apps Centralized",
     scope: "Access Paths",
     detail:
-      "Contact section now includes direct live links for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
+      "Contact section now includes direct live links for NetPulse, SentinelMesh, Cloud Sandbox, AutoScale OS, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
     proofHref: "/#contact",
     proofLabel: "Open Contact Section",
   },
@@ -114,7 +123,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project Metrics Upgraded",
     scope: "Project Evidence",
     detail:
-      "Project cards now emphasize workload-fit deployment choices, queue/DLQ recovery, PgBouncer/mTLS, event-time telemetry, and pprof-driven optimization outcomes.",
+      "Project cards now emphasize workload-fit deployment choices, zero-trust service-mesh visibility, autoscaling orchestration, queue/DLQ recovery, PgBouncer/mTLS, event-time telemetry, and pprof-driven optimization outcomes.",
     proofHref: "/#featured-systems",
     proofLabel: "View Flagship Systems",
   },

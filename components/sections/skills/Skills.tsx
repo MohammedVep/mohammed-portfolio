@@ -27,7 +27,8 @@ const arsenal = [
   {
     group: "Infrastructure & Cloud",
     items: [
-      { name: "AWS (Fargate, ALB, VPC)", level: "ACTIVE", note: "Cloud-native deployment and service networking." },
+      { name: "AWS (Fargate, EKS, ALB, VPC)", level: "ACTIVE", note: "Cloud-native deployment, service networking, and orchestration." },
+      { name: "Kubernetes", level: "PROJECT", note: "Worker scheduling, health surfaces, and autoscaling orchestration in AutoScale OS." },
       { name: "Terraform (IaC)", level: "ACTIVE", note: "Repeatable infrastructure provisioning and change control." },
       { name: "Docker", level: "ACTIVE", note: "Containerized service packaging and runtime consistency." },
       { name: "Linux / cgroups", level: "PROJECT", note: "Isolation and resource-bound execution constraints." },
@@ -40,7 +41,7 @@ const arsenal = [
       { name: "Grafana", level: "ACTIVE", note: "Operational dashboards for failure and scaling diagnostics." },
       { name: "Go pprof", level: "ACTIVE", note: "Heap and CPU profiling for runtime bottleneck elimination." },
       { name: "Redis / BullMQ DLQ", level: "ACTIVE", note: "Queue durability and dead-letter recovery workflows." },
-      { name: "mTLS + Incident Controls", level: "ACTIVE", note: "Zero-trust communication and alert lifecycle hardening." },
+      { name: "mTLS + Policy Controls", level: "ACTIVE", note: "Zero-trust communication, service policy, and alert lifecycle hardening." },
     ],
   },
   {

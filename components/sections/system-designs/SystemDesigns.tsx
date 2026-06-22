@@ -23,9 +23,9 @@ export default function SystemDesigns() {
             </p>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-neutral-300">
-            Dedicated design pages for the systems behind the portfolio: routing, queues,
-            telemetry, AI evidence grounding, full-stack product flows, and NetPulse reliability
-            upgrades.
+            Dedicated design pages for the systems behind the portfolio: service-mesh policy,
+            autoscaling control loops, routing, queues, telemetry, AI evidence grounding,
+            full-stack product flows, and NetPulse reliability upgrades.
           </p>
         </div>
 

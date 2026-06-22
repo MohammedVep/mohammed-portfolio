@@ -13,7 +13,9 @@ export default function Hero() {
   const blogPostCount = blogPostsSorted.length;
   const deploymentLinks = [
     { id: "netpulse", label: "NetPulse", signal: "netpulsemanage.dev" },
+    { id: "sentinel-mesh", label: "SentinelMesh", signal: "sentinel-mesh.cloud" },
     { id: "cloud-code-execution", label: "Cloud Sandbox", signal: "cloudsandbox.space" },
+    { id: "autoscale-os", label: "AutoScale OS", signal: "autoscale-os.dev" },
     { id: "realtime-transit-telemetry", label: "Transit Telemetry", signal: "realtimedashboard.dev" },
     { id: "mini-load-balancer", label: "Edge Balancer", signal: "miniloadbalancer.io" },
     { id: "ai-job-match-analysis", label: "AI Gateway Platform", signal: "sharedaigateway.com" },
@@ -59,8 +61,10 @@ export default function Hero() {
     "[0.0005] ACTIVE_SIGNAL: flagship_systems_live",
     "[0.0008] ACTIVE_DEPLOYMENT: netpulsemanage.dev",
     "[0.0011] ACTIVE_DEPLOYMENT: cloudsandbox.space",
-    "[0.0014] CORE_STACK: go_node_terraform_fargate",
-    "[0.0017] STATUS: available_onsite_hybrid_remote_est_edt",
+    "[0.0014] ACTIVE_DEPLOYMENT: sentinel-mesh.cloud",
+    "[0.0017] ACTIVE_DEPLOYMENT: autoscale-os.dev",
+    "[0.0020] CORE_STACK: java_go_node_kubernetes_terraform",
+    "[0.0023] STATUS: available_onsite_hybrid_remote_est_edt",
     "_",
   ];
 

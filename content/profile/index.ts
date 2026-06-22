@@ -14,5 +14,5 @@ export const profileData = {
   aiSystemRepoUrl: "https://github.com/MohammedVep/ai-system-shared-ai-platform",
   availability: "Available for on-site, hybrid, or remote roles (EST/EDT).",
   summary:
-    "Honours Bachelor of Computer Science (2026) • 83.95% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Go, Node, and AWS Terraform.",
+    "Honours Bachelor of Computer Science (2026) • 83.95% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Java, Go, Node, Kubernetes, and AWS Terraform.",
 } as const;

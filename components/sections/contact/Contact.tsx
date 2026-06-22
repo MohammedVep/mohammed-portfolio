@@ -6,7 +6,9 @@ import { projectsData } from "@/content/projects";
 
 const liveAppOrder = [
   "netpulse",
+  "sentinel-mesh",
   "cloud-code-execution",
+  "autoscale-os",
   "realtime-transit-telemetry",
   "mini-load-balancer",
   "ai-job-match-analysis",
@@ -14,7 +16,9 @@ const liveAppOrder = [
 
 const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
   netpulse: "NetPulse",
+  "sentinel-mesh": "SentinelMesh",
   "cloud-code-execution": "Cloud Sandbox",
+  "autoscale-os": "AutoScale OS",
   "realtime-transit-telemetry": "Transit Telemetry",
   "mini-load-balancer": "Edge Balancer",
   "ai-job-match-analysis": "AI Gateway Platform",

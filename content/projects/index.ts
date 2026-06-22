@@ -240,6 +240,73 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/moveysplash",
   },
   {
+    id: "sentinel-mesh",
+    title: "SentinelMesh: Zero-Trust Service Mesh Control Plane",
+    projectType: "Distributed Systems & Cloud APIs",
+    description:
+      "Zero-trust service-mesh control plane for monitoring service-to-service traffic, policy decisions, audit events, alerts, and AutoScaleOS export health.",
+    whyItMatters:
+      "Shows recruiters a security-aware backend system: service topology, policy bundles, denied traffic, rate limits, auth failures, and audit traces are visible in one operational dashboard.",
+    architectureSummary:
+      "sentinel-mesh.cloud -> mesh dashboard -> gateway audit stream -> policy bundle evaluator -> service trust map -> alerts + metrics summary -> AutoScaleOS export link.",
+    metrics: "Zero-Trust Mesh | Policy Audit Stream | Security Metrics Dashboard",
+    impactMetrics: [
+      "Built a reviewer-facing zero-trust control-plane dashboard that surfaces active requests, allowed traffic, blocked traffic, rate limits, and authentication failures.",
+      "Modeled service trust relationships across auth, billing, workflow, and monitoring services with policy-version history and violation tracking.",
+      "Connected service-mesh metrics to AutoScaleOS status so security events, routing fallback, and scaling export health can be reviewed together.",
+    ],
+    tags: ["React", "TypeScript", "Service Mesh", "Zero Trust", "Policy Engine", "Observability"],
+    hardProblem:
+      "Make distributed service security understandable without forcing reviewers to read raw gateway logs or policy files first.",
+    architecture: `graph LR
+  Dashboard[SentinelMesh Dashboard]-->Gateway[Gateway Audit Stream]
+  Gateway-->Policy[Policy Bundle Evaluator]
+  Policy-->Topology[Service Trust Map]
+  Gateway-->Alerts[Real-Time Alerts]
+  Gateway-->Metrics[Security Metrics Summary]
+  Metrics-->AutoScale[AutoScaleOS Export Health]`,
+    tradeoffs: [
+      "A rich mesh dashboard improves reviewer comprehension, but every panel must map back to a concrete runtime signal to avoid becoming decorative.",
+      "Strict deny/rate-limit visibility improves security posture, but the UI must separate policy failures from authentication failures for faster triage.",
+      "Linking SentinelMesh to AutoScaleOS improves cross-system story, but it also requires clear boundaries between security decisions and scaling decisions.",
+    ],
+    invariants: [
+      "Policy-denied traffic is visible with subject, target service, method, path, and trace identifier.",
+      "Service topology stays understandable even when live backend data is unavailable by falling back to a safe preview topology.",
+      "Security metrics remain grouped by allowed, denied, rate-limited, and authentication-failure outcomes.",
+    ],
+    highlights: [
+      "Published a live SentinelMesh deployment at sentinel-mesh.cloud.",
+      "Exposes service trust map, real-time alerts, policy violations, policy versions, and audit stream panels.",
+      "Frames security work as operational evidence: reviewers can inspect what was allowed, blocked, and exported.",
+    ],
+    implementationNotes: {
+      ownerSummary:
+        "I built SentinelMesh to make zero-trust service communication visible: not just whether services call each other, but whether those calls satisfy policy, auth, and rate-limit expectations.",
+      hardLesson:
+        "The lesson is that security dashboards need explainability. A blocked request is only useful if the reviewer can see the actor, target, rule path, and trace quickly.",
+      nextEnhancement:
+        "Next I would add a signed policy diff viewer so reviewers can compare policy bundle versions and see exactly why a route changed from allowed to denied.",
+    },
+    behavioralSignals: [
+      "Built security controls as observable product behavior instead of hidden backend-only logic.",
+      "Separated policy-denied, rate-limited, and auth-failure states for clearer incident triage.",
+      "Connected audit traces and topology views so communication tradeoffs are explainable.",
+    ],
+    productionCapabilities: [
+      "Service trust map with policy-driven allow relationships.",
+      "Audit stream, alert list, and policy violation surfaces for reviewer inspection.",
+      "AutoScaleOS export-health panel that shows cross-system operational integration.",
+    ],
+    recentUpdates: [
+      "Added SentinelMesh to the portfolio with live custom-domain access and a dedicated system-design page.",
+      "Positioned SentinelMesh as the zero-trust service-mesh/security-control project in the infrastructure portfolio.",
+      "Documented policy bundles, audit stream, security metrics, and AutoScaleOS integration as the main evidence path.",
+    ],
+    liveUrl: "https://sentinel-mesh.cloud",
+    systemDesignUrl: "/system-design/sentinel-mesh",
+  },
+  {
     id: "cloud-code-execution",
     title: "Cloud Sandbox",
     projectType: "Scaling & Messaging Systems",
@@ -316,6 +383,74 @@ export const projectsData: PortfolioProject[] = [
         url: "/blog/portfolio-production-architecture-upgrades",
       },
     ],
+  },
+  {
+    id: "autoscale-os",
+    title: "AutoScale OS: Intelligent Cloud Orchestration Platform",
+    projectType: "Scaling & Messaging Systems",
+    description:
+      "Java, Kubernetes, Redis, AWS, and Terraform cloud orchestration platform for deployment specs, worker placement, autoscaling recommendations, health checks, and metrics export.",
+    whyItMatters:
+      "Shows platform-engineering depth beyond CRUD: autoscaling policy, worker scheduling, deployment orchestration, readiness checks, and Prometheus-style operational metrics.",
+    architectureSummary:
+      "autoscale-os.dev -> React operations UI -> Java orchestration API -> Redis state store -> autoscaling control loop -> worker scheduler -> Prometheus metrics + readiness endpoints.",
+    metrics: "Java + Kubernetes + Redis | Autoscaling Control Loop | /metrics + /readiness",
+    impactMetrics: [
+      "Built an autoscaling control loop that weighs CPU, memory, queue backlog, current replicas, healthy workers, and desired capacity before recommending bounded scaling actions.",
+      "Modeled deployment orchestration so deployment specs become placement plans, health summaries, and auditable platform events.",
+      "Exposed platform readiness and metrics surfaces so reviewers can evaluate health, worker state, deployment events, and replica recommendations.",
+    ],
+    tags: ["Java", "Kubernetes", "Redis", "AWS", "Terraform", "Prometheus Metrics"],
+    hardProblem:
+      "Turn noisy infrastructure signals into safe scaling recommendations without hiding the reasoning behind the scheduler and control loop.",
+    architecture: `graph LR
+  UI[AutoScaleOS UI]-->API[Java Orchestration API]
+  API-->Redis[(Redis State Store)]
+  API-->Control[Autoscaling Control Loop]
+  Control-->Scheduler[Worker Scheduler]
+  Scheduler-->Workers[Kubernetes Worker Nodes]
+  API-->Metrics[Prometheus /metrics]
+  API-->Readiness[/readiness Health Surface]`,
+    tradeoffs: [
+      "Aggressive scale-up absorbs backlog faster, but bounded recommendations reduce the risk of runaway capacity changes.",
+      "Centralizing specs, metrics, plans, and events in Redis simplifies the demo control plane, but production systems would need stricter persistence and retention policies.",
+      "Combining UI and API in one deployable artifact improves reviewer accessibility, while keeping clear API boundaries preserves platform-engineering credibility.",
+    ],
+    invariants: [
+      "Scaling recommendations account for worker health before increasing desired capacity.",
+      "Deployment events remain auditable from spec intake through placement and health summary.",
+      "Readiness and metrics surfaces expose operational state instead of relying only on UI screenshots.",
+    ],
+    highlights: [
+      "Published a live AutoScale OS deployment at autoscale-os.dev.",
+      "Built recruiter-readable panels for autoscaling control loop, deployment orchestration, worker scheduling, and cloud stack decisions.",
+      "Exposed `/metrics` and `/readiness` concepts as first-class operational surfaces.",
+    ],
+    implementationNotes: {
+      ownerSummary:
+        "I built AutoScale OS to show platform-engineering judgment: how deployment specs, worker health, queue backlog, and capacity targets flow into explainable scaling decisions.",
+      hardLesson:
+        "The main lesson is that autoscaling is a safety problem, not just a formula. Downscaling and cap decisions need guardrails because infrastructure can fail faster than dashboards update.",
+      nextEnhancement:
+        "Next I would add a replayable scaling scenario that shows the control loop before, during, and after a burst so reviewers can inspect the decision timeline.",
+    },
+    behavioralSignals: [
+      "Framed autoscaling decisions around safety, health, and explainability.",
+      "Separated placement, readiness, event history, and metrics export into clear operational surfaces.",
+      "Chose Java/Kubernetes/Redis/AWS/Terraform stack elements that map directly to platform engineering roles.",
+    ],
+    productionCapabilities: [
+      "Autoscaling control loop based on CPU, memory, backlog, current replicas, healthy workers, and desired capacity.",
+      "Worker scheduling model with CPU/memory headroom and availability-zone-aware placement language.",
+      "Prometheus-style `/metrics` and `/readiness` surfaces for operational validation.",
+    ],
+    recentUpdates: [
+      "Added AutoScale OS to the portfolio with live custom-domain access and a dedicated system-design page.",
+      "Positioned AutoScale OS as the Java/Kubernetes/Redis platform orchestration project for recruiters reviewing backend infrastructure fit.",
+      "Documented autoscaling, worker scheduling, deployment events, metrics, and readiness as the main evidence path.",
+    ],
+    liveUrl: "https://autoscale-os.dev",
+    systemDesignUrl: "/system-design/autoscale-os",
   },
   {
     id: "realtime-transit-telemetry",
