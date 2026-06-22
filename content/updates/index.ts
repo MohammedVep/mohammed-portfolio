@@ -15,18 +15,18 @@ export const latestImprovements: Improvement[] = [
     title: "Current Public Deployment Links Surfaced",
     scope: "Live Access",
     detail:
-      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, Cloud Sandbox, Edge Balancer, and AI Gateway Platform.",
+      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
     proofHref: "/",
     proofLabel: "Open Homepage",
   },
   {
-    id: "telecom-visualizer-reintroduced",
-    title: "Telecom Network Visualizer Reintroduced as Repo/System Design Evidence",
-    scope: "Project Evidence",
+    id: "transit-telemetry-access-domain",
+    title: "Transit Telemetry Dedicated Dashboard Domain Added",
+    scope: "Live Access",
     detail:
-      "Telecom Network Routing Visualizer is back on the portfolio without a stale live link; reviewers now get the GitHub repo and system design page while the old CloudFront deployment remains intentionally removed.",
-    proofHref: "/system-design/telecom-network-routing-visualizer",
-    proofLabel: "Open Telecom Design",
+      "Real-Time Transit Telemetry now points to realtimedashboard.dev, replacing the raw S3 website endpoint with a cleaner reviewer-facing domain.",
+    proofHref: "https://realtimedashboard.dev",
+    proofLabel: "Open Transit Dashboard",
   },
   {
     id: "cloud-sandbox-access-domain",
@@ -60,7 +60,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, Telecom Network Visualizer, AI Gateway Platform, and moveYSplash.",
+      "Homepage now surfaces dedicated system design docs for NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },

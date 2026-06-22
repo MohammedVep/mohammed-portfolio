@@ -14,6 +14,7 @@ export default function Hero() {
   const deploymentLinks = [
     { id: "netpulse", label: "NetPulse", signal: "netpulsemanage.dev" },
     { id: "cloud-code-execution", label: "Cloud Sandbox", signal: "cloudsandbox.space" },
+    { id: "realtime-transit-telemetry", label: "Transit Telemetry", signal: "realtimedashboard.dev" },
     { id: "mini-load-balancer", label: "Edge Balancer", signal: "miniloadbalancer.io" },
     { id: "ai-job-match-analysis", label: "AI Gateway Platform", signal: "sharedaigateway.com" },
   ]
