@@ -18,8 +18,8 @@ export default function Home() {
       <FeaturedSystems />
       <SystemDesigns />
       <Runbooks />
-      <BlogPreview />
       <Projects />
+      <BlogPreview />
       <LatestImprovements />
       <Skills />
       <Experience />

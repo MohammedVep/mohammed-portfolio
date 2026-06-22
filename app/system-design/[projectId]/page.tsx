@@ -22,7 +22,7 @@ export default async function ProjectSystemDesignPage({ params }: SystemDesignPa
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <h1 className="text-3xl font-bold tracking-tight text-white">{project.title} System Design</h1>
           <Link
-            href="/#projects"
+            href="/#featured-systems"
             className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-300"
           >
             Back to Portfolio

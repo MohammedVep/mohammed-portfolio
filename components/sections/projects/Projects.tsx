@@ -1,251 +1,91 @@
-'use client';
+import { projectsData } from "@/content/projects";
 
-import { Bento } from "@/components/ui/bento";
-import { projectsData, type PortfolioProject } from "@/content/projects";
+const additionalProjectIds = [
+  "mini-load-balancer",
+  "realtime-transit-telemetry",
+  "ai-job-match-analysis",
+  "moveysplash",
+] as const;
 
-const categoryOrder: PortfolioProject["projectType"][] = [
-  "Distributed Systems & Cloud APIs",
-  "Scaling & Messaging Systems",
-  "Algorithms & Visualization",
-  "Full-Stack Product Engineering",
-];
-
-const categoryDescriptions: Record<PortfolioProject["projectType"], string> = {
-  "Distributed Systems & Cloud APIs":
-    "Reliability-focused backend systems with routing, failover, and API-driven operations.",
-  "Scaling & Messaging Systems":
-    "Queue-based and real-time data pipelines designed for throughput, isolation, and safe execution.",
-  "Algorithms & Visualization":
-    "Algorithmic systems that surface routing, optimization, and tradeoff decisions clearly.",
-  "Full-Stack Product Engineering":
-    "End-to-end applications with product UX, backend workflows, and documented design decisions.",
+const additionalPositioning: Record<(typeof additionalProjectIds)[number], string> = {
+  "mini-load-balancer":
+    "Go networking fundamentals and failure-handling proof; kept lower so the page stays focused on current platform/security systems.",
+  "realtime-transit-telemetry":
+    "Realtime dashboard and stream-correctness proof; useful support evidence, but secondary to the core backend/platform brand.",
+  "ai-job-match-analysis":
+    "Applied AI product proof; kept lower so AI does not distract from the stronger infrastructure and backend signal.",
+  moveysplash:
+    "Academic full-stack product proof; useful for product delivery context, but lower priority than infra/backend systems.",
 };
 
-const toArchitecturePreview = (summary: string) =>
-  summary
-    .split("->")
-    .map((node) => node.trim())
-    .filter(Boolean)
-    .join("\n  -> ");
+const linkClass =
+  "rounded border px-3 py-2 text-[10px] uppercase tracking-widest transition";
 
-function buildBentoItems(categoryProjects: PortfolioProject[]) {
-  return categoryProjects.map((project, index) => ({
-    id: project.id,
-    className:
-      categoryProjects.length === 1
-        ? "col-span-12"
-        : index === 0
-          ? "col-span-12 lg:col-span-8"
-          : "col-span-12 lg:col-span-4",
-    content: (
-      <div className="flex h-full flex-col justify-between font-mono">
-        <div>
-          <div className="mb-2 flex items-center gap-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-            <span className="text-[10px] uppercase tracking-widest text-emerald-500/80">
-              {project.metrics}
-            </span>
-          </div>
-          <p className="mb-2 text-[10px] uppercase tracking-widest text-cyan-300/90">
-            {project.projectType}
+export default function Projects() {
+  const additionalProjects = additionalProjectIds
+    .map((id) => projectsData.find((project) => project.id === id))
+    .filter((project): project is (typeof projectsData)[number] => Boolean(project));
+
+  return (
+    <section id="projects" className="border-t border-neutral-900 bg-black py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <p className="mb-3 text-xs font-mono uppercase tracking-[0.45em] text-neutral-500">
+            Additional_Projects
           </p>
-          <h3 className="mb-2 text-xl font-bold text-neutral-200">{project.title}</h3>
-          <p className="text-sm leading-relaxed text-neutral-300">{project.whyItMatters}</p>
-
-          <div className="mt-3 space-y-1 text-[11px] text-neutral-400">
-            <p>
-              <span className="text-neutral-200">Tech:</span> {project.tags.join(", ")}
-            </p>
-            <p>
-              <span className="text-neutral-200">Architecture:</span> {project.architectureSummary}
-            </p>
-          </div>
-
-          <div className="mt-3">
-            <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-emerald-500">
-              Architecture Snapshot
-            </p>
-            <pre className="overflow-x-auto rounded border border-neutral-800 bg-black p-3 text-[10px] text-neutral-400">
-              {toArchitecturePreview(project.architectureSummary)}
-            </pre>
-          </div>
-
-          <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">
-            {project.impactMetrics.slice(0, 2).map((metric, metricIndex) => (
-              <p key={`${project.id}-metric-preview-${metricIndex}`}>- {metric}</p>
-            ))}
-          </div>
-
-          {project.recentUpdates?.length ? (
-            <p className="mt-2 text-[11px] text-amber-300/90">
-              Update: {project.recentUpdates[0]}
-            </p>
-          ) : null}
-          {project.phaseImprovements?.length ? (
-            <p className="mt-2 text-[11px] text-cyan-300/90">
-              Roadmap: {project.phaseImprovements.map((item) => item.phase).join(" + ")} improvements documented
-            </p>
-          ) : null}
+          <h2 className="text-2xl font-bold text-white">Supporting Work, Kept Below the Main Proof</h2>
+          <p className="mt-4 text-sm leading-relaxed text-neutral-300">
+            These projects are still useful proof, but they are intentionally lower on the page so
+            recruiters first see the four strongest backend/platform systems: NetPulse, Cloud
+            Sandbox, AutoScale OS, and SentinelMesh.
+          </p>
         </div>
-        <div className="mt-4">
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded border border-neutral-700 bg-neutral-800 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-500"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          {project.liveUrl ||
-          project.repoUrl ||
-          project.systemDesignUrl ||
-          (project.additionalLinks?.length ?? 0) > 0 ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {project.liveUrl ? (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(event) => event.stopPropagation()}
-                  className="rounded border border-emerald-500/30 px-2 py-1 text-[10px] uppercase tracking-widest text-emerald-300 transition hover:border-emerald-400 hover:text-emerald-200"
-                >
-                  Live
-                </a>
-              ) : null}
-              {project.repoUrl ? (
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(event) => event.stopPropagation()}
-                  className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-300 transition hover:border-emerald-500/60 hover:text-emerald-200"
-                >
-                  Repo
-                </a>
-              ) : null}
-              {project.systemDesignUrl ? (
-                <a
-                  href={project.systemDesignUrl}
-                  onClick={(event) => event.stopPropagation()}
-                  className="rounded border border-cyan-400/40 px-2 py-1 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
-                >
-                  System Design
-                </a>
-              ) : null}
-              {project.additionalLinks?.map((link) => (
-                <a
-                  key={`${project.id}-${link.label}`}
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(event) => event.stopPropagation()}
-                  className={`rounded border px-2 py-1 text-[10px] uppercase tracking-widest transition ${
-                    link.label.toLowerCase().includes("sre")
-                      ? "border-red-500/40 text-red-300 hover:border-red-300 hover:text-red-200"
-                      : "border-amber-400/40 text-amber-300 hover:border-amber-300 hover:text-amber-200"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      </div>
-    ),
-    deepDiveContent: (
-      <div className="font-mono">
-        <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-cyan-300">{project.projectType}</p>
-        <h2 className="mb-2 text-2xl font-bold text-emerald-400">{project.title}</h2>
-        <p className="mb-4 text-xs uppercase tracking-widest text-emerald-500/80">{project.metrics}</p>
 
-        <div className="space-y-6 text-sm">
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              Why This Project Matters
-            </h4>
-            <p className="mt-2 text-neutral-200">{project.whyItMatters}</p>
-          </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {additionalProjects.map((project) => (
+            <article
+              key={project.id}
+              className="flex h-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-950 p-5 font-mono"
+            >
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-cyan-300/90">
+                  {project.projectType}
+                </p>
+                <h3 className="mt-3 text-lg font-bold text-neutral-100">{project.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-300">
+                  {project.whyItMatters}
+                </p>
+                <p className="mt-3 rounded border border-neutral-800 bg-black p-3 text-[11px] leading-relaxed text-neutral-400">
+                  {additionalPositioning[project.id as (typeof additionalProjectIds)[number]]}
+                </p>
 
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              Tech + Architecture Summary
-            </h4>
-            <div className="mt-2 space-y-2 rounded border border-neutral-800 bg-neutral-950 p-4 text-neutral-300">
-              <p>
-                <span className="text-neutral-100">Tech:</span> {project.tags.join(", ")}
-              </p>
-              <p>
-                <span className="text-neutral-100">Architecture:</span> {project.architectureSummary}
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Impact Metrics</h4>
-            <div className="mt-2 space-y-2 rounded border border-emerald-500/30 bg-emerald-500/5 p-4 text-neutral-200">
-              {project.impactMetrics.map((metric, metricIndex) => (
-                <p key={`${project.id}-metric-${metricIndex}`}>- {metric}</p>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Problem</h4>
-            <p className="mt-2 text-neutral-300">{project.hardProblem}</p>
-          </div>
-
-          {project.implementationNotes ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-300">
-                Build Notes
-              </h4>
-              <div className="mt-2 grid gap-3 md:grid-cols-3">
-                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                    What I Owned
-                  </p>
-                  <p className="mt-2 text-neutral-200">
-                    {project.implementationNotes.ownerSummary}
-                  </p>
+                <div className="mt-4 space-y-2 text-[11px] text-emerald-300/90">
+                  {project.impactMetrics.slice(0, 2).map((metric, index) => (
+                    <p key={`${project.id}-additional-metric-${index}`}>- {metric}</p>
+                  ))}
                 </div>
-                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                    Hard Lesson
-                  </p>
-                  <p className="mt-2 text-neutral-200">
-                    {project.implementationNotes.hardLesson}
-                  </p>
-                </div>
-                <div className="rounded border border-neutral-800 bg-neutral-950 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">
-                    Next Enhancement
-                  </p>
-                  <p className="mt-2 text-neutral-200">
-                    {project.implementationNotes.nextEnhancement}
-                  </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tags.slice(0, 4).map((tag) => (
+                    <span
+                      key={`${project.id}-${tag}`}
+                      className="rounded border border-neutral-700 bg-black px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-500"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
-          ) : null}
 
-          {project.liveUrl ||
-          project.repoUrl ||
-          project.systemDesignUrl ||
-          (project.additionalLinks?.length ?? 0) > 0 ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">Links</h4>
-              <div className="mt-3 flex flex-wrap gap-3">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {project.liveUrl ? (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded border border-emerald-500/40 px-3 py-2 text-xs uppercase tracking-widest text-emerald-300 transition hover:border-emerald-400 hover:text-emerald-200"
+                    className={`${linkClass} border-emerald-500/40 text-emerald-300 hover:border-emerald-300 hover:text-emerald-200`}
                   >
-                    Live Demo
+                    Live
                   </a>
                 ) : null}
                 {project.repoUrl ? (
@@ -253,207 +93,21 @@ function buildBentoItems(categoryProjects: PortfolioProject[]) {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded border border-neutral-700 px-3 py-2 text-xs uppercase tracking-widest text-neutral-300 transition hover:border-emerald-400/60 hover:text-emerald-200"
+                    className={`${linkClass} border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-neutral-100`}
                   >
-                    Source Code
+                    Repo
                   </a>
                 ) : null}
                 {project.systemDesignUrl ? (
                   <a
                     href={project.systemDesignUrl}
-                    className="rounded border border-cyan-400/50 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                    className={`${linkClass} border-cyan-400/40 text-cyan-300 hover:border-cyan-300 hover:text-cyan-200`}
                   >
-                    System Design Doc
+                    Design
                   </a>
                 ) : null}
-                {project.additionalLinks?.map((link) => (
-                  <a
-                    key={`${project.id}-detail-${link.label}`}
-                    href={link.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`rounded border px-3 py-2 text-xs uppercase tracking-widest transition ${
-                      link.label.toLowerCase().includes("sre")
-                        ? "border-red-500/50 text-red-300 hover:border-red-300 hover:text-red-200"
-                        : "border-amber-400/50 text-amber-300 hover:border-amber-300 hover:text-amber-200"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
               </div>
-            </div>
-          ) : null}
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              System Architecture
-            </h4>
-            <div className="mt-2 rounded border border-neutral-800 bg-black p-4">
-              <pre className="overflow-x-auto text-[10px] text-neutral-400">
-                {`mermaid
-${project.architecture}
-`}
-              </pre>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              Engineering Decisions
-            </h4>
-            <div className="mt-2 space-y-2 rounded border border-neutral-800 bg-neutral-950 p-4 text-neutral-300">
-              {project.tradeoffs.map((tradeoff, tradeoffIndex) => (
-                <p key={`${project.id}-tradeoff-${tradeoffIndex}`}>- {tradeoff}</p>
-              ))}
-            </div>
-          </div>
-
-          {project.behavioralSignals?.length ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-amber-300">
-                Behavioral + Impact Signals
-              </h4>
-              <div className="mt-2 space-y-2 rounded border border-amber-500/30 bg-amber-500/5 p-4 text-neutral-200">
-                {project.behavioralSignals.map((signal, signalIndex) => (
-                  <p key={`${project.id}-signal-${signalIndex}`}>- {signal}</p>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {project.productionCapabilities?.length ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-400">
-                Production-Grade Capabilities
-              </h4>
-              <div className="mt-2 space-y-2 rounded border border-cyan-500/30 bg-cyan-500/5 p-4 text-neutral-200">
-                {project.productionCapabilities.map((capability, capabilityIndex) => (
-                  <p key={`${project.id}-production-${capabilityIndex}`}>- {capability}</p>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              Quality Guarantees
-            </h4>
-            <div className="mt-2 space-y-2 rounded border border-neutral-800 bg-neutral-950 p-4 text-neutral-300">
-              {project.invariants.map((invariant, invariantIndex) => (
-                <p key={`${project.id}-invariant-${invariantIndex}`}>- {invariant}</p>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.4em] text-emerald-500">
-              Outcome Highlights
-            </h4>
-            <div className="mt-2 space-y-2 rounded border border-neutral-800 bg-neutral-950 p-4 text-neutral-300">
-              {project.highlights.map((highlight, highlightIndex) => (
-                <p key={`${project.id}-highlight-${highlightIndex}`}>- {highlight}</p>
-              ))}
-            </div>
-          </div>
-
-          {project.recentUpdates?.length ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-amber-400">
-                Recent Upgrades
-              </h4>
-              <div className="mt-2 space-y-2 rounded border border-amber-500/30 bg-amber-500/5 p-4 text-neutral-200">
-                {project.recentUpdates.map((item, updateIndex) => (
-                  <p key={`${project.id}-update-${updateIndex}`}>- {item}</p>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {project.phaseImprovements?.length ? (
-            <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-cyan-300">
-                Phase Improvements
-              </h4>
-              <div className="mt-2 grid gap-3 md:grid-cols-2">
-                {project.phaseImprovements.map((item) => (
-                  <article
-                    key={`${project.id}-${item.phase}`}
-                    className="rounded border border-cyan-500/30 bg-cyan-500/5 p-4 text-neutral-200"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300">
-                        {item.phase}
-                      </p>
-                      <span className="rounded border border-neutral-700 px-2 py-1 text-[10px] uppercase tracking-widest text-neutral-400">
-                        {item.status}
-                      </span>
-                    </div>
-                    <h5 className="mt-2 text-sm font-semibold text-neutral-100">{item.title}</h5>
-                    <p className="mt-2 text-sm leading-relaxed text-neutral-300">{item.summary}</p>
-                    <div className="mt-3 space-y-2 text-sm text-neutral-300">
-                      {item.bullets.map((bullet) => (
-                        <p key={`${project.id}-${item.phase}-${bullet}`}>- {bullet}</p>
-                      ))}
-                    </div>
-                    {item.proofHref && item.proofLabel ? (
-                      <a
-                        href={item.proofHref}
-                        className="mt-4 inline-flex rounded border border-cyan-400/50 px-3 py-2 text-xs uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
-                      >
-                        {item.proofLabel}
-                      </a>
-                    ) : null}
-                  </article>
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    ),
-  }));
-}
-
-export default function Projects() {
-  const groupedProjects = categoryOrder
-    .map((category) => ({
-      category,
-      description: categoryDescriptions[category],
-      projects: projectsData.filter((project) => project.projectType === category),
-    }))
-    .filter((group) => group.projects.length > 0);
-
-  return (
-    <section id="projects" className="border-t border-neutral-900 bg-black py-20">
-      <div className="container mx-auto px-6">
-        <h2 className="mb-2 text-center text-2xl font-bold text-white">
-          Core Infrastructure Engineering
-        </h2>
-        <p className="mb-4 text-center text-xs font-mono uppercase tracking-[0.5em] text-emerald-500">
-          Production Systems Portfolio
-        </p>
-        <p className="mx-auto mb-6 max-w-3xl text-center text-sm text-neutral-300">
-          Core infrastructure systems and reliability engineering projects. All systems are
-          provisioned via Infrastructure as Code (Terraform), instrumented with deep observability
-          pipelines, and rigorously tested through chaos drills and load validation.
-        </p>
-        <div className="mx-auto mb-10 max-w-4xl rounded-xl border border-neutral-800 bg-neutral-950 p-5 font-mono text-sm text-neutral-300">
-          <p className="mb-2 text-xs uppercase tracking-[0.3em] text-amber-300">
-            Engineering Behavioral Signals
-          </p>
-          <p>- Built systems with explicit failure handling, retries, and reliability controls.</p>
-          <p>- Documented architecture tradeoffs and scaling decisions in each project deep dive.</p>
-          <p>- Demonstrated deployment + observability readiness with public demos and live metrics.</p>
-        </div>
-
-        <div className="space-y-12">
-          {groupedProjects.map((group) => (
-            <div key={group.category}>
-              <h3 className="text-lg font-bold text-white">{group.category}</h3>
-              <p className="mb-4 mt-1 text-sm text-neutral-400">{group.description}</p>
-              <Bento items={buildBentoItems(group.projects)} />
-            </div>
+            </article>
           ))}
         </div>
       </div>

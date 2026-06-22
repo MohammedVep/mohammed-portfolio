@@ -8,7 +8,7 @@ import { profileData } from "@/content/profile";
 import { projectsData } from "@/content/projects";
 
 export default function Hero() {
-  const liveProjectCount = projectsData.filter((project) => Boolean(project.liveUrl)).length;
+  const coreProjectCount = 4;
   const systemDesignCount = projectsData.filter((project) => Boolean(project.systemDesignUrl)).length;
   const blogPostCount = blogPostsSorted.length;
   const deploymentLinks = [
@@ -16,9 +16,6 @@ export default function Hero() {
     { id: "sentinel-mesh", label: "SentinelMesh", signal: "sentinel-mesh.cloud" },
     { id: "cloud-code-execution", label: "Cloud Sandbox", signal: "cloudsandbox.space" },
     { id: "autoscale-os", label: "AutoScale OS", signal: "autoscale-os.dev" },
-    { id: "realtime-transit-telemetry", label: "Transit Telemetry", signal: "realtimedashboard.dev" },
-    { id: "mini-load-balancer", label: "Edge Balancer", signal: "miniloadbalancer.io" },
-    { id: "ai-job-match-analysis", label: "AI Gateway Platform", signal: "sharedaigateway.com" },
   ]
     .map((item) => {
       const project = projectsData.find((candidate) => candidate.id === item.id);
@@ -187,10 +184,10 @@ export default function Hero() {
               </p>
             </div>
             <Link
-              href="/#projects"
+              href="/#featured-systems"
               className="rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-cyan-400/60 hover:text-cyan-200"
             >
-              View Project Details
+              View Core Details
             </Link>
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -212,8 +209,8 @@ export default function Hero() {
         </div>
         <div className="mb-8 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Live Systems</p>
-            <p className="mt-2 text-2xl font-bold text-emerald-300">{liveProjectCount}</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Core Systems</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-300">{coreProjectCount}</p>
           </div>
           <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
             <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Design Docs</p>

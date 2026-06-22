@@ -1,38 +1,31 @@
 const runbookItems = [
   {
-    title: "Upgrade Log: Portfolio Apps as Production-Style Systems",
+    title: "NetPulse Incident Noise Reduction",
     summary:
-      "How NetPulse, Cloud Sandbox, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash now map to clearer architecture proof and live evidence paths.",
-    href: "/blog/portfolio-production-architecture-upgrades",
-    label: "Read Upgrade Log",
+      "What broke: noisy checks and alert trust. Fix: queue-based ingestion, PgBouncer pooling, retry windows, and incident lifecycle controls.",
+    href: "/blog/netpulse-incident-noise-reduction",
+    label: "Read NetPulse Writeup",
   },
   {
-    title: "Migration Notes: App Runner to ECS for AI Gateway Platform and Edge Balancer",
+    title: "Cloud Sandbox Queue + DLQ Strategy",
     summary:
-      "Why both services outgrew App Runner, why AI Gateway Platform moved to ECS Express Mode while Edge Balancer moved to regular ECS, and which AWS alternatives remained viable.",
-    href: "/blog/app-runner-to-ecs-migration-notes",
-    label: "Read Migration Notes",
-  },
-  {
-    title: "ADR: Fargate Spot and Firecracker Isolation Strategy",
-    summary:
-      "Why I selected AWS Fargate Spot + isolation-first execution boundaries over EC2 worker fleets for asynchronous payload workloads.",
+      "What broke: synchronous execution pressure and unsafe worker coupling. Fix: queue-first execution, bounded workers, DLQ recovery, and isolation-first design.",
     href: "/blog/queue-first-cloud-code-execution",
-    label: "Read ADR",
+    label: "Read Sandbox ADR",
   },
   {
-    title: "Post-Mortem: Surviving a 15k Req/Min Payload Spike",
+    title: "AutoScale OS Control Loop Design",
     summary:
-      "Failure timeline, root-cause analysis, and queue-decoupling response path used to stabilize throughput and memory pressure.",
-    href: "/blog/queue-first-cloud-code-execution",
-    label: "Read Post-Mortem",
+      "What it proves: Java/Kubernetes orchestration, worker health, backlog-aware scaling, readiness checks, and Prometheus-style metrics surfaces.",
+    href: "/system-design/autoscale-os",
+    label: "Open AutoScale Design",
   },
   {
-    title: "FinOps Report: 70% Compute Reduction with Spot",
+    title: "SentinelMesh Zero-Trust Control Plane",
     summary:
-      "Cost and scaling analysis for elastic worker execution using spot capacity, queue-depth triggers, and recovery guardrails.",
-    href: "/blog/queue-first-cloud-code-execution",
-    label: "Read FinOps Report",
+      "What it proves: service trust map, policy evaluation, blocked traffic, auth failures, audit stream, and operational security visibility.",
+    href: "/system-design/sentinel-mesh",
+    label: "Open Mesh Design",
   },
 ];
 
@@ -44,11 +37,11 @@ export default function Runbooks() {
           Architecture_And_Runbooks
         </h2>
         <p className="mx-auto mb-8 max-w-3xl text-center text-sm text-neutral-300">
-          Engineering writing focused on architecture decisions, incident response, and operating
-          economics. This is the evidence layer behind the project metrics.
+          Four core proof paths: what broke, how it was fixed, the metrics or operating signal,
+          and the design docs recruiters can inspect quickly.
         </p>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {runbookItems.map((item) => (
             <article
               key={item.title}

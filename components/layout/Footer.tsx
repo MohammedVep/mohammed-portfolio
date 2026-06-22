@@ -3,7 +3,7 @@ import { profileData } from "@/content/profile";
 const quickLinks = [
   { href: "/#featured-systems", label: "Flagship Systems" },
   { href: "/#system-designs", label: "System Design Docs" },
-  { href: "/#projects", label: "Core Infrastructure" },
+  { href: "/#projects", label: "Additional Projects" },
   { href: "/#runbooks", label: "Architecture and Runbooks" },
   { href: "/blog", label: "Engineering Blog" },
   { href: "/#skills", label: "Technical Skills" },

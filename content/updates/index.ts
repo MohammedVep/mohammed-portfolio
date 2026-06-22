@@ -11,6 +11,15 @@ export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
   {
+    id: "homepage-density-reduced",
+    title: "Homepage Density Reduced Around Four Core Systems",
+    scope: "Recruiter Scan Path",
+    detail:
+      "Homepage now leads with NetPulse, Cloud Sandbox, AutoScale OS, and SentinelMesh, while Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash are moved into compact Additional Projects.",
+    proofHref: "/#featured-systems",
+    proofLabel: "View Core Systems",
+  },
+  {
     id: "honours-degree-proof-added",
     title: "Honours BCS Degree Proof Added",
     scope: "Academic Verification",
@@ -33,7 +42,7 @@ export const latestImprovements: Improvement[] = [
     title: "Current Public Deployment Links Surfaced",
     scope: "Live Access",
     detail:
-      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, SentinelMesh, Cloud Sandbox, AutoScale OS, Transit Telemetry, Edge Balancer, and AI Gateway Platform.",
+      "Homepage now shows only the four strongest custom-domain deployments above the fold: NetPulse, SentinelMesh, Cloud Sandbox, and AutoScale OS.",
     proofHref: "/",
     proofLabel: "Open Homepage",
   },
@@ -43,8 +52,8 @@ export const latestImprovements: Improvement[] = [
     scope: "Project Evidence",
     detail:
       "Portfolio now includes SentinelMesh as a zero-trust service-mesh control-plane project and AutoScale OS as a Java/Kubernetes/Redis autoscaling orchestration project, each with live access and a system-design page.",
-    proofHref: "/#projects",
-    proofLabel: "View Projects",
+    proofHref: "/#featured-systems",
+    proofLabel: "View Core Systems",
   },
   {
     id: "transit-telemetry-access-domain",
@@ -87,7 +96,7 @@ export const latestImprovements: Improvement[] = [
     title: "Project System Design Library Added",
     scope: "Architecture Evidence",
     detail:
-      "Homepage now surfaces dedicated system design docs for NetPulse, SentinelMesh, Cloud Sandbox, AutoScale OS, Transit Telemetry, Edge Balancer, AI Gateway Platform, and moveYSplash.",
+      "Homepage now surfaces four primary system design docs for NetPulse, SentinelMesh, Cloud Sandbox, and AutoScale OS, with supporting project docs kept in a compact additional list.",
     proofHref: "/#system-designs",
     proofLabel: "View Design Docs",
   },
@@ -111,12 +120,12 @@ export const latestImprovements: Improvement[] = [
   },
   {
     id: "core-infra-order",
-    title: "Core Infrastructure Positioned First",
+    title: "Core Systems Positioned First",
     scope: "Homepage Structure",
     detail:
-      "Core infrastructure systems now appear ahead of non-engineering history so reviewers see production work first.",
-    proofHref: "/#projects",
-    proofLabel: "View Core Infrastructure",
+      "Core infrastructure systems now appear ahead of additional projects and non-engineering history so reviewers see the strongest proof first.",
+    proofHref: "/#featured-systems",
+    proofLabel: "View Core Systems",
   },
   {
     id: "skills-map-refresh",
