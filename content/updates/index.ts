@@ -11,6 +11,15 @@ export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
   {
+    id: "cloud-sandbox-access-domain",
+    title: "Cloud Sandbox Dedicated Access Domain Added",
+    scope: "Live Access",
+    detail:
+      "Cloud Sandbox reviewer access now points to cloudsandbox.space, replacing the raw ALB endpoint with a cleaner production-style domain.",
+    proofHref: "https://cloudsandbox.space",
+    proofLabel: "Open Cloud Sandbox",
+  },
+  {
     id: "netpulse-access-domain",
     title: "NetPulse Dedicated Access Domain Added",
     scope: "Live Access",

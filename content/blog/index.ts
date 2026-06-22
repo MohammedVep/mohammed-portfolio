@@ -103,7 +103,7 @@ export const blogPosts: BlogPost[] = [
         "The old portfolio risk was not a code failure; it was an evidence failure. Strong apps were present, but the reviewer still had to connect deployment changes, architecture decisions, and upgrade history manually.",
       evidence: [
         "NetPulse now leads the homepage with queue-based monitoring, PgBouncer pooling, mTLS checker traffic, and incident lifecycle controls.",
-        "Cloud Sandbox is positioned as a live ALB-backed execution API with asynchronous queue/DLQ recovery and worker isolation.",
+        "Cloud Sandbox is positioned as a live custom-domain execution platform with asynchronous queue/DLQ recovery and worker isolation.",
         "Edge Balancer is separated from App Runner-era language and now explains why regular ECS fits a networking-heavy Go service.",
         "AI Gateway Platform is framed as an evidence-grounded AI product on ECS Express Mode instead of a generic recruiter gimmick.",
         "Undeployed or lower-signal projects were removed so reviewers do not encounter stale or irrelevant links.",

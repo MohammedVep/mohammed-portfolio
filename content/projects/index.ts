@@ -248,7 +248,7 @@ export const projectsData: PortfolioProject[] = [
     whyItMatters:
       "Shows SRE-first backend platform engineering where sandbox isolation, autoscaling, queue durability, and cost-efficiency are first-class requirements.",
     architectureSummary:
-      "ALB execution ingress -> queue and DLQ lanes -> Fargate Spot worker pool -> result store -> recovery scheduler via EventBridge.",
+      "cloudsandbox.space -> execution ingress -> queue and DLQ lanes -> Fargate Spot worker pool -> result store -> recovery scheduler via EventBridge.",
     metrics: "Fargate Spot FinOps + DLQ Recovery | 15k+ Req/Min Burst Tests",
     impactMetrics: [
       "Architected a highly elastic worker pool utilizing AWS Fargate Spot instances via Terraform, reducing distributed compute costs by 70% for asynchronous payload processing.",
@@ -301,12 +301,13 @@ export const projectsData: PortfolioProject[] = [
       "Terraform-managed infrastructure topology with explicit control-plane and execution-plane separation.",
     ],
     recentUpdates: [
+      "Cut over Cloud Sandbox reviewer access to cloudsandbox.space so the live execution path uses a dedicated production-style domain.",
       "Introduced Terraform-governed dual-endpoint model for control plane and execution API traffic separation.",
       "Expanded Cloud Sandbox scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
       "Added stronger sandbox controls: bounded runtime resources, idempotent job handling, and audit visibility.",
-      "Clarified the live ALB endpoint as the execution API proof path and documented queue/DLQ recovery in the production upgrade log.",
+      "Clarified the live execution proof path and documented queue/DLQ recovery in the production upgrade log.",
     ],
-    liveUrl: "http://ccee-api-alb-371008494.us-east-1.elb.amazonaws.com",
+    liveUrl: "https://cloudsandbox.space",
     repoUrl: "https://github.com/MohammedVep/cloud-code-execution-engine",
     systemDesignUrl: "/system-design/cloud-code-execution",
     additionalLinks: [
