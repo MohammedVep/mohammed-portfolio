@@ -7,6 +7,7 @@ export const profileData = {
   githubUrl: "https://github.com/MohammedVep",
   linkedInUrl: "https://www.linkedin.com/in/mohammed-v-2094b222a/",
   resumeUrl: "/Mohammed_Vepari_Resume.docx",
+  degreeProofUrl: "/Mohammed_Vepari_BCS_Honours_Degree_Proof.pdf",
   netPulseLiveUrl: "https://netpulsemanage.dev",
   netPulseRepoUrl: "https://github.com/MohammedVep/NetPulse",
   sreDashboardUrl: "/sre-dashboard",

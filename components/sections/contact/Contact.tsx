@@ -115,6 +115,14 @@ export default function Contact() {
             >
               Download Resume
             </a>
+            <a
+              href={profileData.degreeProofUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-cyan-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+            >
+              View Degree Proof
+            </a>
           </div>
         </div>
       </section>

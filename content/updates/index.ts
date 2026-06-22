@@ -11,6 +11,24 @@ export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
   {
+    id: "honours-degree-proof-added",
+    title: "Honours BCS Degree Proof Added",
+    scope: "Academic Verification",
+    detail:
+      "Portfolio now includes a direct proof link for Mohammed's Honours Bachelor of Computer Science degree alongside resume and education details.",
+    proofHref: "/Mohammed_Vepari_BCS_Honours_Degree_Proof.pdf",
+    proofLabel: "Open Degree Proof",
+  },
+  {
+    id: "keep-visible-systems-prioritized",
+    title: "Keep-Visible Systems Prioritized",
+    scope: "Recruiter Scan Path",
+    detail:
+      "Featured systems now intentionally keep NetPulse, Cloud Sandbox, AutoScale OS, and SentinelMesh visible because they carry the strongest reliability, sandboxing, Java/Kubernetes, and zero-trust signals.",
+    proofHref: "/#featured-systems",
+    proofLabel: "View Featured Systems",
+  },
+  {
     id: "current-public-deployments-surfaced",
     title: "Current Public Deployment Links Surfaced",
     scope: "Live Access",

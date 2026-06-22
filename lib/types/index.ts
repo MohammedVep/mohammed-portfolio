@@ -12,6 +12,8 @@ export interface Education {
   gpa: string;
   honours: boolean;
   coursework?: string[];
+  proofUrl?: string;
+  proofLabel?: string;
 }
 
 export interface Project {

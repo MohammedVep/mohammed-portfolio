@@ -1,6 +1,6 @@
 import { projectsData } from "@/content/projects";
 
-const flagshipIds = ["netpulse", "cloud-code-execution", "realtime-transit-telemetry"] as const;
+const flagshipIds = ["netpulse", "cloud-code-execution", "autoscale-os", "sentinel-mesh"] as const;
 
 const architectureSnapshots: Record<(typeof flagshipIds)[number], string> = {
   netpulse: `Client Dashboard
@@ -29,19 +29,39 @@ Fargate Spot Worker Pool
    |
    v
 Result Store + Recovery Replay`,
-  "realtime-transit-telemetry": `Transit Feed Ingestion
-        |
-        v
-Telemetry Processor
-        |
-        v
-Stream Buffer + Event Store
-        |
-        v
-WebSocket Push Layer
-        |
-        v
-Operations Dashboard`,
+  "autoscale-os": `React Operations UI
+      |
+      v
+Java Orchestration API
+      |
+      v
+Redis State + Control Loop
+      |
+      v
+Kubernetes Worker Scheduler
+      |
+      v
+/metrics + /readiness`,
+  "sentinel-mesh": `Service Traffic
+      |
+      v
+Gateway Audit Stream
+      |
+      v
+Policy Bundle Evaluator
+      |
+      v
+Trust Map + Alerts
+      |
+      v
+AutoScaleOS Export Health`,
+};
+
+const visibilityReasons: Record<(typeof flagshipIds)[number], string> = {
+  netpulse: "Best flagship; strongest backend/reliability story.",
+  "cloud-code-execution": "Strong platform/security/sandboxing signal.",
+  "autoscale-os": "Best Java/Kubernetes/platform-engineering signal.",
+  "sentinel-mesh": "Strong security/backend/zero-trust signal.",
 };
 
 const netPulseArchitecture = `API Layer
@@ -100,9 +120,9 @@ export default function FeaturedSystems() {
           Flagship_System
         </h2>
         <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-neutral-300">
-          NetPulse is the primary proof system on this portfolio. The rest of the projects support
-          the same backend, reliability, and infrastructure story, with the current NetPulse
-          roadmap split into Phase 2 onboarding work and Phase 3 real-user evidence.
+          Keep-visible systems for recruiter scan: NetPulse, Cloud Sandbox, AutoScale OS, and
+          SentinelMesh. These projects cover backend reliability, sandboxed platform execution,
+          Java/Kubernetes orchestration, and zero-trust service-mesh controls.
         </p>
 
         <article className="border border-emerald-500/30 bg-neutral-950 p-5 font-mono md:p-6">
@@ -117,6 +137,9 @@ export default function FeaturedSystems() {
               <p className="mt-3 max-w-4xl text-sm leading-relaxed text-neutral-300">
                 Queue-based uptime monitoring system with retry logic, regional workers, PgBouncer
                 connection pooling, mTLS worker communication, and incident lifecycle controls.
+              </p>
+              <p className="mt-3 inline-flex rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-[11px] uppercase tracking-widest text-emerald-300">
+                Keep Visible: {visibilityReasons.netpulse}
               </p>
             </div>
 
@@ -297,7 +320,7 @@ export default function FeaturedSystems() {
 
         <div className="mt-8">
           <p className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-neutral-500">
-            Secondary Systems
+            Keep Visible Supporting Systems
           </p>
           <div className="grid gap-5 lg:grid-cols-2">
             {secondaryProjects.map((project) => (
@@ -311,6 +334,9 @@ export default function FeaturedSystems() {
                 <h3 className="mt-2 text-lg font-bold text-neutral-100">{project.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-300">
                   {project.whyItMatters}
+                </p>
+                <p className="mt-3 rounded border border-cyan-500/30 bg-cyan-500/5 px-3 py-2 text-[11px] uppercase tracking-widest text-cyan-300">
+                  Keep Visible: {visibilityReasons[project.id as (typeof flagshipIds)[number]]}
                 </p>
 
                 <div className="mt-3 space-y-1 text-[11px] text-emerald-300/90">

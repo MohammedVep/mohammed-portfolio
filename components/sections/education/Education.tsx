@@ -32,10 +32,20 @@ export default function Education() {
                 </div>
                 {edu.honours && (
                   <div className="text-[10px] text-neutral-400 uppercase tracking-widest">
-                    {'// Graduating with Honours'}
+                    {'// Honours degree'}
                   </div>
                 )}
               </div>
+              {edu.proofUrl ? (
+                <a
+                  href={edu.proofUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex rounded border border-cyan-400/40 px-3 py-2 text-[10px] uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                >
+                  {edu.proofLabel ?? 'View Education Proof'}
+                </a>
+              ) : null}
               {edu.coursework?.length ? (
                 <div className="mt-5">
                   <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-neutral-500">

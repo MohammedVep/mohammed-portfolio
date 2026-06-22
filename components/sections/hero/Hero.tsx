@@ -171,7 +171,8 @@ export default function Hero() {
           </p>
           <p className="mt-2 max-w-4xl text-sm leading-relaxed text-neutral-300">
             Flagship project: NetPulse. Academic foundation includes Operating Systems,
-            Distributed Systems (85%), Theory of Computing, Java, Python, and database systems.
+            Distributed Systems (85%), Theory of Computing, Java, Python, database systems, and
+            honours BCS degree proof.
           </p>
         </div>
         <div className="mb-8 rounded-2xl border border-cyan-500/20 bg-cyan-500/[0.03] p-5">
@@ -250,6 +251,14 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-emerald-300 transition hover:border-emerald-400 hover:text-emerald-200"
           >
             Download Resume
+          </a>
+          <a
+            href={profileData.degreeProofUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 px-4 py-2 text-xs font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300 hover:text-cyan-200"
+          >
+            View Degree Proof
           </a>
           <a
             href={profileData.githubUrl}
