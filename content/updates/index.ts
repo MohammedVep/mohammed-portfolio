@@ -11,6 +11,15 @@ export const improvementsUpdatedAt = "June 2026";
 
 export const latestImprovements: Improvement[] = [
   {
+    id: "current-public-deployments-surfaced",
+    title: "Current Public Deployment Links Surfaced",
+    scope: "Live Access",
+    detail:
+      "Homepage now shows the active custom-domain deployments above the fold: NetPulse, Cloud Sandbox, Edge Balancer, and AI Gateway Platform.",
+    proofHref: "/",
+    proofLabel: "Open Homepage",
+  },
+  {
     id: "cloud-sandbox-access-domain",
     title: "Cloud Sandbox Dedicated Access Domain Added",
     scope: "Live Access",

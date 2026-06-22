@@ -43,7 +43,8 @@ export default function Contact() {
           <p className="mx-auto mb-10 max-w-2xl text-center text-neutral-400">
             I am actively seeking full-time New Grad Software Engineer roles (2026).
             I have shipped public, production-style projects with live demos and source code.
-            I am based in Brampton and available for Toronto-area on-site or hybrid office schedules.
+            I am based in Brampton and available for on-site, hybrid, or remote roles
+            aligned with EST/EDT working hours.
             The fastest way to reach me is by email.
           </p>
 

@@ -77,7 +77,7 @@ export const blogPosts: BlogPost[] = [
       diagram: `graph LR
   Reviewer[Reviewer / Recruiter]-->Portfolio[Portfolio Homepage]
   Portfolio-->NetPulse[NetPulse Flagship]
-  Portfolio-->CCEE[Cloud Sandbox API]
+  Portfolio-->CCEE[Cloud Sandbox]
   Portfolio-->Transit[Transit Telemetry Dashboard]
   Portfolio-->LoadBalancer[Edge Balancer]
   Portfolio-->AI[AI Gateway Platform]
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
         ? [{ label: "NetPulse System Design", url: netPulse.systemDesignUrl }]
         : []),
       ...(cloudSandbox.liveUrl
-        ? [{ label: "Cloud Sandbox API", url: cloudSandbox.liveUrl }]
+        ? [{ label: "Cloud Sandbox Live", url: cloudSandbox.liveUrl }]
         : []),
       ...(cloudSandbox.systemDesignUrl
         ? [{ label: "Cloud Sandbox Design", url: cloudSandbox.systemDesignUrl }]
@@ -322,7 +322,7 @@ export const blogPosts: BlogPost[] = [
     ],
     links: [
       ...(cloudSandbox.liveUrl
-        ? [{ label: "Live Execution API", url: cloudSandbox.liveUrl }]
+        ? [{ label: "Cloud Sandbox Live", url: cloudSandbox.liveUrl }]
         : []),
       ...(cloudSandbox.repoUrl
         ? [{ label: "Source Repository", url: cloudSandbox.repoUrl }]

@@ -11,6 +11,27 @@ export default function Hero() {
   const liveProjectCount = projectsData.filter((project) => Boolean(project.liveUrl)).length;
   const systemDesignCount = projectsData.filter((project) => Boolean(project.systemDesignUrl)).length;
   const blogPostCount = blogPostsSorted.length;
+  const deploymentLinks = [
+    { id: "netpulse", label: "NetPulse", signal: "netpulsemanage.dev" },
+    { id: "cloud-code-execution", label: "Cloud Sandbox", signal: "cloudsandbox.space" },
+    { id: "mini-load-balancer", label: "Edge Balancer", signal: "miniloadbalancer.io" },
+    { id: "ai-job-match-analysis", label: "AI Gateway Platform", signal: "sharedaigateway.com" },
+  ]
+    .map((item) => {
+      const project = projectsData.find((candidate) => candidate.id === item.id);
+
+      if (!project?.liveUrl) {
+        return null;
+      }
+
+      return {
+        ...item,
+        url: project.liveUrl,
+      };
+    })
+    .filter((item): item is { id: string; label: string; signal: string; url: string } =>
+      Boolean(item)
+    );
   const roleSummaryCards = [
     {
       title: "Enterprise SaaS New Grad",
@@ -35,17 +56,18 @@ export default function Hero() {
   const baseTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
     "[0.0005] ACTIVE_SIGNAL: flagship_systems_live",
-    "[0.0008] CORE_STACK: go_node_terraform_fargate",
-    "[0.0011] PRINCIPLES: frugality_operational_excellence",
-    "[0.0014] STATUS: available_onsite_hybrid_remote_est_edt",
+    "[0.0008] ACTIVE_DEPLOYMENT: netpulsemanage.dev",
+    "[0.0011] ACTIVE_DEPLOYMENT: cloudsandbox.space",
+    "[0.0014] CORE_STACK: go_node_terraform_fargate",
+    "[0.0017] STATUS: available_onsite_hybrid_remote_est_edt",
     "_",
   ];
 
   const hoverTelemetry = [
     "[0.0002] CANDIDATE_PROFILE: backend_infrastructure_engineer",
-    "[0.0005] FEATURED_SYSTEM: cloud_code_execution_sre",
+    "[0.0005] FEATURED_SYSTEM: cloud_sandbox_execution",
     "[0.0008] FEATURED_SYSTEM: netpulse_zero_trust",
-    "[0.0010] FEATURED_SYSTEM: mini_load_balancer_pprof",
+    "[0.0010] FEATURED_SYSTEM: edge_balancer_pprof",
     "[0.0012] CONTACT_CHANNELS: email_linkedin_github",
     "_",
   ];
@@ -146,6 +168,41 @@ export default function Hero() {
             Flagship project: NetPulse. Academic foundation includes Operating Systems,
             Distributed Systems (85%), Theory of Computing, Java, Python, and database systems.
           </p>
+        </div>
+        <div className="mb-8 rounded-2xl border border-cyan-500/20 bg-cyan-500/[0.03] p-5">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-cyan-300">
+                Current Public Deployments
+              </p>
+              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-300">
+                Direct links to the active custom-domain systems reviewers can open without digging
+                through repository notes.
+              </p>
+            </div>
+            <Link
+              href="/#projects"
+              className="rounded-full border border-neutral-700 px-4 py-2 text-xs font-mono uppercase tracking-widest text-neutral-300 transition hover:border-cyan-400/60 hover:text-cyan-200"
+            >
+              View Project Details
+            </Link>
+          </div>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {deploymentLinks.map((deployment) => (
+              <a
+                key={deployment.id}
+                href={deployment.url}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-neutral-800 bg-black p-4 transition hover:border-cyan-400/60"
+              >
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                  {deployment.signal}
+                </p>
+                <p className="mt-2 text-sm font-semibold text-white">{deployment.label}</p>
+              </a>
+            ))}
+          </div>
         </div>
         <div className="mb-8 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 font-mono">
