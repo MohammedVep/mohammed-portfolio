@@ -7,11 +7,11 @@ const runbookItems = [
     label: "Read NetPulse Writeup",
   },
   {
-    title: "Cloud Sandbox Queue + DLQ Strategy",
+    title: "Scale to Zero Without Losing Work",
     summary:
-      "What broke: synchronous execution pressure and unsafe worker coupling. Fix: queue-first execution, bounded workers, DLQ recovery, and isolation-first design.",
-    href: "/blog/queue-first-cloud-code-execution",
-    label: "Read Sandbox ADR",
+      "What it proves: durable queue state, 0-to-N wake-up, readiness gating, cooldown, and explicit cold-start tradeoffs.",
+    href: "/blog/scale-to-zero-without-losing-work",
+    label: "Read Scaling Deep Dive",
   },
   {
     title: "AutoScale OS Control Loop Design",

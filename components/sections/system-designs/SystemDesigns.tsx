@@ -8,8 +8,8 @@ const coreDesignIds = ["netpulse", "cloud-code-execution", "autoscale-os", "sent
 
 const coreDesignReasons: Record<(typeof coreDesignIds)[number], string> = {
   netpulse: "Reliability flagship: incidents, queueing, PgBouncer, mTLS, and alert lifecycle.",
-  "cloud-code-execution": "Platform/security proof: sandboxed execution, queue/DLQ recovery, and worker isolation.",
-  "autoscale-os": "Java/Kubernetes platform proof: autoscaling control loop, worker scheduling, metrics, and readiness.",
+  "cloud-code-execution": "Platform proof: durable queueing, scale-to-zero execution workers, DLQ recovery, and sandbox isolation.",
+  "autoscale-os": "Java/Kubernetes proof: workload eligibility, 0-to-N control, cooldown, readiness, and worker scheduling.",
   "sentinel-mesh": "Security/backend proof: zero-trust policy evaluation, audit stream, trust map, and alerts.",
 };
 

@@ -13,6 +13,7 @@ export const profileData = {
   sreDashboardUrl: "/sre-dashboard",
   aiSystemLiveUrl: "https://sharedaigateway.com",
   aiSystemRepoUrl: "https://github.com/MohammedVep/ai-system-shared-ai-platform",
+  workAuthorization: "Legally authorized to work in Canada without employer sponsorship.",
   availability: "Available for on-site, hybrid, or remote roles (EST/EDT).",
   summary:
     "Honours Bachelor of Computer Science (2026) • 83.95% GPA • Architecting fault-tolerant, auto-scaling distributed systems using Java, Go, Node, Kubernetes, and AWS Terraform.",

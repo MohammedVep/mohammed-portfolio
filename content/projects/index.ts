@@ -311,35 +311,40 @@ export const projectsData: PortfolioProject[] = [
     title: "Cloud Sandbox",
     projectType: "Scaling & Messaging Systems",
     description:
-      "Fault-tolerant cloud sandbox platform for isolated code execution, queue resilience, and high-throughput payload processing.",
+      "Fault-tolerant cloud sandbox platform for isolated code execution, durable queueing, and scale-to-zero worker capacity.",
     whyItMatters:
-      "Shows SRE-first backend platform engineering where sandbox isolation, autoscaling, queue durability, and cost-efficiency are first-class requirements.",
+      "Shows SRE-first platform engineering: the control plane remains reachable while idle execution workers release capacity, then recover safely when queued work arrives.",
     architectureSummary:
-      "cloudsandbox.space -> execution ingress -> queue and DLQ lanes -> Fargate Spot worker pool -> result store -> recovery scheduler via EventBridge.",
-    metrics: "Fargate Spot FinOps + DLQ Recovery | 15k+ Req/Min Burst Tests",
+      "cloudsandbox.space -> always-available control API -> durable queue/DLQ -> queue-depth scaling policy -> 0-to-N ECS/Fargate worker pool -> readiness-gated execution -> result store.",
+    metrics: "Scale 0 -> N | Durable Queue | Readiness-Gated Wake-Up",
     impactMetrics: [
-      "Architected a highly elastic worker pool utilizing AWS Fargate Spot instances via Terraform, reducing distributed compute costs by 70% for asynchronous payload processing.",
+      "Implemented queue-depth-driven scaling with a minimum execution-worker capacity of zero, removing idle worker allocation while keeping request intake available.",
+      "Designed the wake-up path so queued jobs remain durable while ECS/Fargate starts capacity and workers pass readiness checks before execution.",
+      "Added cooldown, hysteresis, bounded retries, and DLQ recovery to reduce scale thrashing and protect jobs across cold starts.",
       "Engineered a self-healing queue ecosystem using Redis Dead Letter Queues (DLQ) and AWS EventBridge cron triggers, achieving 100% payload recovery during staged network partition drills.",
-      "Tuned Node.js V8 garbage collection and libuv thread-pool sizing to prevent memory leaks during sustained 15,000+ req/min payload spikes.",
     ],
-    tags: ["Node.js", "AWS Fargate", "EventBridge", "Terraform (IaC)", "FinOps"],
+    tags: ["Node.js", "AWS ECS/Fargate", "CloudWatch", "EventBridge", "Terraform (IaC)", "FinOps"],
     hardProblem:
       "Execute untrusted user code safely while controlling runtime limits, output size, and request-level isolation.",
     architecture: `graph LR
   Client[Web Client]-->Control[Execution Control API]
   Control-->API[Execution API Endpoint]
   API-->Queue[Execution Queue]
-  Queue-->Worker[Sandboxed Workers]
+  Queue-->Policy[Queue-Depth Scaling Policy]
+  Policy-->Worker[Sandboxed Workers: 0 to N]
   Worker-->Result[Execution Result Store]
   Result-->API
   API-->Control`,
     tradeoffs: [
       "Strict sandbox limits improve safety but can reject edge-case workloads that need higher resource ceilings.",
       "Queue-based execution improves throughput stability, but adds extra latency compared to direct synchronous execution.",
+      "Scaling execution workers to zero removes idle capacity, but the first job after an idle window pays a cold-start delay.",
       "Splitting web and API deployments improves scalability isolation, but increases operational surface area.",
     ],
     invariants: [
       "Every execution request runs with bounded CPU and memory limits.",
+      "Queued jobs remain durable while execution capacity is zero or warming.",
+      "Only ready workers can claim jobs after a scale-from-zero event.",
       "Execution output is returned in a deterministic response format.",
       "Failed runs do not block subsequent queue processing.",
     ],
@@ -351,9 +356,9 @@ export const projectsData: PortfolioProject[] = [
     ],
     implementationNotes: {
       ownerSummary:
-        "This project is where I practiced separating request intake from execution work so one slow or unsafe job does not control the whole service path.",
+        "This project is where I separated always-available request intake from elastic execution capacity so idle workers can scale to zero without dropping accepted jobs.",
       hardLesson:
-        "The important lesson was that execution platforms are mostly about isolation and backpressure; the language runner matters less than the safety boundary around it.",
+        "The important lesson was that scale-to-zero is a queue and readiness problem: saving idle capacity is only safe when work remains durable and cold workers cannot receive traffic too early.",
       nextEnhancement:
         "Next I would add a visible job timeline with queued, running, completed, failed, and DLQ states so reviewers can watch the lifecycle instead of only seeing the API response.",
     },
@@ -364,10 +369,13 @@ export const projectsData: PortfolioProject[] = [
     ],
     productionCapabilities: [
       "Asynchronous queue-worker execution model with bounded retries and durable result flow.",
+      "Queue-depth-driven scale-to-zero worker policy with readiness-gated scale-from-zero recovery.",
       "Tenant-aware API boundary with safer sandbox and runtime guardrails.",
       "Terraform-managed infrastructure topology with explicit control-plane and execution-plane separation.",
     ],
     recentUpdates: [
+      "Added scale-to-zero for eligible execution workers while preserving an available control plane and durable queued jobs.",
+      "Documented the scale-from-zero wake path, cooldown safeguards, and cold-start tradeoff for technical reviewers.",
       "Cut over Cloud Sandbox reviewer access to cloudsandbox.space so the live execution path uses a dedicated production-style domain.",
       "Introduced Terraform-governed dual-endpoint model for control plane and execution API traffic separation.",
       "Expanded Cloud Sandbox scope into a mini Replit/Judge0-style platform with async queue-worker execution and tenant quota controls.",
@@ -379,6 +387,10 @@ export const projectsData: PortfolioProject[] = [
     systemDesignUrl: "/system-design/cloud-code-execution",
     additionalLinks: [
       {
+        label: "Read Scale-to-Zero Design",
+        url: "/blog/scale-to-zero-without-losing-work",
+      },
+      {
         label: "Read Production Upgrade Log",
         url: "/blog/portfolio-production-architecture-upgrades",
       },
@@ -389,35 +401,41 @@ export const projectsData: PortfolioProject[] = [
     title: "AutoScale OS: Intelligent Cloud Orchestration Platform",
     projectType: "Scaling & Messaging Systems",
     description:
-      "Java, Kubernetes, Redis, AWS, and Terraform cloud orchestration platform for deployment specs, worker placement, autoscaling recommendations, health checks, and metrics export.",
+      "Java, Kubernetes, Redis, AWS, and Terraform orchestration platform with explainable scale-to-zero, worker placement, health checks, and metrics export.",
     whyItMatters:
-      "Shows platform-engineering depth beyond CRUD: autoscaling policy, worker scheduling, deployment orchestration, readiness checks, and Prometheus-style operational metrics.",
+      "Shows platform-engineering depth beyond CRUD: workload eligibility, idle detection, safe 0-to-N recovery, readiness checks, and explainable scaling decisions.",
     architectureSummary:
-      "autoscale-os.dev -> React operations UI -> Java orchestration API -> Redis state store -> autoscaling control loop -> worker scheduler -> Prometheus metrics + readiness endpoints.",
-    metrics: "Java + Kubernetes + Redis | Autoscaling Control Loop | /metrics + /readiness",
+      "autoscale-os.dev -> React operations UI -> Java orchestration API -> Redis state -> idle/backlog control loop -> 0-to-N Kubernetes worker scheduler -> Prometheus metrics + readiness.",
+    metrics: "0 <-> N Replica Control | Cooldown + Readiness Guardrails",
     impactMetrics: [
-      "Built an autoscaling control loop that weighs CPU, memory, queue backlog, current replicas, healthy workers, and desired capacity before recommending bounded scaling actions.",
+      "Added a scale-to-zero path for eligible stateless worker pools after a configurable idle window while preserving control-plane and queue state.",
+      "Designed scale-from-zero recovery so new backlog raises desired capacity from 0 to N and readiness gates protect work until workers are healthy.",
+      "Applied cooldown, hysteresis, and per-workload minimum-replica rules so stateful or latency-sensitive services do not scale to zero accidentally.",
       "Modeled deployment orchestration so deployment specs become placement plans, health summaries, and auditable platform events.",
-      "Exposed platform readiness and metrics surfaces so reviewers can evaluate health, worker state, deployment events, and replica recommendations.",
     ],
-    tags: ["Java", "Kubernetes", "Redis", "AWS", "Terraform", "Prometheus Metrics"],
+    tags: ["Java", "Kubernetes", "Redis", "AWS", "Terraform", "Prometheus", "Scale to Zero"],
     hardProblem:
-      "Turn noisy infrastructure signals into safe scaling recommendations without hiding the reasoning behind the scheduler and control loop.",
+      "Reduce idle capacity to zero without losing queued work, scaling the wrong workload, or routing traffic before replacement workers are ready.",
     architecture: `graph LR
   UI[AutoScaleOS UI]-->API[Java Orchestration API]
   API-->Redis[(Redis State Store)]
   API-->Control[Autoscaling Control Loop]
-  Control-->Scheduler[Worker Scheduler]
-  Scheduler-->Workers[Kubernetes Worker Nodes]
+  Control-->Idle[Idle Window + Backlog Trigger]
+  Idle-->Scheduler[Worker Scheduler]
+  Scheduler-->Workers[Kubernetes Workers: 0 to N]
   API-->Metrics[Prometheus /metrics]
   API-->Readiness[/readiness Health Surface]`,
     tradeoffs: [
       "Aggressive scale-up absorbs backlog faster, but bounded recommendations reduce the risk of runaway capacity changes.",
+      "Scale-to-zero reduces idle allocation for eligible workers, but introduces cold-start latency for the first request after inactivity.",
+      "A zero minimum is unsafe for every workload, so stateful and latency-sensitive services retain an explicit replica floor.",
       "Centralizing specs, metrics, plans, and events in Redis simplifies the demo control plane, but production systems would need stricter persistence and retention policies.",
       "Combining UI and API in one deployable artifact improves reviewer accessibility, while keeping clear API boundaries preserves platform-engineering credibility.",
     ],
     invariants: [
       "Scaling recommendations account for worker health before increasing desired capacity.",
+      "Only workloads explicitly marked scale-to-zero eligible may reach zero replicas.",
+      "Queue state survives zero worker capacity and triggers a guarded scale-from-zero transition.",
       "Deployment events remain auditable from spec intake through placement and health summary.",
       "Readiness and metrics surfaces expose operational state instead of relying only on UI screenshots.",
     ],
@@ -428,7 +446,7 @@ export const projectsData: PortfolioProject[] = [
     ],
     implementationNotes: {
       ownerSummary:
-        "I built AutoScale OS to show platform-engineering judgment: how deployment specs, worker health, queue backlog, and capacity targets flow into explainable scaling decisions.",
+        "I built AutoScale OS to show how deployment policy, idle time, backlog, readiness, and capacity targets produce explainable scale-to-zero and scale-from-zero decisions.",
       hardLesson:
         "The main lesson is that autoscaling is a safety problem, not just a formula. Downscaling and cap decisions need guardrails because infrastructure can fail faster than dashboards update.",
       nextEnhancement:
@@ -441,16 +459,25 @@ export const projectsData: PortfolioProject[] = [
     ],
     productionCapabilities: [
       "Autoscaling control loop based on CPU, memory, backlog, current replicas, healthy workers, and desired capacity.",
+      "Opt-in scale-to-zero policy with idle windows, cooldown/hysteresis, queue wake-up, and readiness-gated recovery.",
       "Worker scheduling model with CPU/memory headroom and availability-zone-aware placement language.",
       "Prometheus-style `/metrics` and `/readiness` surfaces for operational validation.",
     ],
     recentUpdates: [
+      "Added recruiter-readable scale-to-zero and scale-from-zero states with explicit workload eligibility and cold-start tradeoffs.",
+      "Added guardrails for idle windows, cooldown, queue-backed wake-up, readiness, and workload-specific replica floors.",
       "Added AutoScale OS to the portfolio with live custom-domain access and a dedicated system-design page.",
       "Positioned AutoScale OS as the Java/Kubernetes/Redis platform orchestration project for recruiters reviewing backend infrastructure fit.",
       "Documented autoscaling, worker scheduling, deployment events, metrics, and readiness as the main evidence path.",
     ],
     liveUrl: "https://autoscale-os.dev",
     systemDesignUrl: "/system-design/autoscale-os",
+    additionalLinks: [
+      {
+        label: "Read Scale-to-Zero Design",
+        url: "/blog/scale-to-zero-without-losing-work",
+      },
+    ],
   },
   {
     id: "realtime-transit-telemetry",

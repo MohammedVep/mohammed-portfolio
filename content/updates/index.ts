@@ -7,9 +7,27 @@ export type Improvement = {
   proofLabel: string;
 };
 
-export const improvementsUpdatedAt = "June 2026";
+export const improvementsUpdatedAt = "July 2026";
 
 export const latestImprovements: Improvement[] = [
+  {
+    id: "scale-to-zero-recruiter-proof",
+    title: "Scale-to-Zero Proof Path and Referral Packet Added",
+    scope: "Platform Engineering Evidence",
+    detail:
+      "Cloud Sandbox and AutoScale OS now explain workload eligibility, durable queue state, idle-to-zero decisions, backlog-triggered 0-to-N recovery, readiness gates, cooldown safeguards, and cold-start tradeoffs. Contact now includes a compact SWA/new-grad referral review packet.",
+    proofHref: "/blog/scale-to-zero-without-losing-work",
+    proofLabel: "Read Scale-to-Zero Design",
+  },
+  {
+    id: "why-refer-decision-brief",
+    title: "Why Refer Mohammed Decision Brief Added",
+    scope: "Referral Review",
+    detail:
+      "A dedicated section now summarizes verified CS fundamentals, public proof of work, platform judgment, technical communication, operational consistency, Canadian work authorization, and the exact scope of a referral endorsement.",
+    proofHref: "/#why-refer",
+    proofLabel: "Open Referral Brief",
+  },
   {
     id: "homepage-density-reduced",
     title: "Homepage Density Reduced Around Four Core Systems",

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { projectsData } from "@/content/projects";
 
 const flagshipIds = ["netpulse", "cloud-code-execution", "autoscale-os", "sentinel-mesh"] as const;
@@ -19,13 +20,16 @@ Alerts + Status Timeline`,
   "cloud-code-execution": `Client UI
    |
    v
-Control API (ALB)
+Always-On Control API
    |
    v
-Queue + DLQ Orchestrator
+Durable Queue + DLQ
    |
    v
-Fargate Spot Worker Pool
+Queue Trigger + Idle Policy
+   |
+   v
+ECS/Fargate Workers (0 to N)
    |
    v
 Result Store + Recovery Replay`,
@@ -35,10 +39,10 @@ Result Store + Recovery Replay`,
 Java Orchestration API
       |
       v
-Redis State + Control Loop
+Redis State + Idle/Backlog Loop
       |
       v
-Kubernetes Worker Scheduler
+Kubernetes Workers (0 to N)
       |
       v
 /metrics + /readiness`,
@@ -62,6 +66,13 @@ const visibilityReasons: Record<(typeof flagshipIds)[number], string> = {
   "cloud-code-execution": "Strong platform/security/sandboxing signal.",
   "autoscale-os": "Best Java/Kubernetes/platform-engineering signal.",
   "sentinel-mesh": "Strong security/backend/zero-trust signal.",
+};
+
+const scaleToZeroSummaries: Partial<Record<(typeof flagshipIds)[number], string>> = {
+  "cloud-code-execution":
+    "Idle execution workers can reach zero while the control API and durable queue remain available. New backlog starts capacity; readiness gates job consumption.",
+  "autoscale-os":
+    "Only eligible stateless workers can reach zero. Idle windows, queue-backed wake-up, cooldown, hysteresis, and replica floors make the decision explicit.",
 };
 
 const netPulseArchitecture = `API Layer
@@ -124,6 +135,26 @@ export default function FeaturedSystems() {
           SentinelMesh. These projects cover backend reliability, sandboxed platform execution,
           Java/Kubernetes orchestration, and zero-trust service-mesh controls.
         </p>
+
+        <div className="mx-auto mb-8 max-w-5xl border border-amber-400/30 bg-amber-400/5 p-4 font-mono">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-amber-300">
+            Scale-to-Zero Proof Path
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-200">
+            Idle window -&gt; eligible workers reach 0 -&gt; accepted work stays in a durable queue
+            -&gt; backlog triggers 0-to-N capacity -&gt; readiness passes -&gt; workers claim jobs.
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-neutral-400">
+            The design saves idle execution capacity for bursty workloads while acknowledging the
+            cold-start latency paid by the first job after inactivity.
+          </p>
+          <Link
+            href="/blog/scale-to-zero-without-losing-work"
+            className="mt-4 inline-flex rounded border border-amber-400/40 px-3 py-2 text-[10px] uppercase tracking-widest text-amber-300 transition hover:border-amber-300 hover:text-amber-200"
+          >
+            Read Scale-to-Zero Design
+          </Link>
+        </div>
 
         <article className="border border-emerald-500/30 bg-neutral-950 p-5 font-mono md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -344,6 +375,17 @@ export default function FeaturedSystems() {
                     <p key={`${project.id}-capability-${index}`}>- {capability}</p>
                   ))}
                 </div>
+
+                {scaleToZeroSummaries[project.id as (typeof flagshipIds)[number]] ? (
+                  <div className="mt-4 border-l-2 border-amber-400/60 bg-amber-400/5 px-3 py-2">
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-amber-300">
+                      Scale-to-Zero Behavior
+                    </p>
+                    <p className="mt-2 text-[11px] leading-relaxed text-neutral-300">
+                      {scaleToZeroSummaries[project.id as (typeof flagshipIds)[number]]}
+                    </p>
+                  </div>
+                ) : null}
 
                 <div className="mt-4">
                   <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-emerald-500">

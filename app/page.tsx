@@ -10,6 +10,7 @@ import Projects from "@/components/sections/projects/Projects";
 import Runbooks from "@/components/sections/runbooks/Runbooks";
 import Skills from "@/components/sections/skills/Skills";
 import SystemDesigns from "@/components/sections/system-designs/SystemDesigns";
+import WhyRefer from "@/components/sections/why-refer/WhyRefer";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       <Experience />
       <Education />
       <About />
+      <WhyRefer />
       <Contact />
     </>
   );

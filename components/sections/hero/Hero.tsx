@@ -44,7 +44,7 @@ export default function Hero() {
     },
     {
       title: "Platform Engineer",
-      detail: "AWS ECS/Fargate, Terraform-managed topology, ALB deployment paths, and infrastructure-first design decisions.",
+      detail: "AWS ECS/Fargate, Kubernetes, Terraform, and queue-backed scale-to-zero with readiness-gated recovery.",
     },
     {
       title: "CS Fundamentals",
@@ -150,7 +150,7 @@ export default function Hero() {
         <p className="mb-2 font-mono text-emerald-300">{profileData.title}</p>
         <p className="mb-2 max-w-3xl text-sm leading-relaxed text-neutral-300">{profileData.summary}</p>
         <p className="mb-1 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-          Reliability | Observability | FinOps | Operational Excellence
+          Reliability | Observability | Scale to Zero | Operational Excellence
         </p>
         <p className="mb-1 inline-flex rounded border border-neutral-800 bg-neutral-950 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-300">
           {profileData.availability}
@@ -170,6 +170,10 @@ export default function Hero() {
             Flagship project: NetPulse. Academic foundation includes Operating Systems,
             Distributed Systems (85%), Theory of Computing, Java, Python, database systems, and
             honours BCS degree proof.
+          </p>
+          <p className="mt-3 max-w-4xl border-l border-amber-400/60 pl-3 text-xs leading-relaxed text-amber-100/80">
+            Platform proof: queue-backed workers scale from 0 to N with durable work retention,
+            workload eligibility, cooldown controls, and readiness-gated recovery.
           </p>
         </div>
         <div className="mb-8 rounded-2xl border border-cyan-500/20 bg-cyan-500/[0.03] p-5">

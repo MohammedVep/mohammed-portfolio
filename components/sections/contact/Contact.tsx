@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { MotionDiv } from "@/components/ui/motion";
 import { profileData } from "@/content/profile";
 import { projectsData } from "@/content/projects";
@@ -25,6 +26,11 @@ const liveAppLabels: Record<(typeof liveAppOrder)[number], string> = {
 };
 
 export default function Contact() {
+  const referralEmailHref = `mailto:${profileData.email}?subject=${encodeURIComponent(
+    "SWA / New Grad Software Engineering Referral - Mohammed Vepari"
+  )}&body=${encodeURIComponent(
+    "Hi Mohammed, I reviewed your portfolio and would like to discuss an SWA or new-grad software engineering referral.\n\nRole or program link:\nCompany:\nNext step:"
+  )}`;
   const liveApps = liveAppOrder
     .map((id) => projectsData.find((project) => project.id === id))
     .filter(
@@ -47,10 +53,61 @@ export default function Contact() {
           <p className="mx-auto mb-10 max-w-2xl text-center text-neutral-400">
             I am actively seeking full-time New Grad Software Engineer roles (2026).
             I have shipped public, production-style projects with live demos and source code.
-            I am based in Brampton and available for on-site, hybrid, or remote roles
+            I am legally authorized to work in Canada without employer sponsorship. I am based in
+            Brampton and available for on-site, hybrid, or remote roles
             aligned with EST/EDT working hours.
             The fastest way to reach me is by email.
           </p>
+
+          <div className="mx-auto mb-8 max-w-4xl rounded-xl border border-amber-400/30 bg-amber-400/5 p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-amber-300">
+              SWA / New Grad Referral Packet
+            </p>
+            <h3 className="mt-3 text-lg font-semibold text-white">
+              Everything needed for a quick, evidence-based referral review
+            </h3>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-300">
+              Honours BCS degree, resume, four core backend/platform systems, and a concise
+              scale-to-zero design showing durable queueing, 0-to-N recovery, readiness, and
+              cold-start tradeoffs. I can discuss every claim from code and architecture.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a
+                href={profileData.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-emerald-500/40 px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-emerald-300 transition hover:border-emerald-300"
+              >
+                Resume
+              </a>
+              <a
+                href={profileData.degreeProofUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-cyan-500/40 px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300"
+              >
+                Degree Proof
+              </a>
+              <Link
+                href="/#featured-systems"
+                className="rounded border border-neutral-700 px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-neutral-200 transition hover:border-neutral-500"
+              >
+                Four Core Systems
+              </Link>
+              <Link
+                href="/blog/scale-to-zero-without-losing-work"
+                className="rounded border border-amber-400/40 px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-amber-300 transition hover:border-amber-300"
+              >
+                Scale-to-Zero Design
+              </Link>
+              <a
+                href={referralEmailHref}
+                className="rounded bg-amber-300 px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-black transition hover:bg-amber-200"
+              >
+                Discuss a Referral
+              </a>
+            </div>
+          </div>
 
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
             <a

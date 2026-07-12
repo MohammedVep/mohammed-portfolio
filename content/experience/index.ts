@@ -8,7 +8,7 @@ export const experienceData: Experience[] = [
     description: [
       "Architected and deployed production-grade distributed systems with live demos, system design docs, and measurable reliability metrics.",
       "Provisioned AWS cloud environments via Terraform, including ALB-routed services and queue-worker execution patterns.",
-      "Implemented cost-aware autoscaling patterns, DLQ recovery workflows, and observability instrumentation for failure analysis.",
+      "Implemented cost-aware scale-to-zero patterns, readiness-gated recovery, DLQ workflows, and observability instrumentation for failure analysis.",
       "Published architecture decision records and incident-style post-mortems for public technical review.",
     ],
   },

@@ -51,11 +51,93 @@ const getProject = (id: string) => {
 const netPulse = getProject("netpulse");
 const moveYSplash = getProject("moveysplash");
 const cloudSandbox = getProject("cloud-code-execution");
+const autoScaleOs = getProject("autoscale-os");
 const edgeBalancer = getProject("mini-load-balancer");
 const transitTelemetry = getProject("realtime-transit-telemetry");
 const aiGatewayPlatform = getProject("ai-job-match-analysis");
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "scale-to-zero-without-losing-work",
+    title: "Scale to Zero Without Losing Work: The Queue, Wake-Up, and Readiness Path",
+    summary:
+      "How I added scale-to-zero to eligible worker workloads while keeping accepted jobs durable and making cold-start recovery explicit.",
+    publishedAt: "2026-07-12",
+    readTimeMinutes: 8,
+    targetCompanies: ["Amazon", "Veeva", "Canonical", "Platform Engineering Teams"],
+    tags: ["Scale to Zero", "Kubernetes", "AWS ECS", "Queues", "Reliability", "FinOps"],
+    hook: {
+      problem:
+        "Keeping asynchronous workers running while no jobs are queued wastes capacity, but setting replicas to zero can lose work or create a broken first request if the wake-up path is incomplete.",
+      stakes:
+        "A credible scale-to-zero design must preserve accepted work, distinguish eligible workloads, recover from zero capacity, and expose the cold-start tradeoff instead of hiding it.",
+    },
+    architecture: {
+      summary:
+        "The control plane and durable queue stay available while eligible execution workers scale independently between zero and bounded capacity.",
+      diagram: `graph LR
+  Client[Client]-->API[Always-Available Control API]
+  API-->Queue[Durable Queue + DLQ]
+  Queue-->Metric[Backlog / Oldest-Job Signal]
+  Metric-->Policy[Idle Window + Scaling Policy]
+  Policy-->Workers[Eligible Workers: 0 to N]
+  Workers-->Ready[Readiness Gate]
+  Ready-->Execute[Claim and Execute Job]
+  Execute-->Results[(Result Store)]`,
+      components: [
+        "Always-available request intake separated from elastic execution capacity",
+        "Durable queue and DLQ state that survive zero active workers",
+        "Opt-in workload eligibility plus configurable idle window and replica floor",
+        "Backlog-triggered 0-to-N wake-up with cooldown and hysteresis",
+        "Readiness gate before a cold worker can claim queued work",
+      ],
+    },
+    stressTest: {
+      setup:
+        "I modeled the full lifecycle from an empty queue and zero eligible workers through a new job arrival, worker startup, readiness, execution, and return to idle.",
+      breakingPoint:
+        "A replica count of zero is unsafe if scaling depends only on worker CPU, because no running worker exists to emit the signal needed to wake itself.",
+      evidence: [
+        "Queue backlog and oldest-job age provide external wake-up signals even when execution capacity is zero.",
+        "Accepted jobs remain queued while replacement capacity starts instead of being coupled to a synchronous request timeout.",
+        "Readiness gating keeps warming workers from claiming jobs before their runtime dependencies are available.",
+        "Per-workload eligibility prevents stateful or latency-sensitive services from inheriting a zero-replica minimum.",
+      ],
+    },
+    bottleneckResolution: {
+      rootCause:
+        "CPU-based autoscaling cannot recover a service from zero because there are no active tasks or pods producing CPU metrics.",
+      solution:
+        "I moved the wake-up decision to durable external signals: queue backlog, oldest-job age, workload eligibility, and an idle timer. The control loop raises desired capacity, waits for readiness, and only then allows workers to consume jobs.",
+      tradeoffs: [
+        "Scale-to-zero removes idle worker allocation but adds cold-start latency to the first queued job after inactivity.",
+        "Short idle windows save capacity sooner but can create churn, so cooldown and hysteresis must be tuned together.",
+        "Not every service is eligible; stateful and latency-sensitive workloads need an explicit minimum replica floor.",
+      ],
+    },
+    alternatives: [
+      "Keep one warm worker for latency-sensitive queues and use scale-to-zero only for batch or delay-tolerant workloads.",
+      "Use Kubernetes event-driven autoscaling for queue-backed workloads when cluster-level control is preferred.",
+      "Use managed serverless execution when its runtime, isolation, and startup constraints match the workload.",
+    ],
+    businessImpact: [
+      "Reduces idle execution allocation for bursty, delay-tolerant workloads.",
+      "Preserves reliability by keeping intake and queue state independent from worker count.",
+      "Makes the cost-versus-latency decision visible enough for reviewers to challenge in a system-design interview.",
+    ],
+    links: [
+      ...(autoScaleOs.liveUrl ? [{ label: "AutoScale OS Live", url: autoScaleOs.liveUrl }] : []),
+      ...(autoScaleOs.systemDesignUrl
+        ? [{ label: "AutoScale OS System Design", url: autoScaleOs.systemDesignUrl }]
+        : []),
+      ...(cloudSandbox.liveUrl
+        ? [{ label: "Cloud Sandbox Live", url: cloudSandbox.liveUrl }]
+        : []),
+      ...(cloudSandbox.systemDesignUrl
+        ? [{ label: "Cloud Sandbox System Design", url: cloudSandbox.systemDesignUrl }]
+        : []),
+    ],
+  },
   {
     slug: "portfolio-production-architecture-upgrades",
     title: "Portfolio App Upgrade Log: Queues, ECS, Pooling, and Evidence-Grounded AI",
