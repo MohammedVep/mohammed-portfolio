@@ -100,6 +100,12 @@ export default function Contact() {
               >
                 Scale-to-Zero Design
               </Link>
+              <Link
+                href="/referral"
+                className="rounded border border-cyan-400/40 px-3 py-2 text-[10px] font-mono uppercase tracking-widest text-cyan-300 transition hover:border-cyan-300"
+              >
+                Full Referral Brief
+              </Link>
               <a
                 href={referralEmailHref}
                 className="rounded bg-amber-300 px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-black transition hover:bg-amber-200"

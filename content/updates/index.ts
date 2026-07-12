@@ -21,12 +21,12 @@ export const latestImprovements: Improvement[] = [
   },
   {
     id: "why-refer-decision-brief",
-    title: "Why Refer Mohammed Decision Brief Added",
+    title: "Dedicated Why Refer Mohammed Packet Added",
     scope: "Referral Review",
     detail:
-      "A dedicated section now summarizes verified CS fundamentals, public proof of work, platform judgment, technical communication, operational consistency, Canadian work authorization, and the exact scope of a referral endorsement.",
-    proofHref: "/#why-refer",
-    proofLabel: "Open Referral Brief",
+      "A dedicated referral page now summarizes verified fundamentals, public proof of work, platform judgment, work authorization, suggested role targets, referrer risk checks, and a factual internal note that can be copied and adapted without overstating the relationship.",
+    proofHref: "/referral",
+    proofLabel: "Open Referral Packet",
   },
   {
     id: "homepage-density-reduced",

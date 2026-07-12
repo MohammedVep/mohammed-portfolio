@@ -75,10 +75,10 @@ export default function WhyRefer() {
 
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              href="/#contact"
+              href="/referral"
               className="rounded bg-amber-300 px-4 py-3 text-xs font-mono font-bold uppercase tracking-widest text-black transition hover:bg-amber-200"
             >
-              Open Referral Packet
+              Open Full Referral Packet
             </Link>
             <Link
               href="/blog/scale-to-zero-without-losing-work"

@@ -281,6 +281,12 @@ export default function Hero() {
           >
             Read Post-Mortems
           </Link>
+          <Link
+            href="/referral"
+            className="inline-flex items-center gap-2 rounded-full bg-amber-300 px-4 py-2 text-xs font-mono font-bold uppercase tracking-widest text-black transition hover:bg-amber-200"
+          >
+            Why Refer Mohammed
+          </Link>
         </div>
         <Bento items={heroItems} />
       </div>
