@@ -192,7 +192,6 @@ export default function ReferralPage() {
               <p>- Do not say you worked with Mohammed if you only reviewed this portfolio.</p>
               <p>- Do not describe staged load tests as customer production traffic.</p>
               <p>- Do not imply senior-level employment history from independent projects.</p>
-              <p>- Do not promise an interview, offer, or outcome.</p>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-neutral-200">
               The appropriate endorsement is narrower and stronger: the evidence justifies an
