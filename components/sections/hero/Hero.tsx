@@ -36,7 +36,7 @@ export default function Hero() {
     {
       title: "Enterprise SaaS New Grad",
       detail:
-        "BCS 2026, 83.95% GPA, Java/Python/TypeScript foundation, and Toronto-area availability for office-based teams.",
+        "BCS 2026, 3.7/4.0 GPA, Java/Python/TypeScript foundation, and Toronto-area availability for office-based teams.",
     },
     {
       title: "Backend Engineer",

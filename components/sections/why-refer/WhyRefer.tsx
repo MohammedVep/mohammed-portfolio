@@ -5,7 +5,7 @@ const referralSignals = [
   {
     title: "Verified CS Foundation",
     detail:
-      "Honours BCS (2026), Operating Systems, Distributed Systems (85%), Theory of Computing, algorithms, and databases.",
+      "Honours BCS (January 2024 - June 2026), Operating Systems, Distributed Systems (85%), Theory of Computing, algorithms, and databases.",
   },
   {
     title: "Reviewable Proof of Work",
