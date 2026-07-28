@@ -2,17 +2,6 @@ import { Experience } from '@/lib/types';
 
 export const experienceData: Experience[] = [
   {
-    title: "Independent Systems & Infrastructure Developer",
-    company: "Portfolio Engineering",
-    date: "2024 - Present",
-    description: [
-      "Architected and deployed production-grade distributed systems with live demos, system design docs, and measurable reliability metrics.",
-      "Provisioned AWS cloud environments via Terraform, including ALB-routed services and queue-worker execution patterns.",
-      "Implemented cost-aware scale-to-zero patterns, readiness-gated recovery, DLQ workflows, and observability instrumentation for failure analysis.",
-      "Published architecture decision records and incident-style post-mortems for public technical review.",
-    ],
-  },
-  {
     title: "Fulfillment Associate",
     company: "Amazon Fulfillment",
     date: "2016 - Present",
