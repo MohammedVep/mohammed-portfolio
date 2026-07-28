@@ -19,13 +19,6 @@ export type PortfolioProject = {
   tradeoffs: string[];
   invariants: string[];
   highlights: string[];
-  /**
-   * Human-editing scaffold.
-   *
-   * Keep this section concrete, first-hand, and easy to defend in interviews.
-   * Good: "I first tried X, it failed because Y, then I changed Z."
-   * Avoid: generic buzzwords, unverifiable numbers, or anything you cannot explain from the code.
-   */
   implementationNotes?: {
     ownerSummary: string;
     hardLesson: string;
