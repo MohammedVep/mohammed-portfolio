@@ -19,6 +19,10 @@ export const educationData: Education[] = [
       'Discrete Mathematics',
       'Web Application Development',
     ],
+    awards: [
+      'Algoma University Pathways Scholarship Award - Summit (2024-2025)',
+      'Algoma university Pathways Scholarship Award - Summit (2025-2026)'
+    ]
   },
   {
     institution: 'George Brown College',

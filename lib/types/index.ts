@@ -12,6 +12,7 @@ export interface Education {
   gpa: string;
   honours: boolean;
   coursework?: string[];
+  awards?: string[];
   proofUrl?: string;
   proofLabel?: string;
 }

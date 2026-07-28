@@ -63,6 +63,23 @@ export default function Education() {
                   </div>
                 </div>
               ) : null}
+              {edu.awards?.length ? (
+                <div className="mt-5">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-neutral-500">
+                    Awards
+                  </p>
+                  <ul className="space-y-2 text-xs text-neutral-300">
+                    {edu.awards.map((award) => (
+                      <li key={`${edu.institution}-${award}`} className="flex gap-2">
+                        <span className="text-emerald-500" aria-hidden="true">
+                          {'//'}
+                        </span>
+                        <span>{award}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </MotionDiv>
           ))}
         </div>
