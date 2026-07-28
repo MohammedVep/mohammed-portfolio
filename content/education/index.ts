@@ -3,8 +3,8 @@ import { Education } from '@/lib/types';
 export const educationData: Education[] = [
   {
     institution: 'Algoma University',
-    degree: 'Honours Bachelor of Computer Science (4 year degree program)',
-    date: '2026',
+    degree: 'Honours Bachelor of Computer Science ',
+    date: 'Graduated in June 2026',
     gpa: '3.7/4.0',
     honours: true,
     proofUrl: '/Mohammed_Vepari_BCS_Honours_Degree_Proof.pdf',
@@ -23,7 +23,7 @@ export const educationData: Education[] = [
   {
     institution: 'George Brown College',
     degree: 'Computer Programming and Analysis (3 year advanced diploma program)',
-    date: '2022 - 2023',
+    date: 'Graduated in September 2023',
     gpa: '3.72/4.0',
     honours: true,
     coursework: ['Spring Boot', 'Python', 'SQL', 'Software Design', 'Web Development'],
