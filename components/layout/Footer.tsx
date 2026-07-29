@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-10">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">Portfolio_Node</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">Portfolio</p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-400">
               Systems and infrastructure portfolio with production-style projects, architecture docs,
               and incident-style engineering writing.

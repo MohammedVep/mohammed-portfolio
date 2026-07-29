@@ -30,7 +30,7 @@ export default function About() {
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               <div className="rounded-xl border border-neutral-800 bg-black p-4">
                 <p className="text-[10px] uppercase tracking-widest text-neutral-500">Education</p>
-                <p className="mt-2 text-sm font-semibold text-neutral-100">Honours BCS, 2026</p>
+                <p className="mt-2 text-sm font-semibold text-neutral-100">Honours Bachelor of Computer Science, June 2026</p>
                 <a
                   href={profileData.degreeProofUrl}
                   target="_blank"

@@ -30,6 +30,6 @@ export const educationData: Education[] = [
     date: 'Graduated in September 2023',
     gpa: '3.72/4.0',
     honours: true,
-    coursework: ['Spring Boot', 'Python', 'SQL', 'Software Design', 'Web Development'],
-  },
+    coursework: ['Spring Boot', 'Python', 'SQL', 'Software Design', 'Web Development']
+  }
 ];
